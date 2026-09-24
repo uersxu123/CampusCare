@@ -257,7 +257,7 @@ class Settings(BaseSettings):
     alert_email_delivery_mode: str = "log"
     alert_email_from: str = ""
     alert_email_to: str = ""
-    alert_email_subject_prefix: str = "[MindBridge 高风险预警]"
+    alert_email_subject_prefix: str = "[CampusCare 高风险预警]"
     tool_queue_enabled: bool = True
     tool_queue_poll_interval_seconds: float = 1.0
     tool_queue_batch_size: int = 10

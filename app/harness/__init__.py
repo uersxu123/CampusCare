@@ -1,2 +1,2 @@
-"""MindBridge engineering harness package."""
+"""CampusCare engineering harness package."""
 

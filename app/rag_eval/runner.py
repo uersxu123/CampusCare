@@ -576,7 +576,7 @@ def _resolve_path(settings: Settings, value: str) -> Path:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="运行 MindBridge 知识可靠性评测")
+    parser = argparse.ArgumentParser(description="运行 CampusCare 知识可靠性评测")
     parser.add_argument("--mode", choices=("all", "bm25", "hybrid", "vector-fault"), default="all")
     parser.add_argument("--no-gate", action="store_true", help="只生成报告，不用指标设置退出码")
     parser.add_argument("--skip-seed", action="store_true", help="评测现有数据库快照，不执行启动兼容导入")

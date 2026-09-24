@@ -91,7 +91,7 @@ class InMemoryShortTermMemoryStore:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Run MindBridge engineering harness checks.")
+    parser = argparse.ArgumentParser(description="Run CampusCare engineering harness checks.")
     parser.add_argument(
         "--suite",
         action="append",
@@ -1227,7 +1227,7 @@ def write_report(context: HarnessContext, results: list[CheckResult]) -> dict:
 
 
 def print_report(report: dict) -> None:
-    print("MindBridge Engineering Harness")
+    print("CampusCare Engineering Harness")
     print(f"Report: {report['reportPath']}")
     print("")
     for result in report["results"]:

@@ -71,7 +71,7 @@ class MindBridgeMcpToolClient:
             from mcp import ClientSession, StdioServerParameters
             from mcp.client.stdio import stdio_client
         except ImportError as exc:
-            raise McpToolError("缺少 mcp 依赖，无法通过 MCP 调用 MindBridge 工具") from exc
+            raise McpToolError("缺少 mcp 依赖，无法通过 MCP 调用 CampusCare 工具") from exc
 
         project_root = self.settings.project_root
         env = os.environ.copy()

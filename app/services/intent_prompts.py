@@ -11,7 +11,7 @@ UNDERSTANDING_SCHEMA_NAME = "planning_result_v6"
 
 def build_intent_prompt(context_view: dict[str, Any], current_input: str) -> list[AiMessage]:
     system = (
-        "你是 MindBridge 的 Route Planner。你不回答用户问题，只负责把当前轮用户请求转换为 PlannedWorkItems。\n"
+        "你是 CampusCare 的 Route Planner。你不回答用户问题，只负责把当前轮用户请求转换为 PlannedWorkItems。\n"
         "【第一步：先理解当前轮】系统会同时提供 contextView 和 currentInput。currentInput 是本轮唯一需要路由的用户输入；"
         "contextView 只用于帮助理解 currentInput 中的省略、承接、修正、继续或指代。历史上下文不得自行生成新的 WorkItem；"
         "只有当前轮明确继续、引用、修改或追问历史目标时，历史才用于理解当前语义。明显切换新话题时不要让旧历史污染 Intent。\n"

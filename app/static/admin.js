@@ -1,5 +1,5 @@
 const AUTH_KEY = "mindbridge.auth";
-const BRAND = window.CAMPUSCOVE_BRAND || { assistant: "Cove" };
+const BRAND = window.CAMPUSCARE_BRAND || { assistant: "CampusCare" };
 
 const state = {
   profile: null,

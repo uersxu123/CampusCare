@@ -67,7 +67,7 @@ class AgentHarnessOutcome:
 
 
 class MindBridgeAgentHarness:
-    """Runtime harness for one MindBridge agent turn.
+    """Runtime harness for one CampusCare agent turn.
 
     The harness owns business orchestration around the agent runtime. HTTP/SSE
     code can stay thin while this class manages input preparation, persistence,

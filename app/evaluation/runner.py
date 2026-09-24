@@ -48,7 +48,7 @@ INFRA_FAILURE = 3
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="运行 MindBridge 分层端到端评测")
+    parser = argparse.ArgumentParser(description="运行 CampusCare 分层端到端评测")
     parser.add_argument(
         "--suite",
         choices=("routing", "retrieval", "e2e", "ragas", "e2e-ragas", "all", "release"),

@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(title="MindBridge Python", version="0.1.0")
+    app = FastAPI(title="CampusCare Python", version="0.1.0")
 
     @app.middleware("http")
     async def no_cache_frontend_assets(request, call_next):

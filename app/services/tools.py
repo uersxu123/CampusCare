@@ -41,7 +41,7 @@ class ToolOrchestrationService:
             else:
                 workbook = Workbook()
                 sheet = workbook.active
-                sheet.title = "MindBridge Risk Ledger"
+                sheet.title = "CampusCare Risk Ledger"
                 sheet.append(["reportId", "riskLevel", "emotion", "confidence", "summary", "createdAt"])
             sheet.append([report.id, report.risk_level, report.emotion, report.confidence, report.summary, report.created_at.isoformat()])
             workbook.save(path)
@@ -212,7 +212,7 @@ class ToolOrchestrationService:
         handoff = case.handoff_summary if case else MindBridgeSkillLibrary.counselor_handoff_summary(report, user)
         return "\n".join(
             [
-                "MindBridge 检测到一条高风险心理预警，请尽快安排辅导员或管理员跟进。",
+                "CampusCare 检测到一条高风险心理预警，请尽快安排辅导员或管理员跟进。",
                 "",
                 f"个案ID：{case.id}" if case else "个案ID：未创建",
                 f"报告ID：{report.id}",

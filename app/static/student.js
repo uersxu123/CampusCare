@@ -1,6 +1,6 @@
 const AUTH_KEY = "mindbridge.auth";
 const ACTIVE_TURN_KEY = "mindbridge.activeTurn";
-const BRAND = window.CAMPUSCOVE_BRAND || { product: "CampusCove", assistant: "Cove" };
+const BRAND = window.CAMPUSCARE_BRAND || { product: "CampusCare", assistant: "CampusCare" };
 const ASSISTANT_MARKDOWN_TAGS = [
   "p", "br", "strong", "em", "ul", "ol", "li", "blockquote",
   "h1", "h2", "h3", "h4", "pre", "code",

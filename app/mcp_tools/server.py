@@ -14,7 +14,7 @@ mcp = FastMCP("mindbridge-python-tools")
 
 @mcp.tool()
 def mindbridge_excel_report(report_id: int, idempotency_key: str) -> str:
-    """Write one psychological risk report into the MindBridge Excel ledger."""
+    """Write one psychological risk report into the CampusCare Excel ledger."""
     del idempotency_key
     db = SessionLocal()
     try:
@@ -29,7 +29,7 @@ def mindbridge_excel_report(report_id: int, idempotency_key: str) -> str:
 
 @mcp.tool()
 def mindbridge_case_create(report_id: int, idempotency_key: str) -> str:
-    """Create or return the active MindBridge risk case for one psychological report."""
+    """Create or return the active CampusCare risk case for one psychological report."""
     del idempotency_key
     db = SessionLocal()
     try:
@@ -44,7 +44,7 @@ def mindbridge_case_create(report_id: int, idempotency_key: str) -> str:
 
 @mcp.tool()
 def mindbridge_alert_send(case_id: int, idempotency_key: str) -> str:
-    """Send or record the counselor alert for one MindBridge risk case."""
+    """Send or record the counselor alert for one CampusCare risk case."""
     del idempotency_key
     db = SessionLocal()
     try:
@@ -61,7 +61,7 @@ def mindbridge_alert_send(case_id: int, idempotency_key: str) -> str:
 
 @mcp.tool()
 def mindbridge_alert_ack(case_id: int, actor: str, note: str = "") -> str:
-    """Mark a MindBridge risk case as acknowledged by a counselor or administrator."""
+    """Mark a CampusCare risk case as acknowledged by a counselor or administrator."""
     db = SessionLocal()
     try:
         case = ToolOrchestrationService(db, get_settings()).acknowledge_case(case_id, actor, note)
@@ -74,7 +74,7 @@ def mindbridge_alert_ack(case_id: int, actor: str, note: str = "") -> str:
 
 @mcp.tool()
 def mindbridge_case_note_add(case_id: int, actor: str, note: str) -> str:
-    """Append a follow-up note to a MindBridge risk case."""
+    """Append a follow-up note to a CampusCare risk case."""
     db = SessionLocal()
     try:
         record = ToolOrchestrationService(db, get_settings()).add_case_note(case_id, actor, note)

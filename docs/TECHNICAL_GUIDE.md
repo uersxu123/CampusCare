@@ -1,6 +1,6 @@
-# MindBridge Python
+# CampusCare Python
 
-MindBridge 是一个面向高校学生的 AI 陪伴与校务咨询原型。项目将流式对话、心理风险安全门、校园知识检索、可恢复澄清、多 Agent 协作、后台个案处置和可观测性整合在同一个 FastAPI 应用中；默认可接入本地 Ollama，也支持 OpenAI-compatible API。
+CampusCare 是一个面向高校学生的 AI 陪伴与校务咨询原型。项目将流式对话、心理风险安全门、校园知识检索、可恢复澄清、多 Agent 协作、后台个案处置和可观测性整合在同一个 FastAPI 应用中；默认可接入本地 Ollama，也支持 OpenAI-compatible API。
 
 ## 核心能力
 
@@ -230,7 +230,7 @@ Summary 新写 schema v2，旧 JSON 只在内存中兼容转换。显式用户�
 
 - `mysql`：MySQL 8.0，容器内端口 `3306`，宿主机映射 `13306`
 - `redis`：Redis 7.2 Alpine，容器内端口 `6379`，宿主机映射 `16379`
-- `app`：MindBridge FastAPI 服务，宿主机端口 `8080`
+- `app`：CampusCare FastAPI 服务，宿主机端口 `8080`
 
 默认配置会让应用容器访问宿主机 Ollama：
 
@@ -352,7 +352,7 @@ SMTP_USE_TLS=true
 SMTP_USE_SSL=false
 ALERT_EMAIL_FROM=your-account@example.com
 ALERT_EMAIL_TO=counselor@example.com,admin@example.com
-ALERT_EMAIL_SUBJECT_PREFIX=[MindBridge 高风险预警]
+ALERT_EMAIL_SUBJECT_PREFIX=[CampusCare 高风险预警]
 ```
 
 未配置 SMTP 或收件人时，系统不会中断聊天流程，但会在 `alert_records` 中写入 `FAILED` 记录，提示缺少的配置项。

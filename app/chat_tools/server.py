@@ -9,7 +9,7 @@ from mcp.types import CallToolResult, TextContent
 from app.chat_tools.weather import OpenMeteoWeatherService, WeatherToolError
 
 
-mcp = FastMCP("MindBridge Readonly Chat Tools")
+mcp = FastMCP("CampusCare Readonly Chat Tools")
 
 
 def _success(data: dict, telemetry: dict | None = None) -> CallToolResult:

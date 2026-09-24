@@ -1,4 +1,4 @@
-# MindBridge Evaluation Datasets
+# CampusCare Evaluation Datasets
 
 `routing-v3.jsonl` 是唯一活跃的正式路由数据集，严格覆盖 RoutePlan V3 的五类 Intent、上下文关系、原文分段、HARD_DATA、ORDER_ONLY、缺参和容量保护。数据均为合成数据，不含真实学生信息。
 
