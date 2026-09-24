@@ -1,0 +1,160 @@
+{"id": "A01", "text": "期末只剩十天了，帮我安排一下各科复习顺序", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A02", "text": "我下学期该怎么选课比较合理", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A03", "text": "这门必修课没过，补考资格怎么看", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A04", "text": "补考还是没通过，接下来是不是要重修", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A05", "text": "我的绩点和学分到底怎么计算", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A06", "text": "培养方案里毕业前要修够多少学分", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A07", "text": "我想休学一个学期，手续应该怎么走", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A08", "text": "休学期满后怎样恢复学籍", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A09", "text": "请假以后返校要不要销假", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A10", "text": "毕业需要满足哪些课程和学分条件", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A11", "text": "我在准备推免，应该怎么规划这学期", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A12", "text": "考研和就业之间我应该怎么安排准备节奏", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A13", "text": "秋招和毕业实习时间冲突，怎么规划", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A14", "text": "毕业论文从开题到答辩怎么安排", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A15", "text": "答辩前有哪些学业上的准备", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A16", "text": "参加科研项目一般怎么开始", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A17", "text": "学校对学术诚信有什么要求", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A18", "text": "图书馆的书逾期了怎么处理", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A19", "text": "学校学费一般什么时候缴", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A20", "text": "体测没达标会影响什么", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A21", "text": "志愿服务时长怎么认定", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A22", "text": "社会实践学时有什么要求", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A23", "text": "美育实践的学时怎么认定", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A24", "text": "最近学习很倦怠，帮我重新安排学习任务", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "A25", "text": "高数基础很差，能帮我做个一个月复习计划", "labels": ["ACADEMIC"], "group": "single"}
+{"id": "C01", "text": "国家奖学金需要满足哪些条件", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C02", "text": "国家助学金一般什么时候发放", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C03", "text": "国家奖学金和国家助学金能不能同时拿", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C04", "text": "家庭经济困难学生怎么认定", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C05", "text": "临时困难补助怎么申请", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C06", "text": "国家助学贷款怎么办理", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C07", "text": "生源地贷款在学校要办什么手续", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C08", "text": "综合素质测评是怎么计算的", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C09", "text": "优秀毕业生评选需要什么条件", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C10", "text": "学校有哪些学业帮扶资源", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C11", "text": "学习支持中心能提供哪些帮助", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C12", "text": "我想申请调宿，需要什么材料", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C13", "text": "新生入住学生宿舍要办什么手续", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C14", "text": "毕业离校退宿怎么操作", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C15", "text": "校园网账号怎么开通", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C16", "text": "校园卡丢了以后怎么办", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C17", "text": "校车有哪些乘坐规定", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C18", "text": "电动自行车进校园有什么要求", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C19", "text": "毕业后学生档案转到哪里", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C20", "text": "大学生医保怎么参保", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C21", "text": "住院后医保怎么报销", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C22", "text": "收到纪律处分以后能申诉吗", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C23", "text": "处分复核期限一般怎么规定", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C24", "text": "学生社团活动有什么管理要求", "labels": ["CAMPUS"], "group": "single"}
+{"id": "C25", "text": "校园安全管理有哪些规定", "labels": ["CAMPUS"], "group": "single"}
+{"id": "M01", "text": "我最近总是很焦虑，心里一直发慌", "labels": ["MENTAL"], "group": "single"}
+{"id": "M02", "text": "这几天晚上一直失眠睡不着", "labels": ["MENTAL"], "group": "single"}
+{"id": "M03", "text": "我情绪很低落，什么都不太想做", "labels": ["MENTAL"], "group": "single"}
+{"id": "M04", "text": "最近特别难过和无助，想找人聊聊", "labels": ["MENTAL"], "group": "single"}
+{"id": "M05", "text": "刚上大学一直适应不了，很想家", "labels": ["MENTAL"], "group": "single"}
+{"id": "M06", "text": "我和室友关系很差，不知道怎么沟通", "labels": ["MENTAL"], "group": "single"}
+{"id": "M07", "text": "跟同学发生冲突以后我一直很难受", "labels": ["MENTAL"], "group": "single"}
+{"id": "M08", "text": "最近家庭关系让我压力特别大", "labels": ["MENTAL"], "group": "single"}
+{"id": "M09", "text": "分手以后一直走不出来怎么办", "labels": ["MENTAL"], "group": "single"}
+{"id": "M10", "text": "学校心理咨询中心怎么预约", "labels": ["MENTAL"], "group": "single"}
+{"id": "M11", "text": "我想找心理老师聊聊，要怎么联系", "labels": ["MENTAL"], "group": "single"}
+{"id": "M12", "text": "心理咨询会保护我的隐私吗", "labels": ["MENTAL"], "group": "single"}
+{"id": "M13", "text": "我担心咨询内容被别人知道", "labels": ["MENTAL"], "group": "single"}
+{"id": "M14", "text": "考试一想到就很恐慌怎么办", "labels": ["MENTAL"], "group": "single"}
+{"id": "M15", "text": "挂科以后我一直很低落，晚上也睡不好", "labels": ["MENTAL"], "group": "single"}
+{"id": "M16", "text": "最近经常心慌，感觉很紧张", "labels": ["MENTAL"], "group": "single"}
+{"id": "M17", "text": "压力太大导致每天睡眠都很差", "labels": ["MENTAL"], "group": "single"}
+{"id": "M18", "text": "换了新环境以后一直不适应", "labels": ["MENTAL"], "group": "single"}
+{"id": "M19", "text": "和家里人关系紧张让我很痛苦", "labels": ["MENTAL"], "group": "single"}
+{"id": "M20", "text": "室友天天吵架，我情绪越来越差", "labels": ["MENTAL"], "group": "single"}
+{"id": "M21", "text": "我感觉自己快崩溃了怎么办", "labels": ["MENTAL"], "group": "single"}
+{"id": "M22", "text": "最近什么事情都提不起兴趣", "labels": ["MENTAL"], "group": "single"}
+{"id": "M23", "text": "我总是害怕考试，情绪状态很差", "labels": ["MENTAL"], "group": "single"}
+{"id": "M24", "text": "想了解心理辅导一般怎么进行", "labels": ["MENTAL"], "group": "single"}
+{"id": "M25", "text": "心理咨询的保密边界是什么", "labels": ["MENTAL"], "group": "single"}
+{"id": "T01", "text": "Java 的 HashMap 底层是怎么实现的", "labels": ["CHAT"], "group": "single"}
+{"id": "T02", "text": "Python 这个报错怎么排查", "labels": ["CHAT"], "group": "single"}
+{"id": "T03", "text": "Redis 分布式锁应该怎么做", "labels": ["CHAT"], "group": "single"}
+{"id": "T04", "text": "数据库索引为什么能提高查询速度", "labels": ["CHAT"], "group": "single"}
+{"id": "T05", "text": "解释一下大模型的 KV cache", "labels": ["CHAT"], "group": "single"}
+{"id": "T06", "text": "这道算法题怎么做", "labels": ["CHAT"], "group": "single"}
+{"id": "T07", "text": "帮我把这段中文翻译成英文", "labels": ["CHAT"], "group": "single"}
+{"id": "T08", "text": "帮我润色一段实习经历", "labels": ["CHAT"], "group": "single"}
+{"id": "T09", "text": "帮我写一封普通的感谢邮件", "labels": ["CHAT"], "group": "single"}
+{"id": "T10", "text": "推荐几本经济学入门书", "labels": ["CHAT"], "group": "single"}
+{"id": "T11", "text": "给我安排一个三天东京旅游行程", "labels": ["CHAT"], "group": "single"}
+{"id": "T12", "text": "番茄炒蛋怎么做", "labels": ["CHAT"], "group": "single"}
+{"id": "T13", "text": "TCP 三次握手为什么不是两次", "labels": ["CHAT"], "group": "single"}
+{"id": "T14", "text": "Linux 里怎么查看端口占用", "labels": ["CHAT"], "group": "single"}
+{"id": "T15", "text": "Spring Bean 生命周期是什么", "labels": ["CHAT"], "group": "single"}
+{"id": "T16", "text": "用 Python 写一个识别焦虑文本的分类器", "labels": ["CHAT"], "group": "single"}
+{"id": "T17", "text": "数据库里奖学金申请表应该怎么设计索引", "labels": ["CHAT"], "group": "single"}
+{"id": "T18", "text": "帮我把“国家助学金申请条件”翻译成英文", "labels": ["CHAT"], "group": "single"}
+{"id": "T19", "text": "帮我润色一句“我准备办理休学”", "labels": ["CHAT"], "group": "single"}
+{"id": "T20", "text": "解释一下“心理咨询”这个词的英文表达", "labels": ["CHAT"], "group": "single"}
+{"id": "T21", "text": "写一个 Java 程序统计宿舍人数", "labels": ["CHAT"], "group": "single"}
+{"id": "T22", "text": "帮我写一封询问医保报销的邮件，重点是措辞礼貌", "labels": ["CHAT"], "group": "single"}
+{"id": "T23", "text": "我在算法题里把变量名叫 scholarship，这段代码为什么超时", "labels": ["CHAT"], "group": "single"}
+{"id": "T24", "text": "请把“我最近失眠睡不着”改写得更正式", "labels": ["CHAT"], "group": "single"}
+{"id": "T25", "text": "帮我总结一篇关于大学生焦虑识别算法的论文", "labels": ["CHAT"], "group": "single"}
+{"id": "X01", "text": "我想办理休学，同时想确认休学后国家助学金会不会停发", "labels": ["ACADEMIC", "CAMPUS"], "group": "multi"}
+{"id": "X02", "text": "我准备复学，另外想问恢复学籍后助学金什么时候继续发", "labels": ["ACADEMIC", "CAMPUS"], "group": "multi"}
+{"id": "X03", "text": "最近焦虑得睡不着，同时想申请休学", "labels": ["MENTAL", "ACADEMIC"], "group": "multi"}
+{"id": "X04", "text": "考试压力很大让我失眠，还想让你帮我制定复习计划", "labels": ["MENTAL", "ACADEMIC"], "group": "multi"}
+{"id": "X05", "text": "我和室友关系很差很难受，同时想申请调宿", "labels": ["MENTAL", "CAMPUS"], "group": "multi"}
+{"id": "X06", "text": "室友天天吵架让我焦虑，我还想了解换寝流程", "labels": ["MENTAL", "CAMPUS"], "group": "multi"}
+{"id": "X07", "text": "帮我解释 Java HashMap，再告诉我国家奖学金申请条件", "labels": ["CHAT", "CAMPUS"], "group": "multi"}
+{"id": "X08", "text": "帮我看 Python 报错，再帮我制定高数复习计划", "labels": ["CHAT", "ACADEMIC"], "group": "multi"}
+{"id": "X09", "text": "解释 KV cache，另外我最近失眠应该怎么办", "labels": ["CHAT", "MENTAL"], "group": "multi"}
+{"id": "X10", "text": "我最近焦虑失眠，准备休学，还想确认助学金会不会停发", "labels": ["MENTAL", "ACADEMIC", "CAMPUS"], "group": "multi"}
+{"id": "X11", "text": "帮我做考研复习规划，同时介绍学校有哪些学业帮扶资源", "labels": ["ACADEMIC", "CAMPUS"], "group": "multi"}
+{"id": "X12", "text": "我挂科后很低落，同时想知道补考怎么安排", "labels": ["MENTAL", "ACADEMIC"], "group": "multi"}
+{"id": "X13", "text": "我因为室友矛盾很痛苦，也想知道学生宿舍调换条件", "labels": ["MENTAL", "CAMPUS"], "group": "multi"}
+{"id": "X14", "text": "我准备毕业找工作，同时想知道毕业生档案转到哪里", "labels": ["ACADEMIC", "CAMPUS"], "group": "multi"}
+{"id": "X15", "text": "帮我规划毕业论文进度，另外解释一下 MySQL 索引", "labels": ["ACADEMIC", "CHAT"], "group": "multi"}
+{"id": "X16", "text": "我最近家庭关系压力很大，同时想申请临时困难补助", "labels": ["MENTAL", "CAMPUS"], "group": "multi"}
+{"id": "X17", "text": "我想找心理老师聊聊，同时问一下医保报销流程", "labels": ["MENTAL", "CAMPUS"], "group": "multi"}
+{"id": "X18", "text": "我准备推免，同时最近焦虑到睡不好", "labels": ["ACADEMIC", "MENTAL"], "group": "multi"}
+{"id": "X19", "text": "我想申请国家助学贷款，同时需要一个学习计划", "labels": ["CAMPUS", "ACADEMIC"], "group": "multi"}
+{"id": "X20", "text": "我想换宿舍，同时帮我写一封普通英文邮件", "labels": ["CAMPUS", "CHAT"], "group": "multi"}
+{"id": "X21", "text": "帮我查体测要求，同时最近考试让我很恐慌", "labels": ["ACADEMIC", "MENTAL"], "group": "multi"}
+{"id": "X22", "text": "我想问学生申诉流程，另外 Java 队列怎么定义", "labels": ["CAMPUS", "CHAT"], "group": "multi"}
+{"id": "X23", "text": "我想办休学，最近情绪也很低落，还想问国家助学金", "labels": ["ACADEMIC", "MENTAL", "CAMPUS"], "group": "multi"}
+{"id": "X24", "text": "帮我安排复习计划，再解释 Redis 锁，还想问调宿流程", "labels": ["ACADEMIC", "CHAT", "CAMPUS"], "group": "multi"}
+{"id": "X25", "text": "最近失眠，想了解心理咨询预约，同时还要申请调宿", "labels": ["MENTAL", "CAMPUS"], "group": "multi"}
+{"id": "X26", "text": "我想问补考规定和国家奖学金评选条件", "labels": ["ACADEMIC", "CAMPUS"], "group": "multi"}
+{"id": "X27", "text": "我想知道毕业条件，同时最近因为成绩焦虑失眠", "labels": ["ACADEMIC", "MENTAL"], "group": "multi"}
+{"id": "X28", "text": "帮我做实习规划，另外校园网账号怎么开通", "labels": ["ACADEMIC", "CAMPUS"], "group": "multi"}
+{"id": "X29", "text": "解释数据库索引，同时我和室友矛盾让我很难受", "labels": ["CHAT", "MENTAL"], "group": "multi"}
+{"id": "X30", "text": "我准备复学、申请助学金，而且最近总是焦虑", "labels": ["ACADEMIC", "CAMPUS", "MENTAL"], "group": "multi"}
+{"id": "Z01", "text": "这个怎么办", "labels": [], "group": "abstain"}
+{"id": "Z02", "text": "那第二种呢", "labels": [], "group": "abstain"}
+{"id": "Z03", "text": "还是刚才那个问题", "labels": [], "group": "abstain"}
+{"id": "Z04", "text": "然后呢", "labels": [], "group": "abstain"}
+{"id": "Z05", "text": "这个需要吗", "labels": [], "group": "abstain"}
+{"id": "Z06", "text": "真的吗", "labels": [], "group": "abstain"}
+{"id": "Z07", "text": "为什么", "labels": [], "group": "abstain"}
+{"id": "Z08", "text": "再详细一点", "labels": [], "group": "abstain"}
+{"id": "Z09", "text": "我想问个事", "labels": [], "group": "abstain"}
+{"id": "Z10", "text": "帮我看看这个", "labels": [], "group": "abstain"}
+{"id": "Z11", "text": "就是那个啊", "labels": [], "group": "abstain"}
+{"id": "Z12", "text": "前面说的那个呢", "labels": [], "group": "abstain"}
+{"id": "Z13", "text": "那应该怎么弄", "labels": [], "group": "abstain"}
+{"id": "Z14", "text": "还有别的吗", "labels": [], "group": "abstain"}
+{"id": "Z15", "text": "继续", "labels": [], "group": "abstain"}
+{"id": "Z16", "text": "换一个", "labels": [], "group": "abstain"}
+{"id": "Z17", "text": "不是这个", "labels": [], "group": "abstain"}
+{"id": "Z18", "text": "我刚才说错了", "labels": [], "group": "abstain"}
+{"id": "Z19", "text": "这个可以吗", "labels": [], "group": "abstain"}
+{"id": "Z20", "text": "具体一点", "labels": [], "group": "abstain"}
+{"id": "Z21", "text": "怎么说呢", "labels": [], "group": "abstain"}
+{"id": "Z22", "text": "你看一下", "labels": [], "group": "abstain"}
+{"id": "Z23", "text": "接下来呢", "labels": [], "group": "abstain"}
+{"id": "Z24", "text": "上一个", "labels": [], "group": "abstain"}
+{"id": "Z25", "text": "第二个", "labels": [], "group": "abstain"}
+{"id": "Z26", "text": "嗯？", "labels": [], "group": "abstain"}
+{"id": "Z27", "text": "？", "labels": [], "group": "abstain"}
+{"id": "Z28", "text": "1111", "labels": [], "group": "abstain"}
+{"id": "Z29", "text": "asdfgh", "labels": [], "group": "abstain"}
+{"id": "Z30", "text": "我不知道怎么描述", "labels": [], "group": "abstain"}

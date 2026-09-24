@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "freezeId": "context-workitems-v7-20260917T203303Z",
+  "frozenAt": "2026-09-17T20:33:03.090283+00:00",
+  "encoding": "UTF-8 without BOM",
+  "dataset": {
+    "version": "e2e-smoke-context-workitems-v7",
+    "businessCaseCount": 13,
+    "safetyCaseCount": 3,
+    "files": {
+      "business.jsonl": "5f7e0daa8349822c2e5c4c352d3f0ee68eb3945a656bc13bf96cbad222da3de2",
+      "safety.jsonl": "ec87ef9db5f07e3289b83069a65d0dbcabbfe095fee1dbecf9035e89f59bf5e1",
+      "corpus-audit.json": "c2794ad71a4f5247916f0cbd0c0e0ce4115570f42f52582a1b8a8f190da4a987",
+      "adaptation-changes.json": "2ab3b41a75616ad0b2ee0b4ae3a452e43a021d19918504f00c78016c74d06d39",
+      "README.md": "31aa9d0a7b182b69e5a0c946d0cbd6bd4de42911b303fc76573151771d18b6ee"
+    },
+    "questionsAndBusinessGoldPreservedFrom": "e2e-smoke-current-v2"
+  },
+  "runtimeFiles": {
+    "app/agents/autonomous.py": "4d741b7e8ed8f314454e1834bd09be8b15e9370365f4e1513e8b31658a3a19ba",
+    "app/agents/event_driven_runtime.py": "ba06fd595eee35e706f18588160bb161e70805bba9843b9cb5f905d0cf409d5e",
+    "app/agents/result.py": "270223227280348c07543063c4a0a62483cc22129e6195f382fcc1481ea446fd",
+    "app/agents/routing.py": "03cca335ea3683c2b481b114a2567a1ea4363d20b0cd462ab0611cdbe20bb584",
+    "app/chat_tools/server.py": "79cb3f8bd4b8ded4c7733789a32a509c1c665f9c2d60c0ade75b5ef5b621fd57",
+    "app/evaluation/config.py": "a3a271c60dc1dbd9a0099cfe5099a4c0dfd12414195e11b04e9f56b3bc3bfa6b",
+    "app/evaluation/judges/business.py": "ea7bf24c3300d69714f88f8c12c37bcc760606451d79d392c32bb02ed8d06295",
+    "app/evaluation/judges/deepseek.py": "04ddd9375e9a941892ffbdc805b4959c28be801451568f13c879e76880242c8b",
+    "app/evaluation/runner.py": "e8420dc88863008267f4630c4c430a6906de65fd9ec8f8f5f9945366af4ad6d3",
+    "app/evaluation/runtime/adapter.py": "adeaa30f23c0f4599c8eb2eca7704959496f3827582d0c01969612f4963cb02b",
+    "app/evaluation/runtime/isolation.py": "f110c7b1f52e0009bd8f4504cc6797305a43acebb555eb7ecef5064b0cce8e75",
+    "app/models/entities.py": "822e1beb4213cf561e8814910632b8d5c982f3a8105f77ab53d70c7e5ec3be7a",
+    "app/services/agent_loop.py": "e575bf1fa86cd5f5c7aea340c07f20e1b8c17a4d0c69e802266ba0ad20bad321",
+    "app/services/chat_tool_runtime.py": "6d8cf2d60bd9cf2e878e1480cff4f15d6e2bd6deb2ecafb09c6a802b60c57596",
+    "app/services/context_budget.py": "188cee21f61c7fe33dbc5882f2e1d34f8dda237d840c6d483757c1a89abd5019",
+    "app/services/context_builder.py": "e24b447d0d41756f4fec7f78662434847a7c628646bcada250fff5e1c4668c8c",
+    "app/services/intent_prompts.py": "a6b6c44094601393d3b1a60b04309b06fe76e899d2b73048479e8edb47a7908e",
+    "app/services/rag_pipeline.py": "674531fe5c46273d6af9ea3eeed35b11293cf432b5ec5efa85c527b6bec0cf99",
+    "app/services/routing_v5.py": "d4756a323e07299b138c8064400667986f697133854c1606e3761286fa7402b5",
+    "app/services/tool_executor.py": "56b97d83cf2d90f03fd235136eea24b5191b23e164c18467ab678e961c58da4f",
+    "app/services/tool_models.py": "213d91bfd51aa2bcbe705a9f37e1c8a2e8a25a4b8720f9e442c9f5bdebca5203",
+    "app/services/tool_registry.py": "4898dec836f9a37d1cb6b691d8b5c17cf571851f937c5304a1ca560a20ada08c",
+    "app/services/tool_result_store.py": "b0085f05c19e2f5a3c2180d0220f393ae751d36cbf14d8d97db1509ab0abf8ae",
+    "app/services/trace.py": "dad188745e27a069036df2c88864f309bf33cd222b798917d9dbd4e341795f28",
+    "app/services/understanding.py": "721cbf483b6834d84b5dcc1f6090aa377e33099c03e4e2eaf09317925cfc52b0",
+    "migrations/versions/0016_context_workitems_v7.py": "c7ea1005213de3b9a01070151b4ef4cbd2166a995180790a15b1c6941d34b014",
+    "scripts/freeze_context_workitems_v7.py": "274a596fd7b7bc343c6a4b2b1b64475e7b347ac1a03249c86bb72f6ae91a6c88",
+    "scripts/probe_context_workitems_v7.py": "38151b262ad1ce418bd14fd1dc672b3832906ce17ee94c179b6cace341d06f75",
+    "scripts/probe_context_workitems_v7_runtime.py": "e01f6021dd089861ace59c60094822745db9c4b6f75eb347dd24f5d5c2f60810",
+    "scripts/probe_context_workitems_v7_storage.py": "c38fb83af0e25575880271413293630f207abb30c477fdda488c40abdb389272",
+    "scripts/write_context_workitems_v7_report.py": "39ba4f800642988a435a6553d461c14e6ed7cbf73e514ddef020c754e46dad69",
+    "tests/test_context_workitems_v7.py": "0a0c0b37c6d1ba511ba1f651dbf52660abca19f45ab2f07bc54cfb96ce60d3d5",
+    "tests/test_evaluation_mysql_isolation_url.py": "b2bde4b2fe2f46357be5c60ea2940094fba79b32bb732cc6e23c8dc5c170528c"
+  },
+  "probeEvidence": {
+    "probe-evidence.json": "2804f269121ea510d9f38df41a9837d9c4055748cef061c0a8cd14586a36e51d",
+    "storage-probe-evidence.json": "5606475ee7e16ef8f74b7bf6cd969bb4223cd3cb1c1636db280bfe41aacbfc53",
+    "runtime-probe-evidence.json": "e2e0a1e6b89bb09a0df55893c633d1d5e31691e80c25fc5f95d9834e57a6d08d"
+  },
+  "models": {
+    "application": "qwen3:8b",
+    "judge": "qwen3:8b",
+    "embedding": "bge-m3:latest",
+    "judgeThink": false
+  },
+  "budgets": {
+    "ollamaNumCtx": 32768,
+    "inputMaxTokens": 28672,
+    "safetyMarginTokens": 1024,
+    "plannerOutputMaxTokens": 768,
+    "specialistOutputMaxTokens": 1024,
+    "responseOutputMaxTokens": 1536,
+    "toolLargeResultTokens": 8000,
+    "rereadReserveTokens": 3072
+  },
+  "toolPermissions": {
+    "GeneralChatAgent": [
+      "get_current_weather"
+    ],
+    "AcademicPlanningAgent": [
+      "rag_search",
+      "read_tool_evidence"
+    ],
+    "CampusAffairsAgent": [
+      "rag_search",
+      "read_tool_evidence"
+    ],
+    "PsychologicalSupportAgent": [
+      "rag_search",
+      "read_tool_evidence"
+    ],
+    "ResponseAgent": [
+      "read_tool_evidence"
+    ],
+    "highRiskResponse": []
+  },
+  "judgeContract": {
+    "provider": "ollama",
+    "model": "qwen3:8b",
+    "temperature": 0.0,
+    "maxRetries": 0,
+    "repairAttempts": 0,
+    "repetitions": 1,
+    "allowPromptFallback": false
+  },
+  "execution": {
+    "maxWorkers": 1,
+    "isolationMode": "mysql_isolated",
+    "redis": "database 15, cleaned per case",
+    "failedCaseRerun": false,
+    "formalRunCountAuthorized": 1
+  },
+  "corpus": {
+    "type": "mysql-active-corpus",
+    "relationalDatabaseType": "mysql",
+    "corpusHash": "d4b79542ab7ae7bc9983abc6381d11bf972fb0998aa58e5e9b1994651eebb0dd",
+    "manifestHash": "1a1ffb4da290f5cfe88260628d62de49024fb2d3a8585d2e5b9b9f1f161f76de",
+    "chunkingProfiles": [
+      "handbook_prechunked_v2"
+    ],
+    "activeCollection": "mindbridge_knowledge_v3__e68e6e2ed134",
+    "indexSignature": "e68e6e2ed13410f72adc8f1dba852bba47592b6ee2fcff315bdb3b67184e687e",
+    "documentCount": 49,
+    "chunkCount": 1127,
+    "vectorCount": 855,
+    "generatedAt": "2026-09-17T11:35:49.791799+00:00"
+  },
+  "environment": {
+    "python": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0"
+  }
+}

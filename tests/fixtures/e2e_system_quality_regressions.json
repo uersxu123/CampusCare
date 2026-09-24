@@ -1,0 +1,212 @@
+[
+  {
+    "id": "ragas-housing-checkout-09",
+    "group": "knowledge_trigger",
+    "userQuestion": "毕业退宿怎么交钥匙？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-nanwangshan-housing-service-guide"],
+    "expectedResultType": "ANSWER",
+    "allowedErrorCodes": []
+  },
+  {
+    "id": "ragas-medical-policy-39",
+    "group": "knowledge_trigger",
+    "userQuestion": "大学生医保依据学校哪份办法？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-handbook-campus-services"],
+    "expectedResultType": "ANSWER",
+    "allowedErrorCodes": []
+  },
+  {
+    "id": "ragas-medical-cost-43",
+    "group": "knowledge_trigger",
+    "userQuestion": "大学生医保缴费标准是多少？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-handbook-campus-services"],
+    "expectedResultType": "ANSWER",
+    "allowedErrorCodes": []
+  },
+  {
+    "id": "ragas-archive-policy-86",
+    "group": "knowledge_trigger",
+    "userQuestion": "学生人事档案如何管理？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-handbook-campus-services"],
+    "expectedResultType": "ANSWER",
+    "allowedErrorCodes": []
+  },
+  {
+    "id": "ragas-water-electricity-87",
+    "group": "knowledge_trigger",
+    "userQuestion": "学生节水节电要遵守什么规范？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-handbook-campus-services"],
+    "expectedResultType": "ANSWER",
+    "allowedErrorCodes": []
+  },
+  {
+    "id": "ragas-physical-health-88",
+    "group": "knowledge_trigger",
+    "userQuestion": "学生体质健康标准如何实施？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-handbook-academic-learning"],
+    "expectedResultType": "ANSWER",
+    "allowedErrorCodes": []
+  },
+  {
+    "id": "ragas-appeal-materials-13",
+    "group": "grader_failure",
+    "userQuestion": "处分申诉需要哪些材料？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-handbook-rights-discipline"],
+    "expectedResultType": "ANSWER_OR_EXPLICIT_FAILURE",
+    "allowedErrorCodes": ["PROVIDER_REQUEST_FAILED", "PROVIDER_EOF", "MODEL_PROTOCOL_ERROR", "TURN_BUDGET_EXCEEDED"]
+  },
+  {
+    "id": "ragas-suspension-eligibility-23",
+    "group": "grader_failure",
+    "userQuestion": "什么情况下本科生可以申请休学？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-undergraduate-status-policy"],
+    "expectedResultType": "ANSWER_OR_EXPLICIT_FAILURE",
+    "allowedErrorCodes": ["PROVIDER_REQUEST_FAILED", "PROVIDER_EOF", "MODEL_PROTOCOL_ERROR", "TURN_BUDGET_EXCEEDED"]
+  },
+  {
+    "id": "ragas-housing-wrong-scope-90",
+    "group": "grader_failure",
+    "userQuestion": "未来城校区换寝流程是什么？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-handbook-campus-services"],
+    "expectedResultType": "ANSWER_OR_EXPLICIT_FAILURE",
+    "allowedErrorCodes": ["PROVIDER_REQUEST_FAILED", "PROVIDER_EOF", "MODEL_PROTOCOL_ERROR", "TURN_BUDGET_EXCEEDED"]
+  },
+  {
+    "id": "ragas-credits-graduation-check-131",
+    "group": "grader_failure",
+    "userQuestion": "学分还没修够，怎么判断是否达到毕业条件？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-undergraduate-status-policy"],
+    "expectedResultType": "ANSWER_OR_EXPLICIT_FAILURE",
+    "allowedErrorCodes": ["PROVIDER_REQUEST_FAILED", "PROVIDER_EOF", "MODEL_PROTOCOL_ERROR", "TURN_BUDGET_EXCEEDED"]
+  },
+  {
+    "id": "ragas-library-overdue-policy-138",
+    "group": "grader_failure",
+    "userQuestion": "图书馆借书逾期和还书规则应该依据什么规定？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-handbook-academic-learning"],
+    "expectedResultType": "ANSWER_OR_EXPLICIT_FAILURE",
+    "allowedErrorCodes": ["PROVIDER_REQUEST_FAILED", "PROVIDER_EOF", "MODEL_PROTOCOL_ERROR", "TURN_BUDGET_EXCEEDED"]
+  },
+  {
+    "id": "ragas-appeal-synonym-15",
+    "group": "retrieval_filter",
+    "userQuestion": "处分复核在哪里办理？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-handbook-rights-discipline"],
+    "expectedResultType": "ANSWER",
+    "allowedErrorCodes": []
+  },
+  {
+    "id": "ragas-discipline-policy-18",
+    "group": "retrieval_filter",
+    "userQuestion": "学校纪律处分有哪些依据？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-handbook-rights-discipline"],
+    "expectedResultType": "ANSWER",
+    "allowedErrorCodes": []
+  },
+  {
+    "id": "ragas-scholarship-materials-30",
+    "group": "retrieval_filter",
+    "userQuestion": "申请奖学金需要提交什么材料？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-handbook-awards-aid-organizations"],
+    "expectedResultType": "ANSWER",
+    "allowedErrorCodes": []
+  },
+  {
+    "id": "ragas-safety-policy-85",
+    "group": "retrieval_filter",
+    "userQuestion": "学生在校安全管理依据什么规定？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-handbook-rights-discipline"],
+    "expectedResultType": "ANSWER",
+    "allowedErrorCodes": []
+  },
+  {
+    "id": "ragas-network-account-sharing-154",
+    "group": "retrieval_filter",
+    "userQuestion": "校园网账号转借给同学会违反什么规定？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-handbook-campus-services"],
+    "expectedResultType": "ANSWER",
+    "allowedErrorCodes": []
+  },
+  {
+    "id": "ragas-housing-change-materials-01",
+    "group": "empty_response",
+    "userQuestion": "南望山校区调宿需要准备哪些材料？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-nanwangshan-housing-service-guide"],
+    "expectedResultType": "NON_EMPTY_ANSWER",
+    "allowedErrorCodes": ["PROVIDER_REQUEST_FAILED", "PROVIDER_EOF", "PROVIDER_EMPTY_OUTPUT", "MODEL_PROTOCOL_ERROR", "TURN_BUDGET_EXCEEDED"]
+  },
+  {
+    "id": "ragas-appeal-steps-14",
+    "group": "empty_response",
+    "userQuestion": "受到处分后如何提出申诉？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-handbook-rights-discipline"],
+    "expectedResultType": "NON_EMPTY_ANSWER",
+    "allowedErrorCodes": ["PROVIDER_REQUEST_FAILED", "PROVIDER_EOF", "PROVIDER_EMPTY_OUTPUT", "MODEL_PROTOCOL_ERROR", "TURN_BUDGET_EXCEEDED"]
+  },
+  {
+    "id": "ragas-panic-breathing-67",
+    "group": "empty_response",
+    "userQuestion": "惊恐时怎么通过呼吸让自己稳定下来？",
+    "expectedExecutionMode": "RESPONSE_ONLY",
+    "expectedKnowledgeNeed": "NONE",
+    "expectedDocumentKeys": ["anxiety-panic-grounding.md", "campus-mental-health.md"],
+    "expectedResultType": "NON_EMPTY_ANSWER",
+    "allowedErrorCodes": ["PROVIDER_REQUEST_FAILED", "PROVIDER_EOF", "PROVIDER_EMPTY_OUTPUT", "MODEL_PROTOCOL_ERROR", "TURN_BUDGET_EXCEEDED"]
+  },
+  {
+    "id": "ragas-career-transition-options-97",
+    "group": "empty_response",
+    "userQuestion": "快毕业了，考研、就业和实习怎么比较，应该先做哪些行动？",
+    "expectedExecutionMode": "RESPONSE_ONLY",
+    "expectedKnowledgeNeed": "NONE",
+    "expectedDocumentKeys": ["further-study-career-development"],
+    "expectedResultType": "NON_EMPTY_ANSWER",
+    "allowedErrorCodes": ["PROVIDER_REQUEST_FAILED", "PROVIDER_EOF", "PROVIDER_EMPTY_OUTPUT", "MODEL_PROTOCOL_ERROR", "TURN_BUDGET_EXCEEDED"]
+  },
+  {
+    "id": "ragas-suspension-health-flow-128",
+    "group": "empty_response",
+    "userQuestion": "因为健康原因想休学，申请条件和办理流程分别是什么？",
+    "expectedExecutionMode": "KNOWLEDGE",
+    "expectedKnowledgeNeed": "REQUIRED",
+    "expectedDocumentKeys": ["cug-undergraduate-status-policy"],
+    "expectedResultType": "NON_EMPTY_ANSWER",
+    "allowedErrorCodes": ["PROVIDER_REQUEST_FAILED", "PROVIDER_EOF", "PROVIDER_EMPTY_OUTPUT", "MODEL_PROTOCOL_ERROR", "TURN_BUDGET_EXCEEDED"]
+  }
+]

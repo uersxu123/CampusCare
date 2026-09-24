@@ -1,0 +1,153 @@
+[
+  {
+    "oldCaseId": "ragas-housing-change-materials-01",
+    "newCaseId": "smoke-current-housing-eligibility",
+    "oldQuestion": [
+      "南望山校区调宿需要准备哪些材料？"
+    ],
+    "newQuestion": [
+      "南望山校区学生在什么情况下可以申请调整宿舍，通常集中在几月办理？"
+    ],
+    "reason": "当前有效语料没有原南望山调宿材料指南，改为现有住宿管理办法明确支持的条件与时间。",
+    "referenceContextIds": [
+      "knowledge:9015"
+    ]
+  },
+  {
+    "oldCaseId": "ragas-suspension-steps-21",
+    "newCaseId": "smoke-current-suspension-steps",
+    "oldQuestion": [
+      "本科生休学申请怎么办理？"
+    ],
+    "newQuestion": [
+      "本科生休学申请怎么办理？"
+    ],
+    "reason": "休学规定仍存在，重新绑定当前子块及内容哈希。",
+    "referenceContextIds": [
+      "knowledge:8801"
+    ]
+  },
+  {
+    "oldCaseId": "ragas-study-ten-minute-start-122",
+    "newCaseId": "smoke-current-deferred-exam",
+    "oldQuestion": [
+      "每天列很多待办却完不成，怎么把学习计划缩成十分钟能开始的一步？"
+    ],
+    "newQuestion": [
+      "本科生因病不能参加结课考试，应该何时向谁申请缓考，需要提供什么？"
+    ],
+    "reason": "原学习策略文档已归档，替换为当前手册有直接证据的学业办理题。",
+    "referenceContextIds": [
+      "knowledge:8832"
+    ]
+  },
+  {
+    "oldCaseId": "ragas-anxiety-thought-sorting-161",
+    "newCaseId": "smoke-current-mental-support-phone",
+    "oldQuestion": [
+      "焦虑时脑子一直灾难化，怎样先区分事实和担心？"
+    ],
+    "newQuestion": [
+      "我最近焦虑，想找学校心理健康教育中心求助，联系电话是什么？"
+    ],
+    "reason": "原焦虑认知整理文档不在当前语料，改为有来源的心理求助电话题。",
+    "referenceContextIds": [
+      "knowledge:8628"
+    ]
+  },
+  {
+    "oldCaseId": "ragas-sleep-support-68",
+    "newCaseId": "smoke-current-mental-support-location",
+    "oldQuestion": [
+      "连续失眠时可以怎样调整作息？"
+    ],
+    "newQuestion": [
+      "最近睡不好，想去学校心理健康教育中心寻求支持，手册写的地点在哪里？"
+    ],
+    "reason": "原睡眠自助文档不在当前语料，改为有来源的心理求助地点题。",
+    "referenceContextIds": [
+      "knowledge:8628"
+    ]
+  },
+  {
+    "oldCaseId": "ragas-scholarship-eligibility-29",
+    "newCaseId": "smoke-current-national-scholarship-eligibility",
+    "oldQuestion": [
+      "本科生奖学金评选条件是什么？"
+    ],
+    "newQuestion": [
+      "本科生国家奖学金的申请对象、成绩排名和体测条件是什么，哪些情况没有评选资格？"
+    ],
+    "reason": "原题泛称本科生奖学金但只引用英才奖学金，明确为国家奖学金并使用完整对应条件。",
+    "referenceContextIds": [
+      "knowledge:9267",
+      "knowledge:9268"
+    ]
+  },
+  {
+    "oldCaseId": "ragas-medical-reimbursement-40",
+    "newCaseId": "smoke-current-medical-chronic-application",
+    "oldQuestion": [
+      "大学生医保报销怎么办理？"
+    ],
+    "newQuestion": [
+      "武汉大学生医保门诊慢特病待遇怎么申请认定？"
+    ],
+    "reason": "将原泛化医保报销问题限定为参考材料实际覆盖的慢特病待遇认定，更新引用。",
+    "referenceContextIds": [
+      "knowledge:7938"
+    ]
+  },
+  {
+    "oldCaseId": "ragas-housing-change-synonym-03",
+    "newCaseId": "smoke-current-campus-security-site-clarify",
+    "oldQuestion": [
+      "我想换宿舍，流程是什么？"
+    ],
+    "newQuestion": [
+      "学校校园110的电话是多少？"
+    ],
+    "reason": "原调宿澄清题依赖已归档的校区专用指南，替换为当前手册确实按校区区分的校园110电话澄清题。",
+    "referenceContextIds": []
+  },
+  {
+    "oldCaseId": "ragas-housing-online-processing-time-partial",
+    "newCaseId": "smoke-current-housing-processing-time-partial",
+    "oldQuestion": [
+      "南望山校区宿舍调整线上怎么办，办理时限通常是几个工作日？"
+    ],
+    "newQuestion": [
+      "南望山校区哪些情况可以申请调整宿舍，申请后几个工作日能办完？"
+    ],
+    "reason": "原线上门户办理指南不在当前语料，保留部分回答测试，改为已知申请条件与未知办结时长。",
+    "referenceContextIds": [
+      "knowledge:9015"
+    ]
+  },
+  {
+    "oldCaseId": "ragas-award-deadline-37",
+    "newCaseId": "smoke-current-national-scholarship-current-deadline",
+    "oldQuestion": [
+      "今年奖学金截止时间是哪天？"
+    ],
+    "newQuestion": [
+      "2026年本科生国家奖学金申请截止日期是哪一天？"
+    ],
+    "reason": "明确奖学金类型和年份，当前手册没有该年度具体截止日期，保留拒绝编造测试。",
+    "referenceContextIds": []
+  },
+  {
+    "oldCaseId": "smoke-multi-mental-academic-01",
+    "newCaseId": "smoke-current-multi-mental-academic",
+    "oldQuestion": [
+      "我最近焦虑得睡不好，同时想办理休学。先告诉我今晚怎么稳定一下情绪，再说本科生休学申请怎么办。"
+    ],
+    "newQuestion": [
+      "我最近焦虑得睡不好，同时想办理休学。先告诉我今晚怎么稳定一下情绪，再说本科生休学申请怎么办。"
+    ],
+    "reason": "保留双Agent场景，仅将休学事实绑定当前语料；不再引用已归档焦虑文档，情绪支持按通用行为规范评判。",
+    "referenceContextIds": [
+      "knowledge:8801"
+    ]
+  }
+]

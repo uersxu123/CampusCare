@@ -1,0 +1,22 @@
+{
+  "children_path": "benchmarks\\eval_855\\children_855.jsonl",
+  "children_sha256": "2d1ecb65c0780ca328c7c9f86402a0cc669acd8c1640f783354f209e06638b97",
+  "children_count": 855,
+  "documents_count": 49,
+  "dataset_path": "benchmarks\\eval_855\\ragas_sample_20.jsonl",
+  "dataset_sha256": "f1b30a647346265f99ec1c67fc6354ad1d59062a0d0fbf732bd5eaa3bcff10d3",
+  "dataset_rows_run": 20,
+  "ollama": "http://127.0.0.1:11434",
+  "embed_model": "bge-m3",
+  "gen_model": "qwen3:8b",
+  "cross_encoder_model": null,
+  "candidate_k": 40,
+  "fused_k": 24,
+  "topk": 5,
+  "rrf_k": 60,
+  "methods": [
+    "dense_only",
+    "hybrid_rrf"
+  ],
+  "note": "BM25 here is a self-contained benchmark baseline tokenizer, not guaranteed byte-identical to project production BM25/BM25F. Dense uses real Ollama BGE-M3."
+}

@@ -1,0 +1,17 @@
+MindBridge Evidence Facets / Multi-Query change test status
+Date: 2026-09-13
+
+Targeted regression command:
+DATABASE_URL=sqlite:////mnt/data/mindbridge_test.db python -m pytest -q tests/test_route_plan_v3.py tests/test_route_planning.py tests/test_intent_fusion.py tests/test_understanding_single_path.py tests/test_rag_pipeline_v2.py tests/test_coordinator_work_items_v3.py tests/test_clarification_study_plan_flow.py tests/test_context_builder.py
+
+Result:
+55 passed in 15.96s
+
+Compile check:
+python -m compileall -q app
+Result: COMPILE_OK
+
+Environment limitations:
+- `mcp` package is unavailable in the current runtime, so MCP-importing parts of the full repository suite could not be collected here.
+- `pymysql` is unavailable; targeted tests were run with a temporary SQLite DATABASE_URL.
+- Internet/model runtime is unavailable for downloading BGE-M3/Qwen/Gemma, so benchmark Dense/Reranker components are offline proxies as documented in benchmark_meta.json and the report.

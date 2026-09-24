@@ -1,0 +1,253 @@
+--- /mnt/data/mindbridge_project_multiquery/tests/test_rag_pipeline_v2.py	2026-09-12 16:34:52.184003531 +0000
++++ tests/test_rag_pipeline_v2.py	2026-09-12 17:05:57.467210117 +0000
+@@ -1,76 +1,104 @@
+-from types import SimpleNamespace
+-from dataclasses import replace
+-import pytest
+-from app.services.knowledge import CandidateSearchResult, KnowledgeSearchResult
+-from app.services.rag_pipeline import RagPipeline, RerankOutput, RewriteOutput, weighted_rrf
+-
+-
+-def run_pipeline(rewrite="补考申请材料", rerank_error=False, empty=False, failed=False, top_k=1):
+-    events = []
+-    rows = [KnowledgeSearchResult(chunk_id=i, source="学生手册", content=f"子块{i}", score=1, parent_chunk_id=100) for i in (1, 2)] if not empty else []
+-    class Knowledge:
+-        def search_candidates(self, **kwargs):
+-            events.append(("retrieve", kwargs["query"]))
+-            return CandidateSearchResult(tuple(rows), tuple(reversed(rows)), tuple(rows), {"bm25Degraded": failed, "vectorDegraded": failed})
+-        def expand_context(self, child):
+-            events.append(("parent", child.chunk_id))
+-            return replace(child, content="MySQL 中的完整父块")
+-    class Client:
+-        def complete_structured(self, messages, *, schema_name, **kwargs):
+-            events.append((schema_name, None))
+-            if schema_name == "rag_rewrite_v1":
+-                if isinstance(rewrite, Exception):
+-                    raise rewrite
+-                return SimpleNamespace(value=RewriteOutput(query=rewrite))
+-            assert schema_name == "rag_rerank_v3"
+-            if rerank_error:
+-                raise RuntimeError("reranker unavailable")
+-            return SimpleNamespace(value=RerankOutput(ranked=["ev_chunk_2"]))
+-    result = RagPipeline(knowledge=Knowledge(), client=Client(), settings=SimpleNamespace()).search(query="补考怎么办", top_k=top_k)
+-    return result, events
+-
+-
+-def test_order_and_mysql_parent():
+-    result, events = run_pipeline()
+-    assert events == [("rag_rewrite_v1", None), ("retrieve", "补考申请材料"), ("rag_rerank_v3", None), ("parent", 2)]
+-    assert result["status"] == "OK" and "assessment" not in result
+-    assert result["items"][0]["content"] == "子块2"
+-    assert result["items"][0]["parentContent"] == "MySQL 中的完整父块"
+-    assert result["items"][0]["parentChunkId"] == 100
+-
+-
+-def test_rewrite_failure():
+-    result, events = run_pipeline(rewrite=RuntimeError("offline"))
+-    assert events[1] == ("retrieve", "补考怎么办")
+-    assert result["diagnostics"]["rewriteDegraded"]
+-
+-
+-def test_identical_rewrite():
+-    result, _ = run_pipeline(rewrite="补考怎么办")
+-    assert not result["diagnostics"]["rewriteDegraded"]
+-
+-
+-def test_rerank_failure_respects_top_k():
+-    result, _ = run_pipeline(rerank_error=True, top_k=2)
+-    assert result["diagnostics"]["rerankDegraded"]
+-    assert [i["evidenceId"] for i in result["items"]] == ["ev_chunk_1", "ev_chunk_2"]
+-
+-
+-def test_empty():
+-    result, events = run_pipeline(empty=True)
+-    assert result["status"] == "EMPTY" and result["items"] == []
+-    assert len(events) == 2
+-
+-
+-def test_failed_channels():
+-    result, _ = run_pipeline(failed=True)
+-    assert result["error"]["code"] == "RAG_UNAVAILABLE"
+-
+-
+-def test_rrf_formula():
+-    scores = weighted_rrf([(["a", "b"], 1), (["b", "a"], 1)])
+-    assert scores["a"] == pytest.approx(1/61 + 1/62)
+-    assert scores["a"] == scores["b"]
++from types import SimpleNamespace
++from dataclasses import replace
++import pytest
++from app.services.knowledge import CandidateSearchResult, KnowledgeSearchResult
++from app.services.rag_pipeline import RagPipeline, RerankCandidateAssessment, RerankOutput, RewriteOutput, weighted_rrf
++
++
++def _rerank_output(ids, facet_ids=()):
++    return RerankOutput(
++        ranked=list(ids),
++        assessments=[
++            RerankCandidateAssessment(
++                evidenceId=evidence_id,
++                relevanceLevel="HIGH",
++                matchedFacetIds=list(facet_ids[:1]),
++                directSupport=True,
++            )
++            for evidence_id in ids
++        ],
++    )
++
++
++def run_pipeline(rewrite="补考申请材料", rerank_error=False, empty=False, failed=False, top_k=1):
++    events = []
++    rows = [KnowledgeSearchResult(chunk_id=i, source="学生手册", content=f"子块{i}", score=1, parent_chunk_id=100) for i in (1, 2)] if not empty else []
++    class Knowledge:
++        def search_candidates(self, **kwargs):
++            events.append(("retrieve", kwargs["query"]))
++            return CandidateSearchResult(tuple(rows), tuple(reversed(rows)), tuple(rows), {"bm25Degraded": failed, "vectorDegraded": failed})
++        def expand_context(self, child):
++            events.append(("parent", child.chunk_id))
++            return replace(child, content="MySQL 中的完整父块")
++    class Client:
++        def complete_structured(self, messages, *, schema_name, **kwargs):
++            events.append((schema_name, None))
++            if schema_name == "rag_rewrite_v1":
++                if isinstance(rewrite, Exception):
++                    raise rewrite
++                return SimpleNamespace(value=RewriteOutput(query=rewrite))
++            assert schema_name == "rag_rerank_v4"
++            if rerank_error:
++                raise RuntimeError("reranker unavailable")
++            payload = __import__("json").loads(messages[-1].content)
++            ids = [item["evidenceId"] for item in payload["candidates"]]
++            return SimpleNamespace(value=RerankOutput(
++                ranked=["ev_chunk_2"],
++                assessments=[
++                    RerankCandidateAssessment(
++                        evidenceId=evidence_id,
++                        relevanceLevel="HIGH" if evidence_id == "ev_chunk_2" else "MEDIUM",
++                        matchedFacetIds=[],
++                        directSupport=True,
++                    )
++                    for evidence_id in ids
++                ],
++            ))
++    result = RagPipeline(knowledge=Knowledge(), client=Client(), settings=SimpleNamespace()).search(query="补考怎么办", top_k=top_k)
++    return result, events
++
++
++def test_order_and_mysql_parent():
++    result, events = run_pipeline()
++    assert events == [("rag_rewrite_v1", None), ("retrieve", "补考申请材料"), ("rag_rerank_v4", None), ("parent", 2)]
++    assert result["status"] == "OK" and "assessment" not in result
++    assert result["items"][0]["content"] == "子块2"
++    assert result["items"][0]["parentContent"] == "MySQL 中的完整父块"
++    assert result["items"][0]["parentChunkId"] == 100
++
++
++def test_rewrite_failure():
++    result, events = run_pipeline(rewrite=RuntimeError("offline"))
++    assert events[1] == ("retrieve", "补考怎么办")
++    assert result["diagnostics"]["rewriteDegraded"]
++
++
++def test_identical_rewrite():
++    result, _ = run_pipeline(rewrite="补考怎么办")
++    assert not result["diagnostics"]["rewriteDegraded"]
++
++
++def test_rerank_failure_respects_top_k():
++    result, _ = run_pipeline(rerank_error=True, top_k=2)
++    assert result["diagnostics"]["rerankDegraded"]
++    assert [i["evidenceId"] for i in result["items"]] == ["ev_chunk_1", "ev_chunk_2"]
++
++
++def test_empty():
++    result, events = run_pipeline(empty=True)
++    assert result["status"] == "EMPTY" and result["items"] == []
++    assert len(events) == 2
++
++
++def test_failed_channels():
++    result, _ = run_pipeline(failed=True)
++    assert result["error"]["code"] == "RAG_UNAVAILABLE"
++
++
++def test_rrf_formula():
++    scores = weighted_rrf([(["a", "b"], 1), (["b", "a"], 1)])
++    assert scores["a"] == pytest.approx(1/61 + 1/62)
++    assert scores["a"] == scores["b"]
+ 
+ 
+ def test_upstream_facets_expand_into_multi_query_and_dedupe():
+@@ -103,12 +131,16 @@
+                     "复学后发放": "复学规定",
+                 }
+                 return SimpleNamespace(value=RewriteOutput(query=mapping[payload["evidenceFacet"]]))
+-            assert schema_name == "rag_rerank_v3"
++            assert schema_name == "rag_rerank_v4"
+             # Return all candidates once; ev_chunk_1 was hit by more than one query but must be deduped.
+             ids = [item["evidenceId"] for item in payload["candidates"]]
+             assert len(ids) == len(set(ids))
+-            assert payload["evidenceFacets"] == ["奖助兼得", "休学期间发放", "复学后发放"]
+-            return SimpleNamespace(value=RerankOutput(ranked=ids))
++            assert payload["evidenceFacets"] == [
++                {"facetId": "f1", "text": "奖助兼得"},
++                {"facetId": "f2", "text": "休学期间发放"},
++                {"facetId": "f3", "text": "复学后发放"},
++            ]
++            return SimpleNamespace(value=_rerank_output(ids, ("f1", "f2", "f3")))
+ 
+     result = RagPipeline(knowledge=Knowledge(), client=Client(), settings=SimpleNamespace()).search(
+         query="原问题",
+@@ -122,6 +154,42 @@
+     assert result["diagnostics"]["retrievalQueryCount"] == 4
+     assert {item["evidenceId"] for item in result["items"]} == {"ev_chunk_1", "ev_chunk_2", "ev_chunk_3"}
+     assert len([event for event in events if event[0] == "retrieve"]) == 4
++    assert result["diagnostics"]["rerankAssessmentCount"] == 3
++    assert result["diagnostics"]["rerankCandidateFacetMatches"][0]["matchedFacetIds"] == ["f1"]
++
++
++def test_reranker_rejects_unknown_facet_match_and_degrades():
++    row = KnowledgeSearchResult(chunk_id=9, source="学生手册", content="休学规则", score=1)
++
++    class Knowledge:
++        def search_candidates(self, **kwargs):
++            return CandidateSearchResult((row,), (row,), (row,), {"bm25Degraded": False, "vectorDegraded": False})
++
++        def expand_context(self, child):
++            return child
++
++    class Client:
++        def complete_structured(self, messages, *, schema_name, **kwargs):
++            if schema_name == "rag_facet_rewrite_v1":
++                return SimpleNamespace(value=RewriteOutput(query="休学规定"))
++            return SimpleNamespace(value=RerankOutput(
++                ranked=["ev_chunk_9"],
++                assessments=[RerankCandidateAssessment(
++                    evidenceId="ev_chunk_9",
++                    relevanceLevel="HIGH",
++                    matchedFacetIds=["f999"],
++                    directSupport=True,
++                )],
++            ))
++
++    result = RagPipeline(knowledge=Knowledge(), client=Client(), settings=SimpleNamespace()).search(
++        query="休学怎么办",
++        facets=["休学办理规则"],
++        top_k=1,
++    )
++    assert result["status"] == "OK"
++    assert result["diagnostics"]["rerankDegraded"]
++    assert result["diagnostics"]["rerankAssessmentCount"] == 0
+ 
+ 
+ def test_facet_rewrite_failure_falls_back_to_facet_text():
+@@ -141,7 +209,8 @@
+             if schema_name == "rag_facet_rewrite_v1":
+                 raise RuntimeError("offline")
+             payload = __import__("json").loads(messages[-1].content)
+-            return SimpleNamespace(value=RerankOutput(ranked=[item["evidenceId"] for item in payload["candidates"]]))
++            ids = [item["evidenceId"] for item in payload["candidates"]]
++            return SimpleNamespace(value=_rerank_output(ids, tuple(item["facetId"] for item in payload.get("evidenceFacets", []))))
+ 
+     result = RagPipeline(knowledge=Knowledge(), client=Client(), settings=SimpleNamespace()).search(
+         query="原问题",

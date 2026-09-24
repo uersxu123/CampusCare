@@ -1,0 +1,13 @@
+{
+  "caseCount": 160,
+  "business": 157,
+  "safety": 3,
+  "uniqueIds": true,
+  "uniqueExactQuestions": true,
+  "sourceQuestionPreserved": true,
+  "evidenceContentHashesVerified": true,
+  "goldExcludedFromSutInput": true,
+  "contractValidation": "passed",
+  "selectionIndependentOfResults": true,
+  "humanReviewed": false
+}

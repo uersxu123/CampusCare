@@ -1,0 +1,205 @@
+--- /mnt/data/mindbridge_project_multiquery/app/services/rag_pipeline.py	2026-09-12 16:33:52.067829741 +0000
++++ app/services/rag_pipeline.py	2026-09-12 17:05:12.936465691 +0000
+@@ -5,7 +5,7 @@
+ import json
+ import re
+ import threading
+-from typing import Any
++from typing import Any, Literal
+ 
+ from pydantic import BaseModel, ConfigDict, Field
+ 
+@@ -15,9 +15,19 @@
+ from app.services.knowledge_scoring import reciprocal_rank_fusion
+ 
+ 
++class RerankCandidateAssessment(BaseModel):
++    model_config = ConfigDict(extra="forbid")
++
++    evidenceId: str = Field(min_length=1, max_length=160)
++    relevanceLevel: Literal["HIGH", "MEDIUM", "LOW", "NONE"]
++    matchedFacetIds: list[str] = Field(default_factory=list, max_length=3)
++    directSupport: bool
++
++
+ class RerankOutput(BaseModel):
+     model_config = ConfigDict(extra="forbid")
+     ranked: list[str] = Field(default_factory=list, max_length=24)
++    assessments: list[RerankCandidateAssessment] = Field(default_factory=list, max_length=24)
+ 
+ 
+ class RewriteOutput(BaseModel):
+@@ -110,21 +120,22 @@
+             [(first.bm25_ranking, 1.0), (first.vector_ranking, 1.0)],
+             int(getattr(self.settings, "rag_fused_candidate_limit", 24)),
+         )
+-        ranked = self._rerank(q0, [], fused, candidates)
++        rerank = self._rerank(q0, [], fused, candidates)
+         diagnostics = {
+             **copy.deepcopy(first.diagnostics),
+-            "pipelineVersion": "traditional-v4-facets",
++            "pipelineVersion": "traditional-v5-facet-aware-rerank",
+             "queryMode": "single-rewrite",
+             "rewriteDegraded": bool(rewrite_failed),
+             "facetRewriteDegradedCount": 0,
+-            "rerankDegraded": ranked is None,
+-            "stages": ["rewrite", "bm25", "chroma", "rrf", "reranker"],
++            "rerankDegraded": rerank is None,
++            "stages": ["rewrite", "bm25", "chroma", "rrf", "facet_aware_reranker"],
+         }
++        diagnostics.update(_rerank_diagnostics(rerank))
+         return self._build_response(
+             q0=q0,
+             facets=[],
+             executed_queries=[query_text],
+-            selected_ids=(fused if ranked is None else ranked)[:top_k],
++            selected_ids=(fused if rerank is None else rerank.ranked)[:top_k],
+             candidates=candidates,
+             diagnostics=diagnostics,
+             rewritten_query=query_text,
+@@ -188,23 +199,24 @@
+             limit=int(getattr(self.settings, "rag_fused_candidate_limit", 24)),
+             reserve_per_query=int(getattr(self.settings, "rag_per_query_min_candidates", 3)),
+         )
+-        ranked = self._rerank(q0, facets, fused, all_candidates)
++        rerank = self._rerank(q0, facets, fused, all_candidates)
+         diagnostics = _merge_multi_diagnostics(search_results)
+         diagnostics.update({
+-            "pipelineVersion": "traditional-v4-facets",
++            "pipelineVersion": "traditional-v5-facet-aware-rerank",
+             "queryMode": "upstream-facets",
+             "rewriteDegraded": bool(rewrite_degraded),
+             "facetRewriteDegradedCount": rewrite_degraded,
+             "facetCount": len(facets),
+             "retrievalQueryCount": len(retrieval_queries),
+-            "rerankDegraded": ranked is None,
+-            "stages": ["facet_rewrite", "multi_query", "bm25", "chroma", "weighted_rrf", "dedup", "coverage_reranker"],
++            "rerankDegraded": rerank is None,
++            "stages": ["facet_rewrite", "multi_query", "bm25", "chroma", "weighted_rrf", "dedup", "facet_aware_reranker"],
+         })
++        diagnostics.update(_rerank_diagnostics(rerank))
+         return self._build_response(
+             q0=q0,
+             facets=facets,
+             executed_queries=[item[0] for item in retrieval_queries],
+-            selected_ids=(fused if ranked is None else ranked)[:top_k],
++            selected_ids=(fused if rerank is None else rerank.ranked)[:top_k],
+             candidates=all_candidates,
+             diagnostics=diagnostics,
+             rewritten_query=None,
+@@ -248,12 +260,17 @@
+         facets: list[str],
+         evidence_ids: list[str],
+         candidates: dict[str, KnowledgeSearchResult],
+-    ) -> list[str] | None:
++    ) -> RerankOutput | None:
+         if not evidence_ids:
+-            return []
++            return RerankOutput(ranked=[], assessments=[])
++
++        facet_catalog = [
++            {"facetId": f"f{index}", "text": facet}
++            for index, facet in enumerate(facets, start=1)
++        ]
+         payload = {
+             "originalQuery": original_query,
+-            "evidenceFacets": facets,
++            "evidenceFacets": facet_catalog,
+             "candidates": [_candidate_prompt(candidates[item]) for item in evidence_ids],
+         }
+         try:
+@@ -262,30 +279,58 @@
+                     AiMessage(
+                         role="system",
+                         content=(
+-                            "只重排输入 candidates 中的 evidenceId，不修改证据。"
+-                            "排序目标是完整回答 originalQuery：先判断单条证据相关性，再考虑 evidenceFacets 的整体覆盖；"
+-                            "当多条候选高度重复时，优先保留能覆盖不同 evidenceFacet 的互补证据，但不得为了覆盖而选择明显不相关证据。"
+-                            "ranked 只能引用输入中逐字相同的 evidenceId，禁止新增、猜测或改写 ID；"
+-                            "ranked 是按最终价值从高到低排列的 ID 字符串数组，每个 ID 最多出现一次，不输出评分、答案或解释。"
++                            "你是学生手册 RAG 系统的证据重排器，只能分析输入 candidates，不能回答用户问题。"
++                            "先逐条判断 candidate 是否直接支持 originalQuery，以及它直接支持哪些 evidenceFacet；"
++                            "只有候选文本本身能够直接证明该 facet 时，才能把对应 facetId 写入 matchedFacetIds，"
++                            "禁止依赖常识、猜测、其他候选或未给出的上下文补全支持关系。"
++                            "relevanceLevel 表示 candidate 对 originalQuery 的直接相关程度，只能为 HIGH、MEDIUM、LOW、NONE；"
++                            "directSupport=true 仅表示该 candidate 本身能够直接支持 originalQuery 中至少一个需要查证的事实或规则。"
++                            "然后再生成 ranked：首先保证与 originalQuery 的直接相关性；"
++                            "在相关性相近时，优先把支持不同 evidenceFacet 的互补证据排在重复证据之前；"
++                            "但不得为了覆盖 facet 而提高明显不相关证据。"
++                            "assessments 必须对每个输入 candidate 恰好输出一次，evidenceId 必须逐字复用输入值；"
++                            "matchedFacetIds 只能来自输入 evidenceFacets 的 facetId。"
++                            "ranked 只能引用输入中逐字相同的 evidenceId，每个 ID 最多出现一次，按最终价值从高到低排列。"
++                            "不要输出解释、答案、政策结论或输入中不存在的 ID。"
+                         ),
+                     ),
+                     AiMessage(role="user", content=json.dumps(payload, ensure_ascii=False)),
+                 ],
+                 response_model=RerankOutput,
+-                schema_name="rag_rerank_v3",
++                schema_name="rag_rerank_v4",
+                 options=StructuredCompletionOptions(
+                     temperature=float(getattr(self.settings, "rag_rerank_temperature", 0.0)),
+-                    max_tokens=int(getattr(self.settings, "rag_model_max_tokens", 1024)),
++                    max_tokens=int(getattr(
++                        self.settings,
++                        "rag_rerank_max_tokens",
++                        max(2048, int(getattr(self.settings, "rag_model_max_tokens", 1024))),
++                    )),
+                     repair_attempts=0,
+                     timeout_seconds=float(getattr(self.settings, "rag_rerank_timeout_seconds", 40.0)),
+                 ),
+             )
+         except Exception:
+             return None
++
+         returned = completion.value.ranked
+-        if not returned or len(returned) != len(set(returned)) or not set(returned).issubset(set(evidence_ids)):
++        allowed_ids = set(evidence_ids)
++        if not returned or len(returned) != len(set(returned)) or not set(returned).issubset(allowed_ids):
+             return None
+-        return [*returned, *(item for item in evidence_ids if item not in returned)]
++
++        assessments = completion.value.assessments
++        assessment_ids = [item.evidenceId for item in assessments]
++        if len(assessment_ids) != len(set(assessment_ids)) or set(assessment_ids) != allowed_ids:
++            return None
++
++        allowed_facets = {item["facetId"] for item in facet_catalog}
++        for item in assessments:
++            if not set(item.matchedFacetIds).issubset(allowed_facets):
++                return None
++            if not facets and item.matchedFacetIds:
++                return None
++
++        completed_ranked = [*returned, *(item for item in evidence_ids if item not in returned)]
++        return RerankOutput(ranked=completed_ranked, assessments=assessments)
+ 
+     def _rewrite(self, query: str, site: str | None) -> str | None:
+         try:
+@@ -486,6 +531,26 @@
+     return "ev_" + hashlib.sha256(identity.encode("utf-8")).hexdigest()[:16]
+ 
+ 
++def _rerank_diagnostics(rerank: RerankOutput | None) -> dict[str, Any]:
++    if rerank is None:
++        return {
++            "rerankAssessmentCount": 0,
++            "rerankCandidateFacetMatches": [],
++        }
++    return {
++        "rerankAssessmentCount": len(rerank.assessments),
++        "rerankCandidateFacetMatches": [
++            {
++                "evidenceId": item.evidenceId,
++                "relevanceLevel": item.relevanceLevel,
++                "matchedFacetIds": list(item.matchedFacetIds),
++                "directSupport": item.directSupport,
++            }
++            for item in rerank.assessments
++        ],
++    }
++
++
+ def _candidate_prompt(item: KnowledgeSearchResult) -> dict[str, Any]:
+     return {
+         "evidenceId": _evidence_id(item),

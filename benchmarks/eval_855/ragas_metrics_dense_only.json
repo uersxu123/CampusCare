@@ -1,0 +1,18 @@
+{
+  "ragas_version": "0.4.3",
+  "judge_model": "qwen3:8b",
+  "embed_model": "bge-m3",
+  "n": 20,
+  "columns": [
+    "user_input",
+    "retrieved_contexts",
+    "response",
+    "faithfulness",
+    "answer_relevancy"
+  ],
+  "means": {
+    "faithfulness": 0.9395583160800552,
+    "answer_relevancy": 0.8107178378844567
+  },
+  "per_case_csv": "benchmarks\\eval_855\\ragas_metrics_dense_only.per_case.csv"
+}

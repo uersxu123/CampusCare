@@ -1,0 +1,255 @@
+--- /mnt/data/rag_pipeline_v5_before_coverage.py	2026-09-12 17:23:03.232247574 +0000
++++ app/services/rag_pipeline.py	2026-09-12 17:28:01.379636440 +0000
+@@ -123,22 +123,30 @@
+         rerank = self._rerank(q0, [], fused, candidates)
+         diagnostics = {
+             **copy.deepcopy(first.diagnostics),
+-            "pipelineVersion": "traditional-v5-facet-aware-rerank",
++            "pipelineVersion": "traditional-v6-soft-coverage",
+             "queryMode": "single-rewrite",
+             "rewriteDegraded": bool(rewrite_failed),
+             "facetRewriteDegradedCount": 0,
+             "rerankDegraded": rerank is None,
+-            "stages": ["rewrite", "bm25", "chroma", "rrf", "facet_aware_reranker"],
++            "stages": ["rewrite", "bm25", "chroma", "rrf", "facet_aware_reranker", "coverage_check"],
+         }
+         diagnostics.update(_rerank_diagnostics(rerank))
++        selected_ids, evidence_coverage = _select_with_facet_coverage(
++            rerank=rerank,
++            facets=[],
++            fallback_ids=fused,
++            top_k=top_k,
++        )
++        diagnostics.update(_coverage_diagnostics(evidence_coverage))
+         return self._build_response(
+             q0=q0,
+             facets=[],
+             executed_queries=[query_text],
+-            selected_ids=(fused if rerank is None else rerank.ranked)[:top_k],
++            selected_ids=selected_ids,
+             candidates=candidates,
+             diagnostics=diagnostics,
+             rewritten_query=query_text,
++            evidence_coverage=evidence_coverage,
+         )
+ 
+     def _search_with_facets(
+@@ -202,24 +210,32 @@
+         rerank = self._rerank(q0, facets, fused, all_candidates)
+         diagnostics = _merge_multi_diagnostics(search_results)
+         diagnostics.update({
+-            "pipelineVersion": "traditional-v5-facet-aware-rerank",
++            "pipelineVersion": "traditional-v6-soft-coverage",
+             "queryMode": "upstream-facets",
+             "rewriteDegraded": bool(rewrite_degraded),
+             "facetRewriteDegradedCount": rewrite_degraded,
+             "facetCount": len(facets),
+             "retrievalQueryCount": len(retrieval_queries),
+             "rerankDegraded": rerank is None,
+-            "stages": ["facet_rewrite", "multi_query", "bm25", "chroma", "weighted_rrf", "dedup", "facet_aware_reranker"],
++            "stages": ["facet_rewrite", "multi_query", "bm25", "chroma", "weighted_rrf", "dedup", "facet_aware_reranker", "soft_coverage_selection", "coverage_check"],
+         })
+         diagnostics.update(_rerank_diagnostics(rerank))
++        selected_ids, evidence_coverage = _select_with_facet_coverage(
++            rerank=rerank,
++            facets=facets,
++            fallback_ids=fused,
++            top_k=top_k,
++        )
++        diagnostics.update(_coverage_diagnostics(evidence_coverage))
+         return self._build_response(
+             q0=q0,
+             facets=facets,
+             executed_queries=[item[0] for item in retrieval_queries],
+-            selected_ids=(fused if rerank is None else rerank.ranked)[:top_k],
++            selected_ids=selected_ids,
+             candidates=all_candidates,
+             diagnostics=diagnostics,
+             rewritten_query=None,
++            evidence_coverage=evidence_coverage,
+         )
+ 
+     def _build_response(
+@@ -232,6 +248,7 @@
+         candidates: dict[str, KnowledgeSearchResult],
+         diagnostics: dict[str, Any],
+         rewritten_query: str | None,
++        evidence_coverage: dict[str, Any],
+     ) -> dict[str, Any]:
+         items = []
+         for key in selected_ids:
+@@ -248,6 +265,7 @@
+             "executedQueries": executed_queries,
+             "rounds": 1,
+             "items": items,
++            "evidenceCoverage": evidence_coverage,
+             "diagnostics": diagnostics,
+         }
+         if rewritten_query is not None:
+@@ -531,6 +549,166 @@
+     return "ev_" + hashlib.sha256(identity.encode("utf-8")).hexdigest()[:16]
+ 
+ 
++_RELEVANCE_PRIORITY = {"HIGH": 3, "MEDIUM": 2, "LOW": 1, "NONE": 0}
++
++
++def _select_with_facet_coverage(
++    *,
++    rerank: RerankOutput | None,
++    facets: list[str],
++    fallback_ids: list[str],
++    top_k: int,
++) -> tuple[list[str], dict[str, Any]]:
++    """Select final evidence using a soft facet-coverage constraint.
++
++    The selector never manufactures evidence and never promotes LOW/NONE or
++    indirect support merely to make coverage look complete.  With zero facets
++    it is exactly relevance-only Top-K.  With one facet it preserves normal
++    ranking whenever Top-K already contains a reliable supporting candidate;
++    otherwise it may reserve one reliable candidate from the reranked pool.
++    With multiple facets it greedily reserves reliable candidates that cover
++    the largest number of still-uncovered facets, then fills the remaining
++    slots by the rerank order.  Final output keeps the reranker's relative
++    order so coverage does not arbitrarily reshuffle strong evidence.
++    """
++    base_ranked = list(fallback_ids if rerank is None else rerank.ranked)
++    base_ranked = list(dict.fromkeys(base_ranked))
++    top_k = max(0, int(top_k))
++    facet_catalog = [
++        {"facetId": f"f{index}", "text": facet}
++        for index, facet in enumerate(facets, start=1)
++    ]
++
++    if not facets:
++        selected = base_ranked[:top_k]
++        return selected, {
++            "status": "NOT_APPLICABLE",
++            "selectionMode": "relevance-only",
++            "selectionApplied": False,
++            "coverageRatio": None,
++            "coveredFacets": [],
++            "uncoveredFacets": [],
++            "unknownFacets": [],
++            "facets": [],
++        }
++
++    if rerank is None:
++        selected = base_ranked[:top_k]
++        return selected, {
++            "status": "UNKNOWN",
++            "selectionMode": "rerank-degraded",
++            "selectionApplied": False,
++            "coverageRatio": None,
++            "coveredFacets": [],
++            "uncoveredFacets": [],
++            "unknownFacets": [item["facetId"] for item in facet_catalog],
++            "facets": [
++                {**item, "status": "UNKNOWN", "evidenceIds": []}
++                for item in facet_catalog
++            ],
++        }
++
++    assessment_by_id = {item.evidenceId: item for item in rerank.assessments}
++    rank_index = {evidence_id: index for index, evidence_id in enumerate(base_ranked)}
++    allowed_facets = {item["facetId"] for item in facet_catalog}
++
++    def reliable_matches(evidence_id: str) -> set[str]:
++        assessment = assessment_by_id.get(evidence_id)
++        if assessment is None or not assessment.directSupport:
++            return set()
++        if assessment.relevanceLevel not in {"HIGH", "MEDIUM"}:
++            return set()
++        return set(assessment.matchedFacetIds).intersection(allowed_facets)
++
++    initial_top = base_ranked[:top_k]
++    reserved: list[str] = []
++    uncovered = set(allowed_facets)
++
++    # If one facet is already represented in normal Top-K, preserve the
++    # relevance-only ordering exactly.  Otherwise reserve at most one reliable
++    # candidate so a single-fact query does not become a diversity problem.
++    if len(facets) == 1:
++        facet_id = facet_catalog[0]["facetId"]
++        if not any(facet_id in reliable_matches(item) for item in initial_top):
++            eligible = [item for item in base_ranked if facet_id in reliable_matches(item)]
++            if eligible and top_k > 0:
++                reserved.append(eligible[0])
++    else:
++        # Soft set-cover over reliable candidates. One evidence can satisfy
++        # multiple facets and only consumes one Top-K slot.
++        candidate_pool = [item for item in base_ranked if reliable_matches(item)]
++        while uncovered and len(reserved) < top_k:
++            eligible = [item for item in candidate_pool if item not in reserved and reliable_matches(item).intersection(uncovered)]
++            if not eligible:
++                break
++
++            def reserve_key(evidence_id: str) -> tuple[int, int, int]:
++                assessment = assessment_by_id[evidence_id]
++                new_coverage = len(reliable_matches(evidence_id).intersection(uncovered))
++                relevance = _RELEVANCE_PRIORITY.get(assessment.relevanceLevel, 0)
++                return (new_coverage, relevance, -rank_index.get(evidence_id, 10**9))
++
++            best = max(eligible, key=reserve_key)
++            reserved.append(best)
++            uncovered.difference_update(reliable_matches(best))
++
++    selected_set = set(reserved)
++    for evidence_id in base_ranked:
++        if len(selected_set) >= top_k:
++            break
++        selected_set.add(evidence_id)
++
++    selected = sorted(selected_set, key=lambda item: rank_index.get(item, 10**9))[:top_k]
++    selected_set = set(selected)
++
++    facet_rows: list[dict[str, Any]] = []
++    covered_ids: list[str] = []
++    uncovered_ids: list[str] = []
++    for facet in facet_catalog:
++        facet_id = facet["facetId"]
++        evidence_ids = [
++            evidence_id for evidence_id in selected
++            if facet_id in reliable_matches(evidence_id)
++        ]
++        covered = bool(evidence_ids)
++        (covered_ids if covered else uncovered_ids).append(facet_id)
++        facet_rows.append({
++            **facet,
++            "status": "COVERED" if covered else "UNCOVERED",
++            "evidenceIds": evidence_ids,
++        })
++
++    if len(covered_ids) == len(facet_catalog):
++        status = "FULL"
++    elif covered_ids:
++        status = "PARTIAL"
++    else:
++        status = "NONE"
++
++    return selected, {
++        "status": status,
++        "selectionMode": "single-facet-soft-coverage" if len(facets) == 1 else "multi-facet-soft-coverage",
++        "selectionApplied": selected != initial_top,
++        "coverageRatio": len(covered_ids) / len(facet_catalog),
++        "coveredFacets": covered_ids,
++        "uncoveredFacets": uncovered_ids,
++        "unknownFacets": [],
++        "facets": facet_rows,
++    }
++
++
++def _coverage_diagnostics(coverage: dict[str, Any]) -> dict[str, Any]:
++    return {
++        "coverageStatus": coverage.get("status"),
++        "coverageSelectionMode": coverage.get("selectionMode"),
++        "coverageSelectionApplied": bool(coverage.get("selectionApplied")),
++        "coverageRatio": coverage.get("coverageRatio"),
++        "coveredFacetCount": len(coverage.get("coveredFacets") or []),
++        "uncoveredFacetCount": len(coverage.get("uncoveredFacets") or []),
++        "unknownFacetCount": len(coverage.get("unknownFacets") or []),
++    }
++
++
+ def _rerank_diagnostics(rerank: RerankOutput | None) -> dict[str, Any]:
+     if rerank is None:
+         return {

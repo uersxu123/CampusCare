@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusCove 管理员端</title>
+  <link rel="stylesheet" href="/styles.css?v=campuscove-archive-20260729">
+</head>
+<body class="admin-page">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo admin-logo">CC</div>
+      <div>
+        <p class="eyebrow">COUNSELOR ADMIN</p>
+        <h1>CampusCove 咨询后台</h1>
+      </div>
+    </div>
+    <div class="status-row">
+      <span id="serviceState" class="pill warn">连接中</span>
+      <span id="modelState" class="pill warn">模型读取中</span>
+      <div id="accountBadge" class="account">
+        <strong id="activeAccount">管理员</strong>
+        <span>管理员端</span>
+      </div>
+      <button id="refreshAdmin" class="ghost" type="button">刷新</button>
+      <button id="switchAccount" class="dark-btn" type="button">退出</button>
+    </div>
+  </header>
+
+  <main class="admin-layout">
+    <section class="admin-grid" aria-label="后台指标">
+      <div class="metric">
+        <span>报告数</span>
+        <strong id="metricReports">0</strong>
+      </div>
+      <div class="metric">
+        <span>高风险</span>
+        <strong id="metricHigh">0</strong>
+      </div>
+      <div class="metric">
+        <span>个案数</span>
+        <strong id="metricCases">0</strong>
+      </div>
+      <div class="metric">
+        <span>Excel 台账</span>
+        <strong id="metricExcel">0</strong>
+      </div>
+      <div class="metric">
+        <span>预警记录</span>
+        <strong id="metricAlerts">0</strong>
+      </div>
+    </section>
+
+    <section class="admin-columns">
+      <div class="admin-stack">
+        <section class="panel">
+          <div class="section-head">
+            <div>
+              <p class="panel-label">CASES</p>
+              <h2>风险个案闭环</h2>
+            </div>
+          </div>
+          <div id="cases" class="cases"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-head">
+            <div>
+              <p class="panel-label">KNOWLEDGE BASE</p>
+              <h2>RAG 知识库维护</h2>
+            </div>
+            <span id="knowledgeState" class="hint">等待读取</span>
+          </div>
+          <form id="knowledgeUploadForm" class="knowledge-upload-form">
+            <div class="knowledge-form-grid">
+              <label>文件<input id="knowledgeFile" type="file" required accept=".pdf,.md,.markdown,.txt,application/pdf,text/markdown,text/plain"></label>
+              <label>标题<input id="knowledgeTitle" type="text" required maxlength="256"></label>
+              <label>规范键<input id="knowledgeCanonicalKey" type="text" maxlength="160" placeholder="默认使用文件名"></label>
+              <label>领域<select id="knowledgeDomain"><option value="MENTAL_HEALTH">心理健康</option><option value="ACADEMIC">学业</option><option value="CAMPUS_SERVICE">校园服务</option><option value="SAFETY">安全</option></select></label>
+              <label>标签<input id="knowledgeTags" type="text" placeholder="用逗号分隔"></label>
+              <label>校区<input id="knowledgeSite" type="text" value="ALL" maxlength="64"></label>
+              <label>版本<input id="knowledgeVersion" type="text" value="1" maxlength="64"></label>
+              <label>解析配置<select id="knowledgeParserProfile"><option value="auto">auto</option><option value="pypdf_fast">pypdf_fast</option></select></label>
+              <label>分割配置<select id="knowledgeChunkingProfile"><option value="structure_token_v2">structure_token_v2</option><option value="legacy_char_v1">legacy_char_v1</option></select></label>
+              <label>验证时间<input id="knowledgeVerifiedAt" type="datetime-local"></label>
+              <label>过期时间<input id="knowledgeExpiresAt" type="datetime-local"></label>
+            </div>
+            <div class="admin-actions">
+              <button class="primary" type="submit">提交处理</button>
+              <button id="knowledgeRetryJob" class="ghost" type="button" hidden>重试任务</button>
+            </div>
+          </form>
+          <p id="knowledgeUploadState" class="hint" aria-live="polite">支持 PDF、Markdown、txt 文件</p>
+          <div class="knowledge-workspace">
+            <div>
+              <div class="subsection-head"><strong>文档</strong><button id="refreshKnowledgeDocuments" class="ghost compact" type="button">刷新</button></div>
+              <div id="knowledgeDocuments" class="knowledge-documents"></div>
+            </div>
+            <div>
+              <div class="subsection-head"><strong>处理预览</strong><span id="knowledgePreviewState" class="hint">选择文档</span></div>
+              <div id="knowledgePreview" class="knowledge-preview"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="admin-stack">
+        <section class="panel">
+          <div class="section-head">
+            <div>
+              <p class="panel-label">REPORTS</p>
+              <h2>心理风险与咨询报告</h2>
+            </div>
+          </div>
+          <div id="reports" class="reports"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-head">
+            <div>
+              <p class="panel-label">SESSION ARCHIVE</p>
+              <h2>会话档案审阅</h2>
+            </div>
+            <span id="conversationState" class="hint">选择一条报告查看</span>
+          </div>
+          <div id="conversationDetail" class="conversation-detail">
+            <div class="empty small">
+              <strong>未选择报告</strong>
+              <p>点击上方任意报告后，这里只读展示历史消息。</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="/brand.js?v=campuscove-archive-20260729"></script>
+  <script src="/admin.js?v=campuscove-archive-20260729"></script>
+</body>
+</html>

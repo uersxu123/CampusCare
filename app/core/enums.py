@@ -1,0 +1,79 @@
+from enum import Enum
+
+
+class MessageRole(str, Enum):
+    USER = "USER"
+    ASSISTANT = "ASSISTANT"
+    SYSTEM = "SYSTEM"
+
+
+class IntentType(str, Enum):
+    CHAT = "CHAT"
+    ACADEMIC = "ACADEMIC"
+    CAMPUS = "CAMPUS"
+    MENTAL = "MENTAL"
+    RISK = "RISK"
+
+
+MAX_INPUT_CHARS = 1000
+MAX_WORK_ITEMS = 4
+
+
+class KnowledgeDomain(str, Enum):
+    MENTAL_HEALTH = "MENTAL_HEALTH"
+    ACADEMIC = "ACADEMIC"
+    CAMPUS_SERVICE = "CAMPUS_SERVICE"
+    MIXED = "MIXED"
+    SAFETY = "SAFETY"
+
+
+class RouteReasonCode(str, Enum):
+    HIGH_RISK_SIGNAL = "HIGH_RISK_SIGNAL"
+    ACADEMIC_SIGNAL = "ACADEMIC_SIGNAL"
+    CAMPUS_SERVICE_SIGNAL = "CAMPUS_SERVICE_SIGNAL"
+    MENTAL_HEALTH_SIGNAL = "MENTAL_HEALTH_SIGNAL"
+    COMPOUND_REQUEST = "COMPOUND_REQUEST"
+    DEPENDENCY_DETECTED = "DEPENDENCY_DETECTED"
+    MEMORY_CONTEXT = "MEMORY_CONTEXT"
+    GENERAL_CHAT = "GENERAL_CHAT"
+    SEMANTIC_FALLBACK = "SEMANTIC_FALLBACK"
+    WORK_ITEM_LIMIT_EXCEEDED = "WORK_ITEM_LIMIT_EXCEEDED"
+    AMBIGUOUS_ROUTING = "AMBIGUOUS_ROUTING"
+
+
+class RiskLevel(str, Enum):
+    LOW = "LOW"
+    MEDIUM = "MEDIUM"
+    HIGH = "HIGH"
+
+
+class EmotionLabel(str, Enum):
+    NORMAL = "NORMAL"
+    ANXIETY = "ANXIETY"
+    DEPRESSED = "DEPRESSED"
+    HIGH_RISK = "HIGH_RISK"
+
+
+class ToolStatus(str, Enum):
+    SUCCESS = "SUCCESS"
+    FAILED = "FAILED"
+
+
+class ToolJobKind(str, Enum):
+    EXCEL_REPORT = "EXCEL_REPORT"
+    CASE_CREATE = "CASE_CREATE"
+    ALERT_SEND = "ALERT_SEND"
+    RISK_ALERT = "RISK_ALERT"
+
+
+class ToolJobStatus(str, Enum):
+    PENDING = "PENDING"
+    RUNNING = "RUNNING"
+    SUCCESS = "SUCCESS"
+    DEAD = "DEAD"
+
+
+class RiskCaseStatus(str, Enum):
+    OPEN = "OPEN"
+    ALERT_SENT = "ALERT_SENT"
+    ACKNOWLEDGED = "ACKNOWLEDGED"

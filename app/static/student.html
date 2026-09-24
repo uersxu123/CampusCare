@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusCove 学生端</title>
+  <link rel="stylesheet" href="/styles.css?v=campuscove-markdown-20260731">
+</head>
+<body class="student-page">
+  <header class="topbar student-topbar">
+    <div class="brand">
+      <div class="logo student-logo">CC</div>
+      <div>
+        <p class="eyebrow">STUDENT COMPANION</p>
+        <h1>CampusCove 校园陪伴与事务助手</h1>
+      </div>
+    </div>
+    <div class="status-row">
+      <span id="serviceState" class="pill warn">连接中</span>
+      <span id="modelState" class="pill warn">模型读取中</span>
+      <div id="accountBadge" class="account">
+        <strong id="activeAccount">学生</strong>
+        <span>学生端</span>
+      </div>
+      <button id="openMemories" class="dark-btn" type="button">我的记忆</button>
+      <button id="switchAccount" class="dark-btn" type="button">退出</button>
+    </div>
+  </header>
+
+  <main class="student-layout">
+    <aside id="conversationDrawer" class="conversation-sidebar" aria-label="历史会话">
+      <div class="conversation-sidebar-head">
+        <button id="newSession" class="new-conversation-btn" type="button">
+          <span aria-hidden="true">＋</span>
+          <span>新建会话</span>
+        </button>
+        <button id="closeHistory" class="icon-btn drawer-close" type="button" aria-label="关闭历史会话" title="关闭历史会话">×</button>
+      </div>
+      <div class="conversation-section-head">
+        <p class="panel-label">最近对话</p>
+        <button id="refreshConversations" class="icon-btn" type="button" aria-label="刷新历史会话" title="刷新历史会话">↻</button>
+      </div>
+      <div id="conversationList" class="conversation-list" aria-live="polite"></div>
+      <div id="conversationListState" class="conversation-list-state">正在读取历史会话...</div>
+    </aside>
+    <button id="historyBackdrop" class="drawer-backdrop" type="button" aria-label="关闭历史会话" hidden></button>
+
+    <section class="chat-panel student-chat">
+      <div class="chat-head">
+        <div class="chat-head-title">
+          <button id="openHistory" class="icon-btn history-toggle" type="button" aria-label="打开历史会话" title="打开历史会话">☰</button>
+          <div>
+            <p class="panel-label">STUDENT CHAT</p>
+            <h2 id="conversationTitle">新会话</h2>
+          </div>
+        </div>
+        <span id="sessionBadge" class="pill">READY</span>
+      </div>
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <div id="messages" class="messages"></div>
+      <form id="chatForm" class="composer">
+        <textarea id="messageInput" placeholder="写下你现在想说的话..." rows="3"></textarea>
+        <div class="composer-actions">
+          <button id="sendButton" class="primary" type="submit">发送</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <dialog id="archiveDialog" class="archive-dialog">
+    <form method="dialog" class="archive-dialog-content">
+      <div>
+        <p class="panel-label">ARCHIVE CONVERSATION</p>
+        <h2>归档会话</h2>
+      </div>
+      <p>归档后，这条会话将从你的历史记录中移除，并且无法在学生端恢复。会话数据仍会按照系统安全与审计规则保留。确认归档吗？</p>
+      <div class="dialog-actions">
+        <button id="cancelArchive" class="ghost" type="button">取消</button>
+        <button id="confirmArchive" class="danger-btn" type="button">确认归档</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="memoryDialog" class="archive-dialog memory-dialog">
+    <section class="archive-dialog-content">
+      <div class="memory-dialog-head">
+        <div>
+          <p class="panel-label">MY MEMORIES</p>
+          <h2>我的记忆</h2>
+        </div>
+        <button id="closeMemories" class="icon-btn" type="button" aria-label="关闭我的记忆">×</button>
+      </div>
+      <p>这里只展示你明确要求 CampusCove 记住的长期信息。删除后，它不会再进入后续对话上下文。</p>
+      <div id="memoryList" class="memory-list" aria-live="polite"></div>
+      <div id="memoryListState" class="conversation-list-state">正在读取记忆...</div>
+    </section>
+  </dialog>
+
+  <script src="/brand.js?v=campuscove-archive-20260729"></script>
+  <script src="/vendor/marked.min.js?v=15.0.7"></script>
+  <script src="/vendor/purify.min.js?v=3.2.6"></script>
+  <script src="/student.js?v=campuscove-markdown-20260731"></script>
+</body>
+</html>

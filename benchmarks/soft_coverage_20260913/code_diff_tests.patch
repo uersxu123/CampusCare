@@ -1,0 +1,173 @@
+--- /mnt/data/test_rag_pipeline_v2_before_coverage.py	2026-09-12 17:23:38.787993394 +0000
++++ tests/test_rag_pipeline_v2.py	2026-09-12 17:29:11.958090990 +0000
+@@ -2,7 +2,7 @@
+ from dataclasses import replace
+ import pytest
+ from app.services.knowledge import CandidateSearchResult, KnowledgeSearchResult
+-from app.services.rag_pipeline import RagPipeline, RerankCandidateAssessment, RerankOutput, RewriteOutput, weighted_rrf
++from app.services.rag_pipeline import RagPipeline, RerankCandidateAssessment, RerankOutput, RewriteOutput, weighted_rrf, _select_with_facet_coverage
+ 
+ 
+ def _rerank_output(ids, facet_ids=()):
+@@ -65,6 +65,8 @@
+     assert result["items"][0]["content"] == "子块2"
+     assert result["items"][0]["parentContent"] == "MySQL 中的完整父块"
+     assert result["items"][0]["parentChunkId"] == 100
++    assert result["evidenceCoverage"]["status"] == "NOT_APPLICABLE"
++    assert result["diagnostics"]["coverageStatus"] == "NOT_APPLICABLE"
+ 
+ 
+ def test_rewrite_failure():
+@@ -156,6 +158,9 @@
+     assert len([event for event in events if event[0] == "retrieve"]) == 4
+     assert result["diagnostics"]["rerankAssessmentCount"] == 3
+     assert result["diagnostics"]["rerankCandidateFacetMatches"][0]["matchedFacetIds"] == ["f1"]
++    assert result["evidenceCoverage"]["status"] == "PARTIAL"
++    assert result["evidenceCoverage"]["coveredFacets"] == ["f1"]
++    assert result["evidenceCoverage"]["uncoveredFacets"] == ["f2", "f3"]
+ 
+ 
+ def test_reranker_rejects_unknown_facet_match_and_degrades():
+@@ -220,3 +225,142 @@
+     assert ("retrieve", "原问题") in events
+     assert ("retrieve", "休学期间发放") in events
+     assert result["diagnostics"]["facetRewriteDegradedCount"] == 1
++
++
++
++def _assessment(evidence_id, level="HIGH", facets=(), direct=True):
++    return RerankCandidateAssessment(
++        evidenceId=evidence_id,
++        relevanceLevel=level,
++        matchedFacetIds=list(facets),
++        directSupport=direct,
++    )
++
++
++def test_soft_coverage_multi_facet_reserves_missing_facet_without_reordering_strong_items():
++    ranked = [f"e{i}" for i in range(1, 8)]
++    rerank = RerankOutput(
++        ranked=ranked,
++        assessments=[
++            _assessment("e1", facets=("f1",)),
++            _assessment("e2", facets=("f1",)),
++            _assessment("e3", facets=("f1",)),
++            _assessment("e4", facets=("f2",)),
++            _assessment("e5", facets=("f2",)),
++            _assessment("e6", facets=("f3",)),
++            _assessment("e7", level="LOW", facets=("f3",)),
++        ],
++    )
++    selected, coverage = _select_with_facet_coverage(
++        rerank=rerank,
++        facets=["兼得", "休学", "复学"],
++        fallback_ids=ranked,
++        top_k=5,
++    )
++    assert selected == ["e1", "e2", "e3", "e4", "e6"]
++    assert coverage["status"] == "FULL"
++    assert coverage["coveredFacets"] == ["f1", "f2", "f3"]
++    assert coverage["selectionApplied"]
++    assert coverage["coverageRatio"] == 1.0
++
++
++def test_soft_coverage_single_facet_is_noop_when_topk_already_covers():
++    ranked = ["e1", "e2", "e3"]
++    rerank = RerankOutput(
++        ranked=ranked,
++        assessments=[
++            _assessment("e1", facets=("f1",)),
++            _assessment("e2", facets=()),
++            _assessment("e3", facets=()),
++        ],
++    )
++    selected, coverage = _select_with_facet_coverage(
++        rerank=rerank,
++        facets=["本科生最大借阅册数"],
++        fallback_ids=ranked,
++        top_k=2,
++    )
++    assert selected == ["e1", "e2"]
++    assert coverage["selectionMode"] == "single-facet-soft-coverage"
++    assert not coverage["selectionApplied"]
++    assert coverage["status"] == "FULL"
++
++
++def test_soft_coverage_single_facet_can_pull_one_reliable_candidate_into_topk():
++    ranked = ["e1", "e2", "e3", "e4"]
++    rerank = RerankOutput(
++        ranked=ranked,
++        assessments=[
++            _assessment("e1", facets=()),
++            _assessment("e2", facets=()),
++            _assessment("e3", facets=()),
++            _assessment("e4", level="MEDIUM", facets=("f1",)),
++        ],
++    )
++    selected, coverage = _select_with_facet_coverage(
++        rerank=rerank,
++        facets=["唯一证据目标"],
++        fallback_ids=ranked,
++        top_k=3,
++    )
++    assert selected == ["e1", "e2", "e4"]
++    assert coverage["status"] == "FULL"
++    assert coverage["selectionApplied"]
++
++
++def test_soft_coverage_does_not_promote_low_or_indirect_evidence():
++    ranked = ["e1", "e2", "e3", "e4"]
++    rerank = RerankOutput(
++        ranked=ranked,
++        assessments=[
++            _assessment("e1", facets=("f1",)),
++            _assessment("e2", facets=("f2",), direct=False),
++            _assessment("e3", level="LOW", facets=("f2",)),
++            _assessment("e4", facets=()),
++        ],
++    )
++    selected, coverage = _select_with_facet_coverage(
++        rerank=rerank,
++        facets=["目标一", "目标二"],
++        fallback_ids=ranked,
++        top_k=3,
++    )
++    assert selected == ["e1", "e2", "e3"]
++    assert coverage["status"] == "PARTIAL"
++    assert coverage["coveredFacets"] == ["f1"]
++    assert coverage["uncoveredFacets"] == ["f2"]
++    assert not coverage["selectionApplied"]
++
++
++def test_soft_coverage_one_candidate_can_cover_two_facets_once():
++    ranked = ["e1", "e2", "e3"]
++    rerank = RerankOutput(
++        ranked=ranked,
++        assessments=[
++            _assessment("e1", facets=("f1", "f2")),
++            _assessment("e2", facets=("f3",)),
++            _assessment("e3", facets=()),
++        ],
++    )
++    selected, coverage = _select_with_facet_coverage(
++        rerank=rerank,
++        facets=["休学", "复学", "兼得"],
++        fallback_ids=ranked,
++        top_k=2,
++    )
++    assert selected == ["e1", "e2"]
++    assert coverage["status"] == "FULL"
++    assert coverage["coverageRatio"] == 1.0
++
++
++def test_soft_coverage_rerank_degraded_is_unknown_not_fake_uncovered():
++    selected, coverage = _select_with_facet_coverage(
++        rerank=None,
++        facets=["目标一", "目标二"],
++        fallback_ids=["e1", "e2", "e3"],
++        top_k=2,
++    )
++    assert selected == ["e1", "e2"]
++    assert coverage["status"] == "UNKNOWN"
++    assert coverage["coverageRatio"] is None
++    assert all(item["status"] == "UNKNOWN" for item in coverage["facets"])

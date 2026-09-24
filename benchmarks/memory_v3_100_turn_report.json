@@ -1,0 +1,22 @@
+{
+  "turns": 100,
+  "maxSpecialistInputTokens": 1018,
+  "maxResponseInputTokens": 991,
+  "applicationInputBudget": 12000,
+  "baseMemoryBudget": 4200,
+  "protectedOverflowCount": 0,
+  "currentInputDuplicatePromptCount": 0,
+  "duplicateSourceIdCount": 0,
+  "snapshotMismatchCount": 0,
+  "crossSessionRecallTurns": 50,
+  "summaryVersions": [
+    23,
+    23
+  ],
+  "summaryCursors": [
+    92,
+    192
+  ],
+  "summaryProgressValid": true,
+  "mode": "deterministic SQLite + SQL fallback; no external model or embedding service"
+}

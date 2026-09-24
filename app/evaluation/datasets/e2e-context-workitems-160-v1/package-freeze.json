@@ -1,0 +1,25 @@
+{
+  "frozenAt": "2026-09-18T12:10:41.278541+00:00",
+  "files": {
+    "adaptation-changes.json": "0745b839aeeaf530e3fcc4791015431de3bb0f34f0491622011fe1c25a8d691c",
+    "audit-results.json": "d48cf9ae8fcf89a61c3f6bbcff7d562f07dcbc2ba544d508e0719419f79b892f",
+    "business.jsonl": "a59954a19f31247e42f7ac34f642b1f15603542907458acedff8da520c2db377",
+    "corpus-audit.json": "9fa72ef0aa3f3f770fa7a7e42d4380cd20ac00bf999657398444e9d1949fffed",
+    "README.md": "2558dca56c13514ae911f4c542e97725a76cc95b94a04f4506dc67b416486394",
+    "safety.jsonl": "ec87ef9db5f07e3289b83069a65d0dbcabbfe095fee1dbecf9035e89f59bf5e1"
+  },
+  "inputs": {
+    "target\\verification\\e2e160-package-20260918\\reviewed-gold.tsv": "95169121b096241133b14a96de9a1e7cff0b24a9c61c55bf7ab7f8da53da332f",
+    "target\\verification\\e2e160-package-20260918\\discovery.json": "7d01d6b88ba0f2e5ece26324e0ab1d799bf5628d83385f6088f532b6d75195b1",
+    "target\\verification\\e2e160-package-20260918\\corpus-snapshot.json": "18b13007a96c6ffd6aa8099015e3852ad4e2c97ecbda4d00b2bca447f13df25e",
+    "target\\verification\\e2e160-package-20260918\\tests.xml": "222e52d44f7687f9a70516b1852cfd791c38b5f6b9f40aae67d4facfd6213fff",
+    "scripts\\build_e2e160.py": "9b38ecde05a6f85e345fef86669f8548b8f7d9a84d962b081e59fb67f23894e5",
+    "scripts\\prepare_e2e160.py": "c1d6230150684e4b23f6d1a7068d1f69d3af102e1e755bf1bd67278eb7947152",
+    "scripts\\run_frozen_e2e160.py": "fe06577a4d58247a1ea9e5e279500f873d3d253183c285572210d2873680c93e",
+    "scripts\\freeze_e2e160.py": "9e87e184f144974eee42d5dbdbe2597a602f2da738e0a5cdbc116a4fbb443575"
+  },
+  "tests": 47,
+  "chromaVerified": 855,
+  "calibrationRejected": true,
+  "noModelRunDuringGoldReview": true
+}

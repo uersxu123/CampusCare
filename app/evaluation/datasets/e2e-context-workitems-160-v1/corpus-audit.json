@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 4,
+  "scope": "e2e-context-workitems-160-v1",
+  "referenceSource": {
+    "type": "mysql-active-corpus",
+    "relationalDatabaseType": "mysql",
+    "corpusHash": "d4b79542ab7ae7bc9983abc6381d11bf972fb0998aa58e5e9b1994651eebb0dd",
+    "manifestHash": "1a1ffb4da290f5cfe88260628d62de49024fb2d3a8585d2e5b9b9f1f161f76de",
+    "chunkingProfiles": [
+      "handbook_prechunked_v2"
+    ],
+    "activeCollection": "mindbridge_knowledge_v3__e68e6e2ed134",
+    "indexSignature": "e68e6e2ed13410f72adc8f1dba852bba47592b6ee2fcff315bdb3b67184e687e",
+    "documentCount": 49,
+    "chunkCount": 1127,
+    "vectorCount": 855,
+    "generatedAt": "2026-09-17T11:35:49.791799+00:00"
+  },
+  "outputCaseCount": 160,
+  "businessCaseCount": 157,
+  "safetyCaseCount": 3,
+  "actionDistribution": {
+    "ANSWER": 135,
+    "PARTIAL_ANSWER": 20,
+    "CLARIFY": 1,
+    "ABSTAIN": 1
+  },
+  "adaptationVersion": "e2e-context-workitems-160-v1",
+  "humanReviewed": false,
+  "datasetSha256": {
+    "business.jsonl": "a59954a19f31247e42f7ac34f642b1f15603542907458acedff8da520c2db377",
+    "safety.jsonl": "ec87ef9db5f07e3289b83069a65d0dbcabbfe095fee1dbecf9035e89f59bf5e1"
+  },
+  "routerContractVersion": "router-v5.5-four-intents",
+  "safetyContractVersion": "safety-agent-v7.5",
+  "judgePromptVersion": "business-judge-v2-acceptable-actions"
+}

@@ -1,0 +1,5 @@
+split,method,n_queries,avg_predicted_facet_coverage,full_coverage_rate,selection_applied_rate
+all200,FacetMultiQuery_Hybrid_RRF_FacetAwareRerank_SoftCoverage,200,0.9275,0.925,0.135
+all200,FacetRewrite_Hybrid_RRF_FacetAwareRerank_SoftCoverage,200,0.925,0.92,0.125
+heldout150,FacetMultiQuery_Hybrid_RRF_FacetAwareRerank_SoftCoverage,150,0.93,0.9266666666666666,0.13333333333333333
+heldout150,FacetRewrite_Hybrid_RRF_FacetAwareRerank_SoftCoverage,150,0.92,0.9133333333333333,0.12

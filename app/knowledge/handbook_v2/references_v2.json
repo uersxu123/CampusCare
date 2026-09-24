@@ -1,0 +1,471 @@
+[
+  {
+    "reference_id": "ref-v2-0000",
+    "document_id": "doc-02",
+    "source_element_id": "doc-02-e0137",
+    "source_chunk_ids": [
+      "v2-c-00146"
+    ],
+    "reference_label": "第一百三十六条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-02-e0136"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00145"
+    ],
+    "target_excerpt": null,
+    "relation_type": "DEPENDS_ON",
+    "auto_expand": true,
+    "max_hops": 1,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0001",
+    "document_id": "doc-03",
+    "source_element_id": "doc-03-e0014",
+    "source_chunk_ids": [
+      "v2-c-00164"
+    ],
+    "reference_label": "第四条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-03-e0003"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00153"
+    ],
+    "target_excerpt": null,
+    "relation_type": "CROSS_REFERENCE",
+    "auto_expand": true,
+    "max_hops": 1,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0002",
+    "document_id": "doc-04",
+    "source_element_id": "doc-04-e0007",
+    "source_chunk_ids": [
+      "v2-c-00224"
+    ],
+    "reference_label": "第四条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-04-e0003"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00220"
+    ],
+    "target_excerpt": null,
+    "relation_type": "DEPENDS_ON",
+    "auto_expand": true,
+    "max_hops": 1,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0003",
+    "document_id": "doc-04",
+    "source_element_id": "doc-04-e0007",
+    "source_chunk_ids": [
+      "v2-c-00224"
+    ],
+    "reference_label": "第七条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-04-e0006"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00223"
+    ],
+    "target_excerpt": null,
+    "relation_type": "DEPENDS_ON",
+    "auto_expand": true,
+    "max_hops": 1,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0004",
+    "document_id": "doc-04",
+    "source_element_id": "doc-04-e0008",
+    "source_chunk_ids": [
+      "v2-c-00225"
+    ],
+    "reference_label": "第七条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-04-e0006"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00223"
+    ],
+    "target_excerpt": null,
+    "relation_type": "DEPENDS_ON",
+    "auto_expand": true,
+    "max_hops": 1,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0005",
+    "document_id": "doc-04",
+    "source_element_id": "doc-04-e0010",
+    "source_chunk_ids": [
+      "v2-c-00227"
+    ],
+    "reference_label": "第三十四条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-04-e0033"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00250"
+    ],
+    "target_excerpt": null,
+    "relation_type": "DEPENDS_ON",
+    "auto_expand": true,
+    "max_hops": 1,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0006",
+    "document_id": "doc-04",
+    "source_element_id": "doc-04-e0027",
+    "source_chunk_ids": [
+      "v2-c-00244"
+    ],
+    "reference_label": "第四条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-04-e0003"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00220"
+    ],
+    "target_excerpt": null,
+    "relation_type": "DEPENDS_ON",
+    "auto_expand": true,
+    "max_hops": 1,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0007",
+    "document_id": "doc-04",
+    "source_element_id": "doc-04-e0030",
+    "source_chunk_ids": [
+      "v2-c-00247"
+    ],
+    "reference_label": "第三十条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-04-e0029"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00246"
+    ],
+    "target_excerpt": null,
+    "relation_type": "PROCEDURE_FROM",
+    "auto_expand": true,
+    "max_hops": 1,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0008",
+    "document_id": "doc-04",
+    "source_element_id": "doc-04-e0033",
+    "source_chunk_ids": [
+      "v2-c-00250"
+    ],
+    "reference_label": "第三十条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-04-e0029"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00246"
+    ],
+    "target_excerpt": null,
+    "relation_type": "PROCEDURE_FROM",
+    "auto_expand": true,
+    "max_hops": 1,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0009",
+    "document_id": "doc-04",
+    "source_element_id": "doc-04-e0036",
+    "source_chunk_ids": [
+      "v2-c-00253"
+    ],
+    "reference_label": "第三十六条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-04-e0035"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00252"
+    ],
+    "target_excerpt": null,
+    "relation_type": "PROCEDURE_FROM",
+    "auto_expand": true,
+    "max_hops": 1,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0010",
+    "document_id": "doc-08",
+    "source_element_id": "doc-08-e0008",
+    "source_chunk_ids": [
+      "v2-c-00430",
+      "v2-c-00431"
+    ],
+    "reference_label": "第十六条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-08-e0015"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00438"
+    ],
+    "target_excerpt": null,
+    "relation_type": "SCOPE_BOUNDARY",
+    "auto_expand": false,
+    "max_hops": 0,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0011",
+    "document_id": "doc-08",
+    "source_element_id": "doc-08-e0008",
+    "source_chunk_ids": [
+      "v2-c-00430",
+      "v2-c-00431"
+    ],
+    "reference_label": "第四十条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-08-e0039"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00462"
+    ],
+    "target_excerpt": null,
+    "relation_type": "SCOPE_BOUNDARY",
+    "auto_expand": false,
+    "max_hops": 0,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0012",
+    "document_id": "doc-08",
+    "source_element_id": "doc-08-e0008",
+    "source_chunk_ids": [
+      "v2-c-00430",
+      "v2-c-00431"
+    ],
+    "reference_label": "第六十二条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-08-e0061"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00484"
+    ],
+    "target_excerpt": null,
+    "relation_type": "SCOPE_REFERENCE",
+    "auto_expand": false,
+    "max_hops": 0,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0013",
+    "document_id": "doc-08",
+    "source_element_id": "doc-08-e0008",
+    "source_chunk_ids": [
+      "v2-c-00430",
+      "v2-c-00431"
+    ],
+    "reference_label": "第四十一条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-08-e0040"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00463"
+    ],
+    "target_excerpt": null,
+    "relation_type": "SCOPE_REFERENCE",
+    "auto_expand": false,
+    "max_hops": 0,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0014",
+    "document_id": "doc-08",
+    "source_element_id": "doc-08-e0008",
+    "source_chunk_ids": [
+      "v2-c-00430",
+      "v2-c-00431"
+    ],
+    "reference_label": "第六十五条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-08-e0064"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00487"
+    ],
+    "target_excerpt": null,
+    "relation_type": "SCOPE_REFERENCE",
+    "auto_expand": false,
+    "max_hops": 0,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0015",
+    "document_id": "doc-08",
+    "source_element_id": "doc-08-e0008",
+    "source_chunk_ids": [
+      "v2-c-00430",
+      "v2-c-00431"
+    ],
+    "reference_label": "第六十六条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-08-e0065"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00488"
+    ],
+    "target_excerpt": null,
+    "relation_type": "SCOPE_REFERENCE",
+    "auto_expand": false,
+    "max_hops": 0,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0016",
+    "document_id": "doc-08",
+    "source_element_id": "doc-08-e0008",
+    "source_chunk_ids": [
+      "v2-c-00430",
+      "v2-c-00431"
+    ],
+    "reference_label": "第十二条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-08-e0011"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00434"
+    ],
+    "target_excerpt": null,
+    "relation_type": "SCOPE_REFERENCE",
+    "auto_expand": false,
+    "max_hops": 0,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0017",
+    "document_id": "doc-15",
+    "source_element_id": "doc-15-e0012",
+    "source_chunk_ids": [
+      "v2-c-00617"
+    ],
+    "reference_label": "第十四条",
+    "reference_subclause": null,
+    "target_element_ids": [
+      "doc-15-e0013"
+    ],
+    "target_chunk_ids": [
+      "v2-c-00618"
+    ],
+    "target_excerpt": null,
+    "relation_type": "SCOPE_REFERENCE",
+    "auto_expand": false,
+    "max_hops": 0,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0018",
+    "document_id": "doc-28",
+    "source_element_id": "doc-28-e0016",
+    "source_chunk_ids": [
+      "v2-c-01009"
+    ],
+    "reference_label": "第六条",
+    "reference_subclause": "第三款",
+    "target_element_ids": [
+      "doc-28-e0005"
+    ],
+    "target_chunk_ids": [
+      "v2-c-01002"
+    ],
+    "target_excerpt": "（三）在评选申报过程中有弄虚作假行为等。",
+    "relation_type": "VIOLATION_OF",
+    "auto_expand": true,
+    "max_hops": 1,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0019",
+    "document_id": "doc-29",
+    "source_element_id": "doc-29-e0017",
+    "source_chunk_ids": [
+      "v2-c-01028"
+    ],
+    "reference_label": "第七条",
+    "reference_subclause": "第三款",
+    "target_element_ids": [
+      "doc-29-e0006"
+    ],
+    "target_chunk_ids": [
+      "v2-c-01017"
+    ],
+    "target_excerpt": "（三）在评选申报过程中有弄虚作假行为等。",
+    "relation_type": "VIOLATION_OF",
+    "auto_expand": true,
+    "max_hops": 1,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  },
+  {
+    "reference_id": "ref-v2-0020",
+    "document_id": "doc-33",
+    "source_element_id": "doc-33-e0016",
+    "source_chunk_ids": [
+      "v2-c-01186"
+    ],
+    "reference_label": "第七条",
+    "reference_subclause": "第二款",
+    "target_element_ids": [
+      "doc-33-e0006"
+    ],
+    "target_chunk_ids": [
+      "v2-c-01178"
+    ],
+    "target_excerpt": "（二）在评选申报过程中有弄虚作假行为等。",
+    "relation_type": "VIOLATION_OF",
+    "auto_expand": true,
+    "max_hops": 1,
+    "verified": true,
+    "verification_method": "same_document_unique_article_label"
+  }
+]

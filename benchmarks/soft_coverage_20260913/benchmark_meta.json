@@ -1,0 +1,13 @@
+{
+  "dataset": "frozen realistic_student_queries_200.jsonl",
+  "dataset_sha256": "581bfd9c7d78f41d004e5e4edab97f3c4a62f8b4b3b41161b6af3a638c391cbd",
+  "split": "50-query dev / 150-query heldout (same qid%4 split as prior benchmark)",
+  "heldout_single_evidence": 108,
+  "heldout_multi_evidence": 42,
+  "production_change": "Adaptive Soft Coverage-Constrained TopK + explicit Evidence Coverage output",
+  "production_selector": "0 facets=no-op; 1 facet preserves TopK if already covered, otherwise reserves at most one HIGH/MEDIUM direct-support candidate; 2-3 facets greedy reliable set-cover then fill by rerank order; final relative rerank order preserved; LOW/NONE or indirect candidates are never promoted for coverage",
+  "offline_dense": "Chinese char 2-4 gram TF-IDF -> SVD128 -> cosine proxy; NOT BGE-M3",
+  "offline_reranker": "LightGBM LambdaRank proxy; NOT production LLM reranker",
+  "offline_facet_match": "char-bigram overlap candidate->facet proxy; threshold selected only on dev50 from [0.06,0.08,0.10,0.12,0.15], selected=0.12; heldout not used for tuning",
+  "important_caveat": "Use results as architecture ablation, not as BGE-M3/Qwen production-model scores."
+}

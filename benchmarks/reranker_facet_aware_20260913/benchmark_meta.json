@@ -1,0 +1,15 @@
+{
+  "dataset_sha256": "be29c13cc9ded6ab7bc3736f57e23645fee7edc2b16f199d536c42554276ea1a",
+  "dataset_n": 200,
+  "children_n": 1487,
+  "heldout_n": 150,
+  "reranker_train_n": 50,
+  "facet_planner": "query-only deterministic project-background concept planner; DOES NOT read gold expected_document_ids or chunk text",
+  "bm25": "project KnowledgeTokenizer + BM25F field weights tags=3.4,section=3.0,title=2.4,content=1.0",
+  "dense_proxy": "char 2-4gram TFIDF -> TruncatedSVD(128) -> L2 cosine; NOT BGE-M3",
+  "single_rewrite": "project retrieval_taxonomy safe expansion preserving original query",
+  "facet_rewrite": "per-facet safe retrieval_taxonomy expansion; original q0 retained as anchor; facet query weights=0.85",
+  "fusion": "RRF k=60",
+  "reranker_proxy": "LightGBM LambdaRank trained on fixed 50-query dev split. Relevance-only excludes candidate->facet match features; FacetAware adds max facet match and matched-facet-count features. NO constrained Top-K selector is used. This is a proxy for the production LLM reranker prompt/schema, not an LLM result.",
+  "metrics": "Recall@5 = unique expected logical-document coverage in top5 chunks; HitRate@5 = any gold document in top5; MRR@5 = reciprocal rank of first gold document"
+}

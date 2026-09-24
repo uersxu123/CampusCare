@@ -1,0 +1,345 @@
+[
+  {
+    "document_id": "doc-01",
+    "title": "高等学校学生行为准则",
+    "start": 1,
+    "end": 1,
+    "group": "通用制度"
+  },
+  {
+    "document_id": "doc-02",
+    "title": "中国地质大学（武汉）章程",
+    "start": 2,
+    "end": 24,
+    "group": "通用制度"
+  },
+  {
+    "document_id": "doc-03",
+    "title": "中国地质大学（武汉）学生管理规定",
+    "start": 25,
+    "end": 34,
+    "group": "通用制度"
+  },
+  {
+    "document_id": "doc-04",
+    "title": "中国地质大学（武汉）本科生学籍管理办法",
+    "start": 36,
+    "end": 45,
+    "group": "学籍与学务"
+  },
+  {
+    "document_id": "doc-05",
+    "title": "中国地质大学（武汉）学生学费收缴管理规定",
+    "start": 46,
+    "end": 47,
+    "group": "学籍与学务"
+  },
+  {
+    "document_id": "doc-06",
+    "title": "中国地质大学（武汉）本科课程修读管理办法",
+    "start": 48,
+    "end": 55,
+    "group": "学籍与学务"
+  },
+  {
+    "document_id": "doc-07",
+    "title": "中国地质大学（武汉）学生安全管理规定",
+    "start": 57,
+    "end": 61,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-08",
+    "title": "中国地质大学（武汉）学生纪律处分办法",
+    "start": 62,
+    "end": 76,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-09",
+    "title": "中国地质大学（武汉）本科生课程考核纪律与学术规范",
+    "start": 77,
+    "end": 79,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-10",
+    "title": "中国地质大学（武汉）大学生课堂学习规范",
+    "start": 80,
+    "end": 80,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-11",
+    "title": "中国地质大学（武汉）本科生请销假管理办法",
+    "start": 81,
+    "end": 82,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-12",
+    "title": "中国地质大学（武汉）学生宿舍住宿管理办法",
+    "start": 83,
+    "end": 86,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-13",
+    "title": "中国地质大学（武汉）学生使用计算机网络信息管理办法",
+    "start": 87,
+    "end": 90,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-14",
+    "title": "中国地质大学（武汉）校园飞行器使用与管理办法（暂行）",
+    "start": 91,
+    "end": 92,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-15",
+    "title": "中国地质大学（武汉）学生申诉处理办法",
+    "start": 93,
+    "end": 97,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-16",
+    "title": "中国地质大学（武汉）学生就业工作流程",
+    "start": 98,
+    "end": 104,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-17",
+    "title": "中国地质大学（武汉）图书馆读者须知",
+    "start": 105,
+    "end": 112,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-18",
+    "title": "中国地质大学（武汉）《国家学生体质健康标准》实施暂行办法",
+    "start": 113,
+    "end": 114,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-19",
+    "title": "中国地质大学（武汉）机动车辆通行管理暂行办法",
+    "start": 115,
+    "end": 118,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-20",
+    "title": "中国地质大学（武汉）校园电动自行车通行管理办法（修订）",
+    "start": 119,
+    "end": 123,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-21",
+    "title": "中国地质大学（武汉）学生人事档案管理办法",
+    "start": 124,
+    "end": 132,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-22",
+    "title": "中国地质大学（武汉）大学生基本医疗保障实施办法",
+    "start": 133,
+    "end": 138,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-23",
+    "title": "大学生医保热点问题问答",
+    "start": 139,
+    "end": 150,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-24",
+    "title": "中国地质大学（武汉）大学生节水节电行为规范",
+    "start": 151,
+    "end": 151,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-25",
+    "title": "“制止餐饮浪费  培养节约习惯”行动方案",
+    "start": 152,
+    "end": 153,
+    "group": "纪律与规范"
+  },
+  {
+    "document_id": "doc-26",
+    "title": "中国地质大学（武汉）本科生奖励资助管理办法",
+    "start": 155,
+    "end": 158,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-27",
+    "title": "中国地质大学（武汉）本科生综合素质测评实施办法",
+    "start": 159,
+    "end": 162,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-28",
+    "title": "中国地质大学（武汉）本科生国家奖学金评选办法",
+    "start": 163,
+    "end": 164,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-29",
+    "title": "中国地质大学（武汉）本科生国家励志奖学金评选办法",
+    "start": 165,
+    "end": 166,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-30",
+    "title": "中国地质大学（武汉）英才奖学金评选办法",
+    "start": 167,
+    "end": 172,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-31",
+    "title": "中国地质大学（武汉）本科生社会奖学金评选办法",
+    "start": 173,
+    "end": 186,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-32",
+    "title": "中国地质大学（武汉）家庭经济困难学生认定管理办法",
+    "start": 187,
+    "end": 190,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-33",
+    "title": "中国地质大学（武汉）国家助学金评选办法",
+    "start": 191,
+    "end": 192,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-34",
+    "title": "中国地质大学（武汉）本科生社会助学金评选办法",
+    "start": 193,
+    "end": 196,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-35",
+    "title": "中国地质大学（武汉）本科生临时困难补助实施办法",
+    "start": 197,
+    "end": 197,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-36",
+    "title": "中国地质大学（武汉）本科生重大疾病救助基金管理办法",
+    "start": 198,
+    "end": 201,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-37",
+    "title": "中国地质大学（武汉）大学生日常奖励实施办法",
+    "start": 202,
+    "end": 203,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-38",
+    "title": "中国地质大学（武汉）本科生年度先进集体及优秀个人评选奖励办法",
+    "start": 204,
+    "end": 206,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-39",
+    "title": "中国地质大学（武汉）本科生先进毕业班、优秀毕业生评选办法",
+    "start": 207,
+    "end": 208,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-40",
+    "title": "中国地质大学（武汉）本科生助学贷款实施细则",
+    "start": 209,
+    "end": 212,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-41",
+    "title": "中国地质大学（武汉）本科生基层就业学费补偿和助学贷款代偿实施办法",
+    "start": 213,
+    "end": 215,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-42",
+    "title": "中国地质大学（武汉）本科生应征入伍服兵役及退伍资助实施办法",
+    "start": 216,
+    "end": 218,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-43",
+    "title": "中国地质大学（武汉）英才工程资助计划实施办法",
+    "start": 219,
+    "end": 221,
+    "group": "奖励与资助"
+  },
+  {
+    "document_id": "doc-44",
+    "title": "中国地质大学（武汉）大学生科技活动管理办法",
+    "start": 223,
+    "end": 228,
+    "group": "实践与发展"
+  },
+  {
+    "document_id": "doc-45",
+    "title": "中国地质大学（武汉）大学生社会实践活动管理办法",
+    "start": 229,
+    "end": 231,
+    "group": "实践与发展"
+  },
+  {
+    "document_id": "doc-46",
+    "title": "中国地质大学（武汉）学生社团活动管理办法",
+    "start": 232,
+    "end": 235,
+    "group": "实践与发展"
+  },
+  {
+    "document_id": "doc-47",
+    "title": "中国地质大学（武汉）志愿服务时长管理办法",
+    "start": 236,
+    "end": 240,
+    "group": "实践与发展"
+  },
+  {
+    "document_id": "doc-48",
+    "title": "中国地质大学（武汉）美育实践活动学时认定管理办法",
+    "start": 241,
+    "end": 244,
+    "group": "实践与发展"
+  },
+  {
+    "document_id": "doc-49",
+    "title": "咨询服务电话及地点",
+    "start": 245,
+    "end": 245,
+    "group": "服务通讯录"
+  }
+]

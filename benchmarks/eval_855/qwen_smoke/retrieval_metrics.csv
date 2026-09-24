@@ -1,0 +1,6 @@
+method,recall@5,hitrate@5,mrr@5
+bm25_only,1.0,1.0,0.8
+dense_only,1.0,1.0,0.9
+hybrid_rrf,1.0,1.0,0.9
+rewrite_hybrid_qwen_rerank,0.6,0.6,0.26666666666666666
+rewrite_hybrid_rrf,1.0,1.0,0.9

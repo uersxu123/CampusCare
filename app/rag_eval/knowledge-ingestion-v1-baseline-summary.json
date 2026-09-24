@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-08-02T14:16:36.366973+00:00",
+  "profile": "legacy_char_v1",
+  "dataset": "app/rag_eval/mindbridge-rag-eval.json",
+  "mode": "bm25",
+  "totalCases": 181,
+  "activeDocumentCount": 22,
+  "activeChunkCount": 530,
+  "chunkLengthCharacters": {
+    "min": 21,
+    "p50": 430,
+    "p95": 512,
+    "max": 512,
+    "mean": 386.098
+  },
+  "metrics": {
+    "recallAt5": 0.9632936507936508,
+    "mrr": 0.8720238095238095,
+    "ndcgAt5": 0.8859156102982071,
+    "gradeMacroF1": 0.9635416666666667,
+    "citationPageAccuracy": 1.0,
+    "citationPageChecks": 482
+  },
+  "audit": {
+    "duplicateCanonicalActive": 0,
+    "duplicateContentActive": 0
+  },
+  "gatePassed": true,
+  "notes": [
+    "长度单位是 Python 字符数，不是 Token。",
+    "页码准确率只核对检索结果页码与持久化 Chunk 页码的一致性，不代表对 PDF 印刷页码的人工标注准确率。",
+    "完整离线报告位于 target/knowledge-ingestion-v1-baseline.json，语料审计位于 target/knowledge-corpus-active-audit.json。"
+  ]
+}

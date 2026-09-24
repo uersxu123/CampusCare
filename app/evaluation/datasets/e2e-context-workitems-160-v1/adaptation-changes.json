@@ -1,0 +1,5577 @@
+{
+  "selection": {
+    "createdAt": "2026-09-18T11:54:09.832339+00:00",
+    "sourcePath": "benchmarks\\evidence_facets_multiquery_20260913\\realistic_student_queries_200.jsonl",
+    "sourceSha256": "be29c13cc9ded6ab7bc3736f57e23645fee7edc2b16f199d536c42554276ea1a",
+    "sourceCount": 200,
+    "selectionRule": "index=floor((2*i+1)*200/(2*144)), i=0..143; source order; no model-result selection",
+    "selectedIds": [
+      "real-cug-001",
+      "real-cug-003",
+      "real-cug-004",
+      "real-cug-005",
+      "real-cug-007",
+      "real-cug-008",
+      "real-cug-010",
+      "real-cug-011",
+      "real-cug-012",
+      "real-cug-014",
+      "real-cug-015",
+      "real-cug-016",
+      "real-cug-018",
+      "real-cug-019",
+      "real-cug-021",
+      "real-cug-022",
+      "real-cug-023",
+      "real-cug-025",
+      "real-cug-026",
+      "real-cug-028",
+      "real-cug-029",
+      "real-cug-030",
+      "real-cug-032",
+      "real-cug-033",
+      "real-cug-035",
+      "real-cug-036",
+      "real-cug-037",
+      "real-cug-039",
+      "real-cug-040",
+      "real-cug-041",
+      "real-cug-043",
+      "real-cug-044",
+      "real-cug-046",
+      "real-cug-047",
+      "real-cug-048",
+      "real-cug-050",
+      "real-cug-051",
+      "real-cug-053",
+      "real-cug-054",
+      "real-cug-055",
+      "real-cug-057",
+      "real-cug-058",
+      "real-cug-060",
+      "real-cug-061",
+      "real-cug-062",
+      "real-cug-064",
+      "real-cug-065",
+      "real-cug-066",
+      "real-cug-068",
+      "real-cug-069",
+      "real-cug-071",
+      "real-cug-072",
+      "real-cug-073",
+      "real-cug-075",
+      "real-cug-076",
+      "real-cug-078",
+      "real-cug-079",
+      "real-cug-080",
+      "real-cug-082",
+      "real-cug-083",
+      "real-cug-085",
+      "real-cug-086",
+      "real-cug-087",
+      "real-cug-089",
+      "real-cug-090",
+      "real-cug-091",
+      "real-cug-093",
+      "real-cug-094",
+      "real-cug-096",
+      "real-cug-097",
+      "real-cug-098",
+      "real-cug-100",
+      "real-cug-101",
+      "real-cug-103",
+      "real-cug-104",
+      "real-cug-105",
+      "real-cug-107",
+      "real-cug-108",
+      "real-cug-110",
+      "real-cug-111",
+      "real-cug-112",
+      "real-cug-114",
+      "real-cug-115",
+      "real-cug-116",
+      "real-cug-118",
+      "real-cug-119",
+      "real-cug-121",
+      "real-cug-122",
+      "real-cug-123",
+      "real-cug-125",
+      "real-cug-126",
+      "real-cug-128",
+      "real-cug-129",
+      "real-cug-130",
+      "real-cug-132",
+      "real-cug-133",
+      "real-cug-135",
+      "real-cug-136",
+      "real-cug-137",
+      "real-cug-139",
+      "real-cug-140",
+      "real-cug-141",
+      "real-cug-143",
+      "real-cug-144",
+      "real-cug-146",
+      "real-cug-147",
+      "real-cug-148",
+      "real-cug-150",
+      "real-cug-151",
+      "real-cug-153",
+      "real-cug-154",
+      "real-cug-155",
+      "real-cug-157",
+      "real-cug-158",
+      "real-cug-160",
+      "real-cug-161",
+      "real-cug-162",
+      "real-cug-164",
+      "real-cug-165",
+      "real-cug-166",
+      "real-cug-168",
+      "real-cug-169",
+      "real-cug-171",
+      "real-cug-172",
+      "real-cug-173",
+      "real-cug-175",
+      "real-cug-176",
+      "real-cug-178",
+      "real-cug-179",
+      "real-cug-180",
+      "real-cug-182",
+      "real-cug-183",
+      "real-cug-185",
+      "real-cug-186",
+      "real-cug-187",
+      "real-cug-189",
+      "real-cug-190",
+      "real-cug-191",
+      "real-cug-193",
+      "real-cug-194",
+      "real-cug-196",
+      "real-cug-197",
+      "real-cug-198",
+      "real-cug-200"
+    ],
+    "plannedComposition": "144 current-corpus retrieval questions + existing 13 business / 3 safety Smoke = 160",
+    "issues": [
+      "160 条命名文件实际是阈值校准集，缺少 E2E Gold",
+      "181 条旧 E2E 引用旧语料；不能替换指纹后强跑",
+      "当前 200 条是文档级检索集，全部 ANSWER、全部 CAMPUS 标签不能直接作为当前 E2E Gold",
+      "必须补充事实引用、当前路由和工具契约，并逐题处理证据不足"
+    ]
+  },
+  "changes": [
+    {
+      "id": "e2e160-real-cug-001",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-001",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-新生复查",
+        "query": "我大一刚开学，报到以后学校还会做新生资格复查吗？主要查什么？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8789
+      ],
+      "reviewedReference": "入学后3个月内复查；核查录取手续及资格、身份与档案一致性、身心健康和特殊类型录取专业水平。"
+    },
+    {
+      "id": "e2e160-real-cug-003",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-003",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-恢复入学",
+        "query": "我之前因为身体原因保留了入学资格，现在准备回来，恢复入学要走什么手续？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8788
+      ],
+      "reviewedReference": "保留期限届满前10日内向本科生院提交入学申请；因健康原因保留者提供二级甲等以上医院恢复健康证明，并经学校指定医院复查，批准后办理报到。"
+    },
+    {
+      "id": "e2e160-real-cug-004",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-004",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-入学报到",
+        "query": "如果新生报到晚了很多天，又没有提前请假，会不会直接取消入学资格？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8786,
+        8787
+      ],
+      "reviewedReference": "延期应提前申请并获批，批准延期不超过2周；未获批准逾期不报到视为放弃入学资格，不可抗力等正当事由除外，不能无条件断言直接取消。"
+    },
+    {
+      "id": "e2e160-real-cug-005",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-005",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-休学",
+        "query": "我已经读了一学期，现在想休学，学校对休学一般有什么规定？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8800,
+        8801
+      ],
+      "reviewedReference": "预计一学期超过6周无法在校学习的规定情形可办理休学；本人书面申请和证明、学院审核、本科生院批准；一次一般不少于一学期，本科累计不超过2年，休学后7日内离校。"
+    },
+    {
+      "id": "e2e160-real-cug-007",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-007",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-复学",
+        "query": "我休学快到期了，复学申请应该在什么时候办？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8802
+      ],
+      "reviewedReference": "休学或保留学籍期满前10日内向学院申请并交证明；因病休学还需恢复健康证明，经审核批准办理复学注册。"
+    },
+    {
+      "id": "e2e160-real-cug-008",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-008",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-休学期间修读",
+        "query": "休学期间我能不能回来跟着原班上课拿学分？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8801
+      ],
+      "reviewedReference": "休学7日内办理离校，休学期间保留学籍但不享受在校学生待遇，不能承诺休学期间照常跟班取得学分；应办理复学后按规定学习。"
+    },
+    {
+      "id": "e2e160-real-cug-010",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-010",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-休学期限",
+        "query": "一个本科生最多能休学多长时间？",
+        "query_style": "short"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8800
+      ],
+      "reviewedReference": "本科生累计休学不超过2年，一次一般不少于一学期；不能把最长学习年限6年说成休学上限。"
+    },
+    {
+      "id": "e2e160-real-cug-011",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-011",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-退学",
+        "query": "我想主动退学，退学手续和学籍处理大概怎么走？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8803,
+        8804
+      ],
+      "reviewedReference": "向所在学院提交载明原因的退学申请及证明，未满18岁须家长同意；学院审核、院长签署、本科生院审议、合法性审查及委员会决定；决定送达后7日内离校，满一年发肄业证、不满一年发写实性学习证明。"
+    },
+    {
+      "id": "e2e160-real-cug-012",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-012",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-退学条件",
+        "query": "如果连续很久没参加学校教学活动，会不会被退学处理？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8803
+      ],
+      "reviewedReference": "未经批准连续2周未参加规定教学活动属于退学处理情形；须按学校程序处理，不能把任何缺勤均说成退学。"
+    },
+    {
+      "id": "e2e160-real-cug-014",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-014",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-毕业结业",
+        "query": "我课程都修完了，但是有些毕业条件没达到，是拿毕业证还是结业证？",
+        "query_style": "compound"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8805,
+        8806,
+        8807
+      ],
+      "reviewedReference": "达到课程学分及德智体美劳等毕业要求才发毕业证；修读规定内容但课程不合格可结业，另有体测、处分未解除等特殊情形。缺少具体未达条件时应说明分类，不能一概说必发结业证。"
+    },
+    {
+      "id": "e2e160-real-cug-015",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-015",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-结业后补修",
+        "query": "结业以后还能补修课程再换毕业证吗？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8806,
+        8807
+      ],
+      "reviewedReference": "能确认因毕业论文不及格结业者，在毕业学期规定时间完成论文通过答辩且符合毕业条件可申请换毕业证；不能据此承诺所有课程结业后都可补修换证，其他情形需向本科生院核实。"
+    },
+    {
+      "id": "e2e160-real-cug-016",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-016",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-毕业审核",
+        "query": "毕业资格一般是谁审核，学院还是学校？",
+        "query_style": "short"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8805,
+        8828
+      ],
+      "reviewedReference": "春季学期向所在学院申请进入毕业程序，由学院审核；学校对照培养方案进行毕业审核。学位授予还涉及学校学位评定委员会，不应混同毕业和学位。"
+    },
+    {
+      "id": "e2e160-real-cug-018",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04",
+          "doc-42"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-018",
+        "intent": "CAMPUS",
+        "policy_area": "学籍+入伍复学",
+        "query": "当兵休学回来以后，学籍怎么恢复？",
+        "query_style": "compound"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8801,
+        8802
+      ],
+      "reviewedReference": "在校生入伍保留学籍至退役后2年；按复学规定向学院提交申请和材料，批准后办理复学注册，不能说退役自动恢复。"
+    },
+    {
+      "id": "e2e160-real-cug-019",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04",
+          "doc-06"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-019",
+        "intent": "CAMPUS",
+        "policy_area": "学籍+学分认定",
+        "query": "转学进地大以后，之前学校修的课程学分能认吗？",
+        "query_style": "compound"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8793,
+        8799,
+        8868
+      ],
+      "reviewedReference": "学校认可的校外课程可附证明向本科生院申请审核认定；转入还需符合转学审批规定。不能保证原学校所有学分自动认可，具体课程对接应由学院和本科生院核实。"
+    },
+    {
+      "id": "e2e160-real-cug-021",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-021",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-信息变更",
+        "query": "学籍信息里姓名或身份证信息有错误，能改吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8809
+      ],
+      "reviewedReference": "个人信息变更应有合法充分理由及有法定效力的证明，向本科生院提出，经学校审核认定；不能自行修改或无证明直接更改。"
+    },
+    {
+      "id": "e2e160-real-cug-022",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-022",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-延长学习",
+        "query": "我现在大四但学分还差一点，能不能申请延毕？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8800,
+        8805
+      ],
+      "reviewedReference": "毕业审核未通过应申请在规定学习年限内继续学习；普通本科学习最长6年，具体年限含休学保留学籍并有参军等例外，不能保证无限延毕。"
+    },
+    {
+      "id": "e2e160-real-cug-023",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-023",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-退学后证明",
+        "query": "如果我被取消学籍，学校会给我什么证明材料吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8786,
+        8804,
+        8955
+      ],
+      "reviewedReference": "取消学籍、退学、开除学籍并非同一处理；资料明确退学满一年肄业证、不满一年写实性证明，开除学籍仅学习证明；不能直接将这些规定套用到取消学籍，应核实具体决定和证明形式。"
+    },
+    {
+      "id": "e2e160-real-cug-025",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-025",
+        "intent": "CAMPUS",
+        "policy_area": "学籍-复学安排",
+        "query": "复学后是回原来的年级和专业吗，还是学校重新安排？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8802
+      ],
+      "reviewedReference": "复学仍进入原专业；原专业调整可申请相近专业，学校可依培养方案调整复学年级和宿舍，不保证回原班原年级。"
+    },
+    {
+      "id": "e2e160-real-cug-026",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-06"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-026",
+        "intent": "ACADEMIC",
+        "policy_area": "选课规则",
+        "query": "选课到底是先到先得还是有其他规则？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8828,
+        8829
+      ],
+      "reviewedReference": "按培养方案和本科生院公布时间选课、结束后核对个人课表；资料未明确先到先得或抽签等分配规则，应查当期选课通知，不得编造机制。"
+    },
+    {
+      "id": "e2e160-real-cug-028",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-06"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-028",
+        "intent": "ACADEMIC",
+        "policy_area": "停开课程",
+        "query": "一门课选的人太少会不会停开？停开后我怎么办？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8830
+      ],
+      "reviewedReference": "人数不足而停开的课程，可在补退选阶段改选同类别其他课程。"
+    },
+    {
+      "id": "e2e160-real-cug-029",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-06"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-029",
+        "intent": "ACADEMIC",
+        "policy_area": "体育课程修读",
+        "query": "体育课因为身体原因不能正常上，可以申请什么替代课程吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8829
+      ],
+      "reviewedReference": "确因身体原因不能正常上体育课，可向学院申请康复保健课程，携带二级甲等以上或学校指定医院证明。"
+    },
+    {
+      "id": "e2e160-real-cug-030",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-06"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-030",
+        "intent": "ACADEMIC",
+        "policy_area": "补考重修",
+        "query": "课程没过，我是补考还是重修，学校怎么规定的？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8832
+      ],
+      "reviewedReference": "考核不合格课程应重新选课修读，必修原则上重修相同课程；部分选修可选同类别课程。缓考课程可报名下学期缓考补考或重新修读，不得把缓考补考等同所有挂科均有补考。"
+    },
+    {
+      "id": "e2e160-real-cug-032",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-06"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-032",
+        "intent": "ACADEMIC",
+        "policy_area": "缓考",
+        "query": "缓考要在考试前申请吗？临时生病来不及怎么办？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8832,
+        9004
+      ],
+      "reviewedReference": "缓考应在结课考试前向学院教务工作人员申请并附证明；请假手续不等于缓考审批。资料未保证临时生病可事后补办，应及时联系教务核实特殊处理，不承诺获准。"
+    },
+    {
+      "id": "e2e160-real-cug-033",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-06",
+          "doc-09"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-033",
+        "intent": "ACADEMIC",
+        "policy_area": "考试成绩与纪律",
+        "query": "旷考和考试不及格在成绩记录上有什么区别？",
+        "query_style": "compare"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8857,
+        8835
+      ],
+      "reviewedReference": "擅自缺考结课考试成绩以零分记；正常考核不合格按考核规则和实得分数或等级记载，不能把所有不及格一律记零。"
+    },
+    {
+      "id": "e2e160-real-cug-035",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-06"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-035",
+        "intent": "ACADEMIC",
+        "policy_area": "GPA换算",
+        "query": "五级制的优秀良好中等等分别对应多少绩点？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8847,
+        8848,
+        8849,
+        8850,
+        8851
+      ],
+      "reviewedReference": "五级制优4.5、良3.5、中2.5、及格1.5、不及格0；不能套用百分制60分对应1的表格。"
+    },
+    {
+      "id": "e2e160-real-cug-036",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-06"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-036",
+        "intent": "ACADEMIC",
+        "policy_area": "课程考核",
+        "query": "课程成绩一般由平时成绩和期末成绩怎么组成？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8835
+      ],
+      "reviewedReference": "总评由平时与结课考核综合评定；结课考核低于50分或等级不及格时，按结课实得分数或等级记载。资料未规定统一百分比，不编造三七开等比例。"
+    },
+    {
+      "id": "e2e160-real-cug-037",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-06"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-037",
+        "intent": "ACADEMIC",
+        "policy_area": "重修",
+        "query": "我已经及格的课还能重修刷分吗？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8832,
+        8857
+      ],
+      "reviewedReference": "资料规定不合格应重修，成绩按最高分参加平均绩点计算，但没有明确已及格课程刷分准入；不能据最高分规则推断人人可刷分，应向教务核实。"
+    },
+    {
+      "id": "e2e160-real-cug-039",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-09",
+          "doc-10"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-039",
+        "intent": "ACADEMIC",
+        "policy_area": "课堂考核纪律",
+        "query": "老师点名的时候让室友帮我答到，这算违纪吗？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        7506
+      ],
+      "reviewedReference": "课堂规范要求如实考勤签到，不顶替作假；找室友答到违反规范，不编造必然开除等处分。"
+    },
+    {
+      "id": "e2e160-real-cug-040",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-09"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-040",
+        "intent": "ACADEMIC",
+        "policy_area": "考试纪律",
+        "query": "考试带手机进考场但没用，会按作弊处理吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8994,
+        8973,
+        8976
+      ],
+      "reviewedReference": "手机应在考试开始前放指定位置；考核过程中携带具有收发功能设备按第四十八条可认定作弊，并非必须实际使用。需区分开考前按要求上交与考核中携带，具体按事实认定。"
+    },
+    {
+      "id": "e2e160-real-cug-041",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-09",
+          "doc-08"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-041",
+        "intent": "ACADEMIC",
+        "policy_area": "考试违纪+处分",
+        "query": "考试的时候和旁边同学说话，可能受到什么处理？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8973,
+        8974
+      ],
+      "reviewedReference": "考核中交头接耳属于一般考场违纪，可口头警告纠正；警告后仍继续或多个一般违纪可严重警告或记过并记零，不能一律说开除。"
+    },
+    {
+      "id": "e2e160-real-cug-043",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-09"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-043",
+        "intent": "ACADEMIC",
+        "policy_area": "学术规范",
+        "query": "小组作业里有同学抄袭，会不会整个组都算违规？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8998,
+        9000
+      ],
+      "reviewedReference": "作业论文不得抄袭、引用须注明来源，合作成果应据实署名；现有条款未规定一人抄袭全组自动连带，应核实具体参与责任，不作全组违规断言。"
+    },
+    {
+      "id": "e2e160-real-cug-044",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-10"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-044",
+        "intent": "ACADEMIC",
+        "policy_area": "课堂规范",
+        "query": "课堂上长期迟到早退，学校规范里怎么要求的？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        7505
+      ],
+      "reviewedReference": "提前5分钟进教室，不迟到早退或旷课；不编造迟到多少次自动开除。"
+    },
+    {
+      "id": "e2e160-real-cug-046",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-06"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-046",
+        "intent": "ACADEMIC",
+        "policy_area": "课程修读",
+        "query": "我想提前修高年级课程，有没有课程修读方面的限制？",
+        "query_style": "natural"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8828,
+        8829
+      ],
+      "reviewedReference": "应结合培养方案、建议修读学期和规定选课时间规划；资料没有统一提前修高年级课程的准入规则，应核实课程先修和开课安排，不承诺全部允许。"
+    },
+    {
+      "id": "e2e160-real-cug-047",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-06",
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-047",
+        "intent": "ACADEMIC",
+        "policy_area": "课程类别+毕业",
+        "query": "毕业前发现一门必修课没修，能不能靠其他选修课学分顶掉？",
+        "query_style": "compound"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8805,
+        8832,
+        8869
+      ],
+      "reviewedReference": "毕业需完成培养方案规定学分且考核合格，不能随意以选修学分抵必修；规定内分层高级课程可替代低级，需按学校认定执行。"
+    },
+    {
+      "id": "e2e160-real-cug-048",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-06"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-048",
+        "intent": "ACADEMIC",
+        "policy_area": "选课",
+        "query": "选课系统里课程容量满了，我还有没有别的处理方式？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8829
+      ],
+      "reviewedReference": "课程开课1周内可申请退换同名其他教学班，填写选课申请表由学院审批；教室容量满不再接受调入，应咨询有容量的班级等合规安排，不承诺加塞。"
+    },
+    {
+      "id": "e2e160-real-cug-050",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-06"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-050",
+        "intent": "ACADEMIC",
+        "policy_area": "课程考核",
+        "query": "课程考核方式临时调整的话，老师需要提前告知学生吗？",
+        "query_style": "natural"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8835
+      ],
+      "reviewedReference": "资料列明可采用的考核形式及综合成绩规则，但未明确临时调整必须提前多少天通知的程序，应向任课教师和教务核实，不能编造时限。"
+    },
+    {
+      "id": "e2e160-real-cug-051",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-11"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-051",
+        "intent": "CAMPUS",
+        "policy_area": "请假审批",
+        "query": "我发烧想请两天假，本科生请假应该找谁批？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9004
+      ],
+      "reviewedReference": "因病两天属一周内，报年级辅导员批准；校外实践期间由指导教师审批。本人书面或管理系统申请并提供病历等证明，批准后告知任课教师并交教务存档。"
+    },
+    {
+      "id": "e2e160-real-cug-053",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-11"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-053",
+        "intent": "CAMPUS",
+        "policy_area": "销假",
+        "query": "我已经请完假回学校了，还要销假吗？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9005,
+        9006
+      ],
+      "reviewedReference": "请假期满及时向学院销假，仍不能参加教学需重新请假；未主动销假按旷课处理。"
+    },
+    {
+      "id": "e2e160-real-cug-054",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-11"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-054",
+        "intent": "CAMPUS",
+        "policy_area": "补假",
+        "query": "临时有急事没来得及提前请假，能不能事后补假？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9004,
+        8831
+      ],
+      "reviewedReference": "规定应事先办理请假并获批，未批准或逾期按旷课；资料未明确紧急事由事后补假规则，及时联系辅导员说明并提供证明，不保证补假成功。"
+    },
+    {
+      "id": "e2e160-real-cug-055",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-11",
+          "doc-06"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-055",
+        "intent": "ACADEMIC",
+        "policy_area": "请假+缓考",
+        "query": "请假期间碰上考试，光有请假条就能算缓考吗？",
+        "query_style": "compound"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9004,
+        8832
+      ],
+      "reviewedReference": "请假和缓考是不同手续；缓考需结课考试前向学院教务工作人员另行申请并附相关证明，不能只凭请假条自动缓考。"
+    },
+    {
+      "id": "e2e160-real-cug-057",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-08",
+          "doc-12"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-057",
+        "intent": "CAMPUS",
+        "policy_area": "处分+宿舍",
+        "query": "喝酒以后在宿舍闹事，会受到什么处分？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8967,
+        8983
+      ],
+      "reviewedReference": "酗酒或酒后闹事视情节批评教育直至留校察看，导致事故或其他违纪从重；宿舍酗酒打闹经教育不改可警告，不能无条件断言必然开除。"
+    },
+    {
+      "id": "e2e160-real-cug-058",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-12",
+          "doc-08"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-058",
+        "intent": "CAMPUS",
+        "policy_area": "宿舍违规+处分",
+        "query": "在宿舍里用违规电器被查到，学校怎么处理？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9020,
+        8959
+      ],
+      "reviewedReference": "违规电器禁止使用存放；发现责令整改，拒不改正可严重警告或记过；造成安全事故可留校察看及以上，并承担相应损失责任。"
+    },
+    {
+      "id": "e2e160-real-cug-060",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-12"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-060",
+        "intent": "CAMPUS",
+        "policy_area": "宿舍秩序",
+        "query": "宿舍晚上太吵影响别人，宿舍管理规定怎么要求？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9016,
+        9017
+      ],
+      "reviewedReference": "尊重休息学习习惯，不得喧闹干扰他人；晚上23:30后自觉熄灯，不得吵闹影响休息。"
+    },
+    {
+      "id": "e2e160-real-cug-061",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-15",
+          "doc-08"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-061",
+        "intent": "CAMPUS",
+        "policy_area": "处分申诉",
+        "query": "学校给了我纪律处分，我觉得事实认定不对，能申诉吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9058,
+        9056
+      ],
+      "reviewedReference": "对纪律处分有异议可向学生申诉处理委员会申诉；决定送达10日内递交申请书及决定书副本，办公室在校团委。"
+    },
+    {
+      "id": "e2e160-real-cug-062",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-15"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-062",
+        "intent": "CAMPUS",
+        "policy_area": "申诉期限",
+        "query": "学生申诉要在收到处理决定后多久提出？",
+        "query_style": "short"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9058
+      ],
+      "reviewedReference": "处理决定书送达之日起10日内递交申诉申请书并提供决定书副本，不得混成复查后向省教育厅申诉的15日。"
+    },
+    {
+      "id": "e2e160-real-cug-064",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-15"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-064",
+        "intent": "CAMPUS",
+        "policy_area": "申诉处理期限",
+        "query": "申诉委员会处理我的申诉一般要多久？",
+        "query_style": "short"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9059,
+        9065
+      ],
+      "reviewedReference": "收到申请书15日内作出复查结论并告知，特殊情况主任批准可延长15日；材料补正时间不计处理期限，3日材料审查不等于整体结案。"
+    },
+    {
+      "id": "e2e160-real-cug-065",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-15"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-065",
+        "intent": "CAMPUS",
+        "policy_area": "申诉后续",
+        "query": "如果对申诉复查结论还是不服，还有没有下一步渠道？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9066
+      ],
+      "reviewedReference": "对复查决定有异议，可在复查决定书送达15日内向湖北省教育厅申诉。"
+    },
+    {
+      "id": "e2e160-real-cug-066",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-08"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-066",
+        "intent": "CAMPUS",
+        "policy_area": "处分期限解除",
+        "query": "处分是不是过一段时间就会自动撤销？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8948
+      ],
+      "reviewedReference": "不是到期自动撤销；表现良好等条件下需本人申请、院系师生评议和学校审批解除；开除学籍始终有效。"
+    },
+    {
+      "id": "e2e160-real-cug-068",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-13",
+          "doc-08"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-068",
+        "intent": "CAMPUS",
+        "policy_area": "网络+纪律",
+        "query": "在网上发不实消息造成影响，学校会按纪律问题处理吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9036,
+        9039
+      ],
+      "reviewedReference": "不得制造散布传播网络谣言；轻微批评教育，较重依纪律处分办法处理，涉嫌犯罪移送司法，不应一律固定处分。"
+    },
+    {
+      "id": "e2e160-real-cug-069",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-13"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-069",
+        "intent": "CAMPUS",
+        "policy_area": "网络管理",
+        "query": "有人盗用我的校园网账号发东西，我应该注意哪些账号安全规定？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9034,
+        9037
+      ],
+      "reviewedReference": "实名账户，妥善保管账号密码，不泄露、不未经授权使用他人账号；终端使用强密码、安全软件及补丁，不能推断被盗用者必然承担所有处分。"
+    },
+    {
+      "id": "e2e160-real-cug-071",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-07"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-071",
+        "intent": "CAMPUS",
+        "policy_area": "校外安全",
+        "query": "我出去实习住在校外，学校安全管理里对校外活动有什么要求？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8925
+      ],
+      "reviewedReference": "校外实习实践应有计划组织并落实安全措施，教学实习指导老师带队、购买人身意外保险和签责任书；重视校外人身财产安全。"
+    },
+    {
+      "id": "e2e160-real-cug-072",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-07"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-072",
+        "intent": "CAMPUS",
+        "policy_area": "集体活动安全",
+        "query": "组织同学出去集体活动，需要提前做安全方面的报备吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8925,
+        8926
+      ],
+      "reviewedReference": "集体校外活动需安全评估审批、老师带队、告知风险并征得家长同意；高危险活动主管校领导审批，变更须重新审批，不编造提前天数。"
+    },
+    {
+      "id": "e2e160-real-cug-073",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-08"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-073",
+        "intent": "CAMPUS",
+        "policy_area": "处分裁量",
+        "query": "如果违反校纪，但情节比较轻，有没有从轻处理的情况？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8949
+      ],
+      "reviewedReference": "情节显著轻微危害不大、主动交代认错、检举有助调查、受胁迫诱骗等可从轻或减轻；不等于保证免罚。"
+    },
+    {
+      "id": "e2e160-real-cug-075",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-08"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-075",
+        "intent": "CAMPUS",
+        "policy_area": "处分程序",
+        "query": "被处分后学校会怎么通知我，家长一定会知道吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8954
+      ],
+      "reviewedReference": "学院送达本人，未成年人同时抄送家长；拒签、离校或失联有留置、邮寄、公告送达等路径，不能说所有成年学生必定通知家长。"
+    },
+    {
+      "id": "e2e160-real-cug-076",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-28"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-076",
+        "intent": "CAMPUS",
+        "policy_area": "国家奖学金资格",
+        "query": "国家奖学金本科生要满足哪些基本条件？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9267,
+        9268
+      ],
+      "reviewedReference": "全日制本科二年级及以上特别优秀学生；遵纪守法诚信，学习和综合测评均班级前10%，前30%且特别突出有证明可例外，体测良好及以上；上学年挂科、违法违纪或申报造假不具资格。"
+    },
+    {
+      "id": "e2e160-real-cug-078",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-28",
+          "doc-33"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-078",
+        "intent": "CAMPUS",
+        "policy_area": "奖助兼得",
+        "query": "拿了国家奖学金以后还能拿国家助学金吗？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9269,
+        9415
+      ],
+      "reviewedReference": "同一学年获得国家奖学金的家庭经济困难学生可同时申请国家助学金，须满足助学金条件；国家奖学金和励志奖学金不可兼得。"
+    },
+    {
+      "id": "e2e160-real-cug-079",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-28"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-079",
+        "intent": "CAMPUS",
+        "policy_area": "国家奖学金评审",
+        "query": "国家奖学金是自己申请还是学院直接推荐？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9269
+      ],
+      "reviewedReference": "符合条件学生在通知下发后向学院申请并填国家奖学金申请审批表；学院限额评审推荐、学校评审、公示5个工作日后报上级审批，不是无需学生申请直接发奖。"
+    },
+    {
+      "id": "e2e160-real-cug-080",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-28"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-080",
+        "intent": "CAMPUS",
+        "policy_area": "国家奖学金资格",
+        "query": "我有一门课成绩不太好，还能参评国家奖学金吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9268
+      ],
+      "reviewedReference": "若上学年考试课程不及格则不具评选资格；仅成绩不高但及格不能直接排除，还需判断排名及突出表现例外、体测等条件，不能保证获奖。"
+    },
+    {
+      "id": "e2e160-real-cug-082",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-29",
+          "doc-32"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-082",
+        "intent": "CAMPUS",
+        "policy_area": "励志奖学金+困难认定",
+        "query": "申请国家励志奖学金必须先做家庭经济困难认定吗？",
+        "query_style": "compound"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9273,
+        9274,
+        9404
+      ],
+      "reviewedReference": "国家励志奖学金面向二年级及以上品学兼优困难本科生，须在学校家庭经济困难认定范围内；应按困难认定程序办理并满足其他评选条件。"
+    },
+    {
+      "id": "e2e160-real-cug-083",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-29"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-083",
+        "intent": "CAMPUS",
+        "policy_area": "励志奖学金标准",
+        "query": "国家励志奖学金的奖励金额是多少？",
+        "query_style": "short"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9273
+      ],
+      "reviewedReference": "当前手册本科生国家励志奖学金每人每年6000元，不是旧标准5000元。"
+    },
+    {
+      "id": "e2e160-real-cug-085",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-31"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-085",
+        "intent": "CAMPUS",
+        "policy_area": "社会奖学金",
+        "query": "学校的社会奖学金是不是不同奖项条件都不一样？去哪里看对应要求？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9327
+      ],
+      "reviewedReference": "社会奖学金有共同基本条件及各奖项特别要求，奖励标准由设奖方决定、奖项以当年学校公布为准；应查对应奖项通知，不虚构统一金额或门槛。"
+    },
+    {
+      "id": "e2e160-real-cug-086",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-32"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-086",
+        "intent": "CAMPUS",
+        "policy_area": "困难认定",
+        "query": "家庭经济困难认定一般需要哪些条件和程序？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9403,
+        9404
+      ],
+      "reviewedReference": "按家庭经济状况及证明分特别困难、困难、一般困难；本人申请或推荐，提交调查表诚信承诺，班级评议公示、学院复核、资助中心抽查、领导小组审定；保护隐私，不要求公开诉苦。"
+    },
+    {
+      "id": "e2e160-real-cug-087",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-32"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-087",
+        "intent": "CAMPUS",
+        "policy_area": "困难认定动态调整",
+        "query": "家庭经济情况突然变差了，可以在学年中重新申请困难认定吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9405
+      ],
+      "reviewedReference": "认定实行动态管理；认定结束后家庭重大变故等可由学院提交新增或变更说明，并由相应负责人签字确认，不必断言只能等下一学年。"
+    },
+    {
+      "id": "e2e160-real-cug-089",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-33"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-089",
+        "intent": "CAMPUS",
+        "policy_area": "国家助学金标准",
+        "query": "国家助学金每年大概多少钱，分几个档？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9413
+      ],
+      "reviewedReference": "平均每生每年3700元，实际2500至5000元，可分2至3档，原则上按困难认定等级资助、特别困难最高档；不是所有人固定3700元。"
+    },
+    {
+      "id": "e2e160-real-cug-090",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-33"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-090",
+        "intent": "CAMPUS",
+        "policy_area": "国家助学金资格",
+        "query": "国家助学金主要看什么条件？",
+        "query_style": "short"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9413,
+        9414
+      ],
+      "reviewedReference": "全日制在校困难本科生含预科，须遵纪守法诚信、勤奋积极、生活俭朴且在困难认定范围；违法违纪、申报造假、经常迟到旷课等不具资格，退役士兵另有规定。"
+    },
+    {
+      "id": "e2e160-real-cug-091",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-33",
+          "doc-28"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-091",
+        "intent": "CAMPUS",
+        "policy_area": "奖助兼得",
+        "query": "我已经拿国家奖学金了，还能同时申请国家助学金不？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9269,
+        9415
+      ],
+      "reviewedReference": "符合困难认定等助学金资格时国家奖学金与国家助学金可兼得；不能与国家励志奖学金同时获奖混淆。"
+    },
+    {
+      "id": "e2e160-real-cug-093",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-33",
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-093",
+        "intent": "CAMPUS",
+        "policy_area": "助学金+复学",
+        "query": "助学金休学暂停以后，复学了会恢复发放吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9417
+      ],
+      "reviewedReference": "学制期限内因疾病等休学或保留学籍暂停发助学金，恢复学籍后再行发放；超过基本修业年限不再享受，不编造自动补发全部暂停月份。"
+    },
+    {
+      "id": "e2e160-real-cug-094",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-33"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-094",
+        "intent": "CAMPUS",
+        "policy_area": "助学金追回",
+        "query": "如果申请助学金时被发现材料造假，会怎么处理？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9414,
+        9417
+      ],
+      "reviewedReference": "申报弄虚作假不具国家助学金评选资格；获助学金后查实造假收回助学金，退款纳入下一年度资助经费，不保证只是口头提醒。"
+    },
+    {
+      "id": "e2e160-real-cug-096",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-35"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-096",
+        "intent": "CAMPUS",
+        "policy_area": "临时困难补助",
+        "query": "家里突然发生事故，短期内生活费不够，学校有没有临时困难补助？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9443,
+        9444
+      ],
+      "reviewedReference": "学校设本科生临时困难补助，家庭重大变故等符合条件可申请；系统提交、学院审核、资助中心确定金额后发放。一般困难500元、特别困难800元、特殊情况另定，不能保证申请必批。"
+    },
+    {
+      "id": "e2e160-real-cug-097",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-35"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-097",
+        "intent": "CAMPUS",
+        "policy_area": "临时困难补助资格",
+        "query": "临时困难补助需要什么情况才能申请？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9443,
+        9444
+      ],
+      "reviewedReference": "在读本科或预科，家庭困难且突发重大变故或灾害致学习生活难保障；学习态度端正成绩较好、愿勤工助学勤俭、遵纪守法。原则每学年一次，特殊情况可直接受理。"
+    },
+    {
+      "id": "e2e160-real-cug-098",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-36"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-098",
+        "intent": "CAMPUS",
+        "policy_area": "重大疾病救助",
+        "query": "得了重大疾病，学校有没有专门的救助基金？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9450,
+        9458
+      ],
+      "reviewedReference": "设本科生重大疾病救助基金，用于相关保险外救助，需按条件申请经校医院鉴定等程序；基金与困难补助不得同时申请，不承诺全额覆盖医疗费。"
+    },
+    {
+      "id": "e2e160-real-cug-100",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-40"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-100",
+        "intent": "CAMPUS",
+        "policy_area": "助学贷款",
+        "query": "校园地国家助学贷款一般怎么申请？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8407,
+        8409
+      ],
+      "reviewedReference": "符合困难全日制本科等条件，按当年通知一般9至11月通过手机银行申请；资助中心及中国银行审核，通过后在线签合同、银行放款；续贷次年重新申请，不混为生源地办理。"
+    },
+    {
+      "id": "e2e160-real-cug-101",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-40"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-101",
+        "intent": "CAMPUS",
+        "policy_area": "助学贷款用途",
+        "query": "助学贷款能不能用来交住宿费和生活费？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8406,
+        8408,
+        8409
+      ],
+      "reviewedReference": "校园地贷款具体条款明确学费及住宿费贷款直接划学校账户；概述提到生活费，但不能据此保证贷款可任意提现作生活费。按合同规定用途，具体生活费额度及发放需向经办银行核实。"
+    },
+    {
+      "id": "e2e160-real-cug-103",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-41"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-103",
+        "intent": "CAMPUS",
+        "policy_area": "基层就业代偿流程",
+        "query": "基层就业代偿是毕业当年申请还是工作一段时间以后？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9491
+      ],
+      "reviewedReference": "流程示例为毕业当年6月申请；未定岗等审核不通过可毕业第二年4月补材料，后续第二三年6月交在岗证明；这些节点仅参考，以当年通知为准，不说必须先干满多年才初次申请。"
+    },
+    {
+      "id": "e2e160-real-cug-104",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-42"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-104",
+        "intent": "CAMPUS",
+        "policy_area": "入伍资助",
+        "query": "我准备参军入伍，本科生学费资助怎么申请？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9500,
+        9498
+      ],
+      "reviewedReference": "填写打印教育资助申请表，贷款者附合同和还款计划；县级征兵办盖章、学校财务核学费，再交申请表原件、入伍通知和银行卡复印件至资助中心。现手册写10月1日前，具体办理核实当年要求，不保证符合所有资助资格。"
+    },
+    {
+      "id": "e2e160-real-cug-105",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-42"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-105",
+        "intent": "CAMPUS",
+        "policy_area": "退役复学资助",
+        "query": "退役复学后，学费减免需要重新提交材料吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9501
+      ],
+      "reviewedReference": "退役复学报到后申请学费减免，交国家教育资助申请表、退出现役证书和复学证明复印件；每年9月申请当年金额，不能一次申多年。"
+    },
+    {
+      "id": "e2e160-real-cug-107",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-43"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-107",
+        "intent": "CAMPUS",
+        "policy_area": "英才工程",
+        "query": "学校英才工程的资助主要面向什么项目？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9507,
+        9508
+      ],
+      "reviewedReference": "英才工程为发展型项目资助；学校攀登计划含科学家、领袖、CEO、将军等，学院启航计划含学业技能研究人文管理提升及宿舍班集体项目；不要混为英才奖学金。"
+    },
+    {
+      "id": "e2e160-real-cug-108",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-37"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-108",
+        "intent": "CAMPUS",
+        "policy_area": "日常奖励",
+        "query": "日常奖励一般哪些表现可以申请？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9462,
+        9463,
+        9464,
+        9465
+      ],
+      "reviewedReference": "日常奖励包括善行善举、响应国家号召就业、学术论文专著发明、外语优秀及无挂科优秀班级等，具体按条件申报并提供材料；不能说任何发表或任意竞赛均固定获奖。"
+    },
+    {
+      "id": "e2e160-real-cug-110",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-39"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-110",
+        "intent": "CAMPUS",
+        "policy_area": "优秀毕业生",
+        "query": "评优秀毕业生需要满足哪些条件？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9481
+      ],
+      "reviewedReference": "优秀毕业生须品德守纪、符合毕业学位条件、论文良好以上、平均绩点专业年级前30%（突出者可放宽）、达到体测要求；处分未解除、不诚信或不能正常获双证不得参评，签约升学等优先。"
+    },
+    {
+      "id": "e2e160-real-cug-111",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-23",
+          "doc-22"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-111",
+        "intent": "CAMPUS",
+        "policy_area": "大学生医保",
+        "query": "大学生医保到底是什么，新生是不是都要参加？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        7906,
+        7907,
+        7924
+      ],
+      "reviewedReference": "大学生医保属于城乡居民基本医保，在校全日制学生按规定纳入参保范围，但在职等类型有排除；不能说所有新生无条件强制参保，有其他基本医保关系需先办理停保避免重复。"
+    },
+    {
+      "id": "e2e160-real-cug-112",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-23"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-112",
+        "intent": "CAMPUS",
+        "policy_area": "医保缴费",
+        "query": "我们学校大学生医保一年交多少钱？",
+        "query_style": "short"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        7908,
+        9216
+      ],
+      "reviewedReference": "按武汉市当年城乡居民医保缴费标准，一年一缴；手册仅给2025年400元示例，当前年度金额须查当年通知，不能把400元断言为2026年标准。"
+    },
+    {
+      "id": "e2e160-real-cug-114",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-22",
+          "doc-23"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-114",
+        "intent": "CAMPUS",
+        "policy_area": "医保门诊",
+        "query": "我在校医院看普通门诊，大学生医保怎么报销？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        7915,
+        9221,
+        9218
+      ],
+      "reviewedReference": "校医院是普通门诊首诊，符合规定和支付范围的费用学校承担90%、个人10%；凭学生门诊病历和校园卡等办理，不等于任何项目都报销90%，具体流程按校医院通知。"
+    },
+    {
+      "id": "e2e160-real-cug-115",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-23",
+          "doc-22"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-115",
+        "intent": "CAMPUS",
+        "policy_area": "异地医保",
+        "query": "寒暑假在外地突然生病住院，大学生医保能报吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        7940,
+        7941,
+        9222
+      ],
+      "reviewedReference": "异地医保定点住院可按规定报销，先确认联网和办理异地备案，成功后医保码结算；不联网等情形先垫付并交住院票据清单病案等材料医保办，不能保证全额报销或用门诊比例算住院。"
+    },
+    {
+      "id": "e2e160-real-cug-116",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-22",
+          "doc-23"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-116",
+        "intent": "CAMPUS",
+        "policy_area": "医保转诊",
+        "query": "我需要转院治疗，医保报销有没有转诊方面的要求？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        7928,
+        7929,
+        7931,
+        7932,
+        9222
+      ],
+      "reviewedReference": "普通门诊外转需校医院医生开转诊单，未经同意自行外诊非急症费用自理且不能事后补开；急症无需转诊，但复诊需按普通门诊流程；住院按定点和医保结算规则，不把门诊转诊一概套到所有住院。"
+    },
+    {
+      "id": "e2e160-real-cug-118",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-23"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-118",
+        "intent": "CAMPUS",
+        "policy_area": "医保使用",
+        "query": "医保卡或者医保电子凭证怎么用？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        7939,
+        7940
+      ],
+      "reviewedReference": "在湖北医疗保障小程序或鄂汇办领激活医保电子凭证，选择武汉市或东湖高新区参保地；市内定点住院凭医保码直接结算，异地先备案及确认联网，不能把电子凭证激活等同参保缴费。"
+    },
+    {
+      "id": "e2e160-real-cug-119",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-23"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-119",
+        "intent": "CAMPUS",
+        "policy_area": "医保参保范围",
+        "query": "我已经参加家里的居民医保，还需要参加大学生医保吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        7924
+      ],
+      "reviewedReference": "已有职工或城乡居民医保关系时高校账户无法重复参保；改由学校参保须先自主办理原关系停保，省内可用居民参保暂停功能，省外联系原经办机构，不建议重复交费。"
+    },
+    {
+      "id": "e2e160-real-cug-121",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-18"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-121",
+        "intent": "CAMPUS",
+        "policy_area": "体测毕业",
+        "query": "体测不及格会不会影响毕业？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9137,
+        9139,
+        8806
+      ],
+      "reviewedReference": "学年体测低于60为不及格可当年补测一次；毕业相关50分阈值与普通不及格不同，不能说一次不及格必然不能毕业。毕业成绩有毕业年与其他学年50%加权规则，现学籍办法对毕业当年低于50的肄业处理有疾病例外。"
+    },
+    {
+      "id": "e2e160-real-cug-122",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-18"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-122",
+        "intent": "CAMPUS",
+        "policy_area": "体测免测",
+        "query": "我因为身体原因不能参加正常体测，能申请免测吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9138
+      ],
+      "reviewedReference": "因病或残疾可提出免测申请，医疗证明及体育学院核准、填写申请表并入档，不能自行宣称身体不适就自动免测。"
+    },
+    {
+      "id": "e2e160-real-cug-123",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-18"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-123",
+        "intent": "CAMPUS",
+        "policy_area": "体测免测材料",
+        "query": "体测申请免测要提供什么材料？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9138
+      ],
+      "reviewedReference": "需医疗单位证明，体育学院核准并填写免予执行国家学生体质健康标准申请表，表可从体育学院网站下载并存学生档案；不编造身份证复印件等必备清单。"
+    },
+    {
+      "id": "e2e160-real-cug-125",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-18",
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-125",
+        "intent": "CAMPUS",
+        "policy_area": "体测+毕业",
+        "query": "大四体测成绩特别差，会不会直接拿不到毕业证？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9139,
+        8806
+      ],
+      "reviewedReference": "不是成绩稍差就直接拿不到毕业证；体测毕业规则涉及50分阈值及加权，现学籍办法规定毕业当年标准测试未达50按肄业处理，身体疾病或生理缺陷除外，应结合具体成绩及免测手续。"
+    },
+    {
+      "id": "e2e160-real-cug-126",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-18",
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-126",
+        "intent": "CAMPUS",
+        "policy_area": "体测+休学",
+        "query": "因病休学期间还需要参加体测吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9138,
+        8801
+      ],
+      "reviewedReference": "因病休学不等于自动完成体测免测；资料可确认因病或残疾免测需医疗证明、体育学院核准，未明确休学当年统一测试安排，应向体育学院核实。"
+    },
+    {
+      "id": "e2e160-real-cug-128",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-18"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-128",
+        "intent": "CAMPUS",
+        "policy_area": "体测补测",
+        "query": "我在外地实习期间错过体测，学校有没有补测安排规定？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9137,
+        9139
+      ],
+      "reviewedReference": "春季正式测试、秋季新生测试及其他年级补测，按当年通知网上预约；补测限当年不合格或缺项学生，实习错过需联系体育学院确认安排，不编造具体日期。"
+    },
+    {
+      "id": "e2e160-real-cug-129",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-22",
+          "doc-23"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-129",
+        "intent": "CAMPUS",
+        "policy_area": "医保门诊住院",
+        "query": "大学生医保普通门诊和住院的报销规则是同一套吗？",
+        "query_style": "compare"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        7915,
+        9221,
+        9222
+      ],
+      "reviewedReference": "普通门诊与住院规则不同：校医院普通门诊可报范围90%，校外门诊按定点等区分；住院凭医保结算按住院规则，不能直接套门诊报销比例。"
+    },
+    {
+      "id": "e2e160-real-cug-130",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-22",
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-130",
+        "intent": "CAMPUS",
+        "policy_area": "医保+休学",
+        "query": "我因病休学了，医保资格会不会跟学籍一起暂停？",
+        "query_style": "compound"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9216,
+        8801
+      ],
+      "reviewedReference": "休学保留学籍，医疗费按国家地方规定；休学学生须到医保办登记并完成缴费方可享受医保，不是学籍休学必然自动停保，也不是无需手续永久保留。"
+    },
+    {
+      "id": "e2e160-real-cug-132",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-12"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-132",
+        "intent": "CAMPUS",
+        "policy_area": "校外居住",
+        "query": "我想在校外租房住，宿舍这边要办什么手续吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9015
+      ],
+      "reviewedReference": "因病或其他特殊原因不能集体生活、家在学校周边等可按程序申请校外住宿；原则办退宿腾床位，集中每年五月办理，突发疾病等除外；不得擅自搬走不办手续。"
+    },
+    {
+      "id": "e2e160-real-cug-133",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-12"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-133",
+        "intent": "CAMPUS",
+        "policy_area": "宿舍用电",
+        "query": "宿舍里能不能用电煮锅或者大功率吹风机？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9020,
+        8959
+      ],
+      "reviewedReference": "禁止使用存放电火锅、电饭煲等电加热取暖违规电器；大功率电器依宿舍安全管理规定，不能以暂时不用为由存放，不编造统一功率阈值。"
+    },
+    {
+      "id": "e2e160-real-cug-135",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-12"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-135",
+        "intent": "CAMPUS",
+        "policy_area": "宿舍卫生",
+        "query": "室友长期不打扫卫生，宿舍管理规定有没有卫生要求？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9016
+      ],
+      "reviewedReference": "坚持卫生值日和周四大扫除、垃圾带下楼指定投放、不堆杂物；可按宿舍管理要求协商分工，不直接给室友诊断或编造处分。"
+    },
+    {
+      "id": "e2e160-real-cug-136",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-13"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-136",
+        "intent": "CAMPUS",
+        "policy_area": "网络账号",
+        "query": "校园网账号可以借给同学用吗？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9034,
+        9037
+      ],
+      "reviewedReference": "实名账户每人一个，账号密码不得泄露他人，也不得未经授权使用他人账号，不能随意转借。"
+    },
+    {
+      "id": "e2e160-real-cug-137",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-13",
+          "doc-08"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-137",
+        "intent": "CAMPUS",
+        "policy_area": "网络+处分",
+        "query": "用校园网发布违法或者不实信息会怎么处理？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9036,
+        9039,
+        8984
+      ],
+      "reviewedReference": "禁止违法和谣言信息，按情节批评教育、纪律处分或移送司法；发表转载不实信息经教育不改可严重警告及以上，造成不良影响可记过及以上，不一律同等处罚。"
+    },
+    {
+      "id": "e2e160-real-cug-139",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-14"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-139",
+        "intent": "CAMPUS",
+        "policy_area": "校园飞行器",
+        "query": "我买了无人机，能在学校操场直接飞吗？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9044,
+        9045
+      ],
+      "reviewedReference": "无人机须到安全保卫部登记，先报批后飞行；操场不等于自由飞行区，仍遵守空域和建筑等禁飞范围、安全要求。"
+    },
+    {
+      "id": "e2e160-real-cug-140",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-14"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-140",
+        "intent": "CAMPUS",
+        "policy_area": "飞行器审批",
+        "query": "在校园里飞无人机要向哪个部门申请？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9044
+      ],
+      "reviewedReference": "安全保卫部（警务室）登记备案，校园使用由安全保卫部审批监管，先报批后飞行。"
+    },
+    {
+      "id": "e2e160-real-cug-141",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-14"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-141",
+        "intent": "CAMPUS",
+        "policy_area": "飞行器报备",
+        "query": "大型活动想用无人机拍摄，需要提前多久报备？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9044,
+        9046
+      ],
+      "reviewedReference": "大型活动先征得主办方同意并将类型数量时间区域报安全保卫部备案，落实先报批后飞；条款未写提前具体多少天，应向安全保卫部核实，不编造3天或7天。"
+    },
+    {
+      "id": "e2e160-real-cug-143",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-19"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-143",
+        "intent": "CAMPUS",
+        "policy_area": "机动车通行",
+        "query": "外来车辆进学校一般有哪些限制？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9147,
+        9150,
+        9152
+      ],
+      "reviewedReference": "严格控制外来车辆，未授权车辆按规定停车收费，临时公务会议可由接待单位联系保卫处办一车一票的通行票，须遵守管理；不能说所有外来车永久禁入或一律免费。"
+    },
+    {
+      "id": "e2e160-real-cug-144",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-19"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-144",
+        "intent": "CAMPUS",
+        "policy_area": "机动车违规",
+        "query": "校园里开车超速或者乱停车会怎么处理？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9154
+      ],
+      "reviewedReference": "轻微批评教育责令改正，严重或不服从可取消授权禁止入校或移交公安；乱停车可警告、锁车教育或通知公安拖车，不编造固定罚款。"
+    },
+    {
+      "id": "e2e160-real-cug-146",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-20"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-146",
+        "intent": "CAMPUS",
+        "policy_area": "电动车记分",
+        "query": "骑电动车不戴头盔会扣分吗？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9174
+      ],
+      "reviewedReference": "校园电动车驾驶未规范戴安全头盔每次累计记1分，不是汽车驾驶证扣分制度。"
+    },
+    {
+      "id": "e2e160-real-cug-147",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-20"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-147",
+        "intent": "CAMPUS",
+        "policy_area": "电动车记分",
+        "query": "电动车违规积分到多少会限制校园通行？",
+        "query_style": "short"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9173,
+        9175
+      ],
+      "reviewedReference": "按年度周期累计，8分由单位批评教育，12分暂停校园通行识别码授权并禁止相关车辆校园行驶，下周期清零重计。"
+    },
+    {
+      "id": "e2e160-real-cug-148",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-20",
+          "doc-12",
+          "doc-08"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-148",
+        "intent": "CAMPUS",
+        "policy_area": "电动车+宿舍+处分",
+        "query": "电动车电池拿回宿舍充电到底允不允许？",
+        "query_style": "compound"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9171,
+        9174,
+        9020,
+        8960
+      ],
+      "reviewedReference": "严禁电池带入宿舍室内充电；电动车规则每次记12分，纪律规定一经发现严重警告或记过并整改、拒改或事故可更重，不能以电池离车为例外。"
+    },
+    {
+      "id": "e2e160-real-cug-150",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-20"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-150",
+        "intent": "CAMPUS",
+        "policy_area": "电动车积分消减",
+        "query": "我的电动车违规被扣分了，参加交通志愿服务能不能减分？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9175
+      ],
+      "reviewedReference": "交通志愿服务累计1小时减1分，知识学习每次减1分；一个周期最多减6分，其中学习最多3分，不是志愿服务无限抵扣。"
+    },
+    {
+      "id": "e2e160-real-cug-151",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-24"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-151",
+        "intent": "CAMPUS",
+        "policy_area": "节水节电",
+        "query": "宿舍人走了空调和灯一直开着，学校节水节电规范怎么要求？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8002,
+        8004
+      ],
+      "reviewedReference": "离开宿舍或睡觉关闭用电设备、避免无人空调空耗；夏季设温不低于26℃、冬季不高于20℃，不颠倒温度方向。"
+    },
+    {
+      "id": "e2e160-real-cug-153",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-25"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-153",
+        "intent": "CAMPUS",
+        "policy_area": "餐饮节约",
+        "query": "食堂吃不完直接倒掉，学校对制止餐饮浪费有什么倡议和要求？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8010
+      ],
+      "reviewedReference": "倡导按需购餐适度消费光盘行动，按食量增减米饭，反对浪费并有监督提醒；不能编造吃剩饭统一罚款条款。"
+    },
+    {
+      "id": "e2e160-real-cug-154",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-12",
+          "doc-07"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-154",
+        "intent": "CAMPUS",
+        "policy_area": "宿舍+安全",
+        "query": "学生宿舍发现安全隐患，是找楼管还是有其他上报要求？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9018,
+        8926
+      ],
+      "reviewedReference": "宿舍设施隐患可向值班室或后勤平台报修，南望山维修67885110、未来城65277110；治安或灾害事故及时报安全保卫部或公安，紧急危险应先避险。"
+    },
+    {
+      "id": "e2e160-real-cug-155",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-19",
+          "doc-20"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-155",
+        "intent": "CAMPUS",
+        "policy_area": "车辆规则对比",
+        "query": "电动车和机动车在校园内的管理规则是同一套吗？",
+        "query_style": "compare"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9148,
+        9166,
+        9174,
+        9175
+      ],
+      "reviewedReference": "不是完全同一套规则，机动车按ETC准入和限速20公里等管理，电动车一人一车一牌一码、超过15公里每小时记2分，累计12分暂停授权。"
+    },
+    {
+      "id": "e2e160-real-cug-157",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-17"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-157",
+        "intent": "CAMPUS",
+        "policy_area": "图书逾期",
+        "query": "借的书逾期了会怎么处理？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9117,
+        9119
+      ],
+      "reviewedReference": "图书逾期按每天每册0.10元计费，超期未归还或欠费不能继续借阅，应还书并缴费。"
+    },
+    {
+      "id": "e2e160-real-cug-158",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-17"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-158",
+        "intent": "CAMPUS",
+        "policy_area": "读者证使用",
+        "query": "图书证能不能借给室友用？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9113
+      ],
+      "reviewedReference": "借书证仅本人使用不得转借，冒用可暂停入馆和借阅1至6个月，严重者上报处分。"
+    },
+    {
+      "id": "e2e160-real-cug-160",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-17"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-160",
+        "intent": "CAMPUS",
+        "policy_area": "图书馆秩序",
+        "query": "在图书馆占座或者大声打电话，读者须知怎么规定？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9111,
+        9128
+      ],
+      "reviewedReference": "图书馆应保持安静手机静音，不在室内接打电话；信息共享空间明确禁止占座，不能将个人物品长期占座视为许可。"
+    },
+    {
+      "id": "e2e160-real-cug-161",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-17"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-161",
+        "intent": "CAMPUS",
+        "policy_area": "图书馆离校",
+        "query": "毕业离校前图书馆这边需要办什么手续？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9113
+      ],
+      "reviewedReference": "毕业离校前归还所借图书并缴清相关费用，离校时终止借书权限。"
+    },
+    {
+      "id": "e2e160-real-cug-162",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-16"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-162",
+        "intent": "ACADEMIC",
+        "policy_area": "就业签约",
+        "query": "毕业签了三方以后又想违约，学校就业流程里怎么处理？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9087,
+        9088
+      ],
+      "reviewedReference": "三方协议应依法履约，违约按约承担责任；电子系统与原单位解约后提供新单位拟录用证明由就业指导处审核开新权限。个人主动违约原则一次，特殊须书面说明；单位同意解约起一个月后审核，学校不出个人主动违约证明。"
+    },
+    {
+      "id": "e2e160-real-cug-164",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-16"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-164",
+        "intent": "ACADEMIC",
+        "policy_area": "就业协议",
+        "query": "毕业生就业协议书丢了能补办吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9087,
+        9089
+      ],
+      "reviewedReference": "电子签约后可打印纸质三方并盖章，但当前材料未列纸质协议遗失补办清单和时限，应向就业指导处核实；不得以遗失掩盖有效签约重新签约。"
+    },
+    {
+      "id": "e2e160-real-cug-165",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-16"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-165",
+        "intent": "ACADEMIC",
+        "policy_area": "毕业去向",
+        "query": "我考上研究生了，就业去向登记要怎么填？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9080,
+        9082,
+        9084
+      ],
+      "reviewedReference": "升学去向应在电子签约系统如实选择升学并上传相应录用材料，按学校就业方案和全国系统要求核验确认信息。"
+    },
+    {
+      "id": "e2e160-real-cug-166",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-21"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-166",
+        "intent": "CAMPUS",
+        "policy_area": "学生档案",
+        "query": "毕业以后档案一般会寄到哪里？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9194,
+        9195
+      ],
+      "reviewedReference": "毕业档案转往有接收资质单位或户籍地人社人才机构，未就业原则回户籍地；密封用专用EMS转递不得本人携带，符合条件可申请暂存最长两年。"
+    },
+    {
+      "id": "e2e160-real-cug-168",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-21"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-168",
+        "intent": "CAMPUS",
+        "policy_area": "档案管理",
+        "query": "档案里有材料写错了，能不能自己拿出来修改？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9191,
+        9193,
+        9188
+      ],
+      "reviewedReference": "不得擅自抽撤涂改销毁档案，发现错误联系培养单位与学生档案科依规核实纠正；本人不得查阅本人档案，特殊复制须申请审批。"
+    },
+    {
+      "id": "e2e160-real-cug-169",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-21"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-169",
+        "intent": "CAMPUS",
+        "policy_area": "档案转递",
+        "query": "转学或者升学时学生档案怎么转递？",
+        "query_style": "natural"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9194,
+        9092
+      ],
+      "reviewedReference": "毕业升学应核对接收单位和转递信息，考取本校研究生可校内转递，档案须按规定密封转送；现有毕业档案条款不足以给出所有转学情形的手续，转学应另向档案科核实。"
+    },
+    {
+      "id": "e2e160-real-cug-171",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-44"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-171",
+        "intent": "ACADEMIC",
+        "policy_area": "科技活动",
+        "query": "大学生科技论文报告会主要是什么活动？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9528
+      ],
+      "reviewedReference": "科技论文报告会由校团委组织，展示大学生科技成果、宣传研究成果、营造科技氛围并锻炼现场表达。"
+    },
+    {
+      "id": "e2e160-real-cug-172",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-44"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-172",
+        "intent": "ACADEMIC",
+        "policy_area": "科技成果认定",
+        "query": "参加学科竞赛的成果在学校科技活动里怎么认定？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9524,
+        9534,
+        8868
+      ],
+      "reviewedReference": "学科竞赛按项目管理部门组织考核，国家省级奖与创新成果依相应奖励标准认定；申请创新学分需向学院提交并按标准审核，不是所有获奖自动折算。"
+    },
+    {
+      "id": "e2e160-real-cug-173",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-45"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-173",
+        "intent": "ACADEMIC",
+        "policy_area": "社会实践",
+        "query": "学校组织的社会实践一般怎么参加和考核？",
+        "query_style": "natural"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9542,
+        9544,
+        9546,
+        9549
+      ],
+      "reviewedReference": "社会实践主要在暑期，社会调查主要面向大二大三一般4至8人并由辅导员指导，主题团面向全日制学生一般不超过10人由导师带队遴选答辩；事前计划、结束整理报告并于新学期提交分享，突出团队个人可获表彰。"
+    },
+    {
+      "id": "e2e160-real-cug-175",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-45"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-175",
+        "intent": "ACADEMIC",
+        "policy_area": "社会实践评优",
+        "query": "社会实践评优一般看哪些条件？",
+        "query_style": "natural"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9549,
+        9546
+      ],
+      "reviewedReference": "实践评优依据实践成果报告和分享等，对突出组织团队及教师工作者表彰；当前材料未给出统一量化评分和所有名额，应核实当年评选通知。"
+    },
+    {
+      "id": "e2e160-real-cug-176",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-46"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-176",
+        "intent": "CAMPUS",
+        "policy_area": "学生社团成立",
+        "query": "我想自己成立一个学生社团，要满足什么条件？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9555,
+        9556
+      ],
+      "reviewedReference": "社团实行申请成立和学期注册，春秋学期初办理，未经批准不得开展活动，并由指导老师挂靠单位及团委管理；材料未列完整成立人数资金门槛，应向校团委查询建设管理办法。"
+    },
+    {
+      "id": "e2e160-real-cug-178",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-46",
+          "doc-07"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-178",
+        "intent": "CAMPUS",
+        "policy_area": "社团活动+安全",
+        "query": "社团想在校内办大型活动，需要走什么审批流程？",
+        "query_style": "compound"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9560,
+        9561,
+        8922
+      ],
+      "reviewedReference": "校内社团活动先经指导老师挂靠单位同意，提前7个工作日向大学生社团联合会交申请审核，导师全程指导，大型活动还需安全申报审批；变更提前2日申请。"
+    },
+    {
+      "id": "e2e160-real-cug-179",
+      "original": {
+        "difficulty": "medium",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-47"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-179",
+        "intent": "CAMPUS",
+        "policy_area": "志愿服务时长",
+        "query": "志愿服务时长怎么认定，自己参加校外志愿活动也算吗？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9580,
+        9582,
+        9583,
+        9584
+      ],
+      "reviewedReference": "志愿时长须负责人初审校志协终审，一般每天不超过8小时；个人校外活动需事前报备保险安全材料，每日不超过4小时，支教至多14天其他至多7天；外部组织活动需提前申请及盖章证明，未事前报备不认定。"
+    },
+    {
+      "id": "e2e160-real-cug-180",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-47"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-180",
+        "intent": "CAMPUS",
+        "policy_area": "志愿服务记录",
+        "query": "志愿服务记录有错误，应该怎么申请更正？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9580,
+        9581
+      ],
+      "reviewedReference": "每月初公示上月时长，错误由负责人向校志协申请核验；漏录应活动结束14个自然日内平台补录并提交策划照片情况说明，审核后下月公示。"
+    },
+    {
+      "id": "e2e160-real-cug-182",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-48"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-182",
+        "intent": "ACADEMIC",
+        "policy_area": "美育学时认定",
+        "query": "参加校外音乐会或者艺术展，能不能认定美育实践学时？",
+        "query_style": "scenario"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9594,
+        9601,
+        9595,
+        9597,
+        9600
+      ],
+      "reviewedReference": "2025级起学校或学院组织的校外集体音乐会艺术展观摩属于A类每活动2学时，须证明系统记录及审核；个人买票参加不能自动认定，2021至2024级适用另行办法。"
+    },
+    {
+      "id": "e2e160-real-cug-183",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-48",
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-183",
+        "intent": "ACADEMIC",
+        "policy_area": "美育+毕业",
+        "query": "美育实践学时不够会影响毕业吗？",
+        "query_style": "compound"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9593,
+        9599,
+        9600
+      ],
+      "reviewedReference": "2025级起要求2美育学分32学时，可通过美育课程或实践获得，本科生院毕业核查；不能仅因实践不足就断言无法毕业，应核对课程和实践总达成，旧年级按相应办法。"
+    },
+    {
+      "id": "e2e160-real-cug-185",
+      "original": {
+        "difficulty": "easy",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-49"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-185",
+        "intent": "CAMPUS",
+        "policy_area": "服务联系方式",
+        "query": "本科生院、学生工作部门这些常用服务电话去哪查？",
+        "query_style": "colloquial"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        8626,
+        8627
+      ],
+      "reviewedReference": "可查学生手册咨询服务电话及地点栏目，例如实践教学办公室67885009行政楼313、创新创业67848554行政楼301；具体联系信息以学校最新公布为准。"
+    },
+    {
+      "id": "e2e160-real-cug-186",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-28",
+          "doc-33",
+          "doc-04"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-186",
+        "intent": "CAMPUS",
+        "policy_area": "奖助+休学复学",
+        "query": "我家庭经济困难，已经拿了国家奖学金，这学期又准备因病休学，国家助学金还能不能拿，复学后怎么办？",
+        "query_style": "multi_evidence"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9269,
+        9414,
+        9415,
+        9417
+      ],
+      "reviewedReference": "符合困难认定等条件可兼得国家奖学金与国家助学金，但学制内休学暂停发助学金、恢复学籍后再发，超基本修业年限不享受。"
+    },
+    {
+      "id": "e2e160-real-cug-187",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-09",
+          "doc-08",
+          "doc-15"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-187",
+        "intent": "ACADEMIC",
+        "policy_area": "考试纪律+处分+申诉",
+        "query": "我考试时带手机被认定违纪，如果学校给处分，我不认可的话后续怎么申诉？",
+        "query_style": "multi_evidence"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9058,
+        9056,
+        9065,
+        9066
+      ],
+      "reviewedReference": "对处分有异议可在送达10日内书面向学生申诉处理委员会提出并附决定副本，办公室设校团委；复查一般15日必要可延15日，不服复查可在收到决定15日内向省教育厅申诉。"
+    },
+    {
+      "id": "e2e160-real-cug-189",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04",
+          "doc-42"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-189",
+        "intent": "CAMPUS",
+        "policy_area": "休学+入伍资助",
+        "query": "我想休学去参军，学籍怎么处理，入伍期间和退役复学后学费资助分别怎么办？",
+        "query_style": "multi_evidence"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC",
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 2,
+        "workItemIntents": [
+          "ACADEMIC",
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          [],
+          []
+        ]
+      },
+      "evidenceIds": [
+        8801,
+        8802,
+        9498,
+        9499,
+        9500,
+        9501
+      ],
+      "reviewedReference": "参军学籍可保留至退役后2年并依规申请复学；学费补偿或贷款代偿按实际金额较高者且本科每年上限20000元，已修和剩余年限分别处理，依要求申请、退役复学每年9月办理减免。"
+    },
+    {
+      "id": "e2e160-real-cug-190",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-40",
+          "doc-41"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-190",
+        "intent": "CAMPUS",
+        "policy_area": "助学贷款+基层代偿",
+        "query": "我毕业去基层工作，同时还有助学贷款，学费补偿和贷款代偿是怎么衔接的？",
+        "query_style": "multi_evidence"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9487,
+        9488,
+        9489,
+        9490,
+        9491,
+        9492
+      ],
+      "reviewedReference": "符合地域岗位和应届生条件且基层服务至少3年可申请学费补偿或用于学费的贷款代偿，每年最高20000元、按实际金额限额，分三年发放前两年各33%；线上提交申请就业证明合同并后续确认在岗，收到代偿资金一周内操作还款，未满服务期退出应报告并可能取消资格自行偿还余款，时间以当年通知为准。"
+    },
+    {
+      "id": "e2e160-real-cug-191",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-12",
+          "doc-20",
+          "doc-08"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-191",
+        "intent": "CAMPUS",
+        "policy_area": "宿舍+电动车+处分",
+        "query": "我在宿舍给电动车电池充电被查到了，这既违反宿舍规定还是电动车规定，会不会有纪律处分？",
+        "query_style": "multi_evidence"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9020,
+        9171,
+        9174,
+        8960
+      ],
+      "reviewedReference": "宿舍电池充电同时涉及住宿安全、电动车管理与纪律规定；电池不得入室充电，电动车每次记12分，纪律上严重警告或记过并整改，拒改或事故可更重。"
+    },
+    {
+      "id": "e2e160-real-cug-193",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-46",
+          "doc-14",
+          "doc-07"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-193",
+        "intent": "CAMPUS",
+        "policy_area": "社团+无人机+安全",
+        "query": "我想办一个学生社团活动，用无人机拍摄，还要组织很多同学参加，需要注意哪些审批和安全要求？",
+        "query_style": "multi_evidence"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9560,
+        9044,
+        9046,
+        8922
+      ],
+      "reviewedReference": "社团大型活动先经指导老师和挂靠单位同意提前7工作日交校内活动申请，另履行大型活动安全审批；无人机使用需依校园航空器管理向保卫部门申报审批并遵守批准范围，社团批准不替代飞行批准。"
+    },
+    {
+      "id": "e2e160-real-cug-194",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-33",
+          "doc-35",
+          "doc-36"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-194",
+        "intent": "CAMPUS",
+        "policy_area": "多种困难资助",
+        "query": "我家庭经济困难又得了重大疾病，除了国家助学金还能不能申请临时困难补助或者疾病救助？",
+        "query_style": "multi_evidence"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9414,
+        9443,
+        9444,
+        9450,
+        9458
+      ],
+      "reviewedReference": "经济困难可按条件申请国家助学金，重大疾病等突发困难可了解临时困难补助与爱心救助基金；基金与困难补助不得同时申请，不能承诺所有资助均能叠加，需提交困难证明依规审核。"
+    },
+    {
+      "id": "e2e160-real-cug-196",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-23",
+          "doc-22",
+          "doc-18"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-196",
+        "intent": "CAMPUS",
+        "policy_area": "医保+体测",
+        "query": "我在外地实习期间生病住院，同时错过了体测，医保报销和体测补测分别怎么处理？",
+        "query_style": "multi_evidence"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS",
+          "ACADEMIC"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 2,
+        "workItemIntents": [
+          "CAMPUS",
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          [],
+          []
+        ]
+      },
+      "evidenceIds": [
+        7940,
+        7941,
+        9222,
+        9137,
+        9139
+      ],
+      "reviewedReference": "实习异地住院应按医保异地就医备案和报销要求办理保留材料；因病不能体测应按规定申请缓测补测，符合免测条件者持医疗证明审批，不能把医保办理视为自动免测。"
+    },
+    {
+      "id": "e2e160-real-cug-197",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-17",
+          "doc-21",
+          "doc-16"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-197",
+        "intent": "ACADEMIC",
+        "policy_area": "毕业离校综合",
+        "query": "我准备毕业，图书馆借书还没还、档案要转、就业去向也没登记，这三块离校前分别要做什么？",
+        "query_style": "multi_evidence"
+      },
+      "expectedAction": "ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC",
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 3,
+        "workItemIntents": [
+          "ACADEMIC",
+          "CAMPUS",
+          "ACADEMIC"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          [],
+          [],
+          []
+        ]
+      },
+      "evidenceIds": [
+        9113,
+        9194,
+        9082,
+        9084
+      ],
+      "reviewedReference": "毕业需分别归还图书缴清费用、核对档案接收资质与地址按密封专用方式转递、如实确认就业去向信息和就业方案；档案不得自行携带，各手续分别办理。"
+    },
+    {
+      "id": "e2e160-real-cug-198",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-29",
+          "doc-33",
+          "doc-34"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-198",
+        "intent": "CAMPUS",
+        "policy_area": "多奖助兼得",
+        "query": "我拿了国家励志奖学金，还想申请国家助学金和社会助学金，这几种资助能不能同时拿？",
+        "query_style": "multi_evidence"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "CAMPUS",
+        "intents": [
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 1,
+        "workItemIntents": [
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          []
+        ]
+      },
+      "evidenceIds": [
+        9276,
+        9415,
+        9441
+      ],
+      "reviewedReference": "国家励志奖学金可与国家助学金兼得，但不能与国家奖学金同时获得；社会助学金需逐项目核对当年设立单位与学院规则，现有依据不足以笼统承诺三项同时获得。"
+    },
+    {
+      "id": "e2e160-real-cug-200",
+      "original": {
+        "difficulty": "hard",
+        "expected_action": "ANSWER",
+        "expected_document_ids": [
+          "doc-04",
+          "doc-06",
+          "doc-21"
+        ],
+        "generation_basis": "project_background_and_student_scenario_not_chunk_text",
+        "id": "real-cug-200",
+        "intent": "ACADEMIC",
+        "policy_area": "转学综合",
+        "query": "我想从外校转入地大，之前的课程学分、学生档案和新学籍分别怎么处理？",
+        "query_style": "multi_evidence"
+      },
+      "expectedAction": "PARTIAL_ANSWER",
+      "expectedRoute": {
+        "primaryIntent": "ACADEMIC",
+        "intents": [
+          "ACADEMIC",
+          "CAMPUS"
+        ],
+        "riskLevel": "LOW",
+        "workItemCount": 2,
+        "workItemIntents": [
+          "ACADEMIC",
+          "CAMPUS"
+        ],
+        "dependencyEdges": [],
+        "missingArgumentNamesByWorkItem": [
+          [],
+          []
+        ]
+      },
+      "evidenceIds": [
+        8799,
+        8793,
+        8868,
+        9188,
+        9189
+      ],
+      "reviewedReference": "转入学生按审批规定报到并在三个月内办理备案，原校课程学分需学校审核认定而非自动全认；档案由培养单位和学生档案科依规接收归档，现有材料未给出转入档案个人办理完整清单，应联系接收单位核实。"
+    }
+  ],
+  "smokePreserved": true
+}

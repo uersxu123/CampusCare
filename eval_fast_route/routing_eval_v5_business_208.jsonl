@@ -1,0 +1,208 @@
+{"id": "A01", "text": "我这学期课程很多，能帮我排一下每周的学习节奏吗？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A02", "text": "距离期末还有18天，我该怎样分配高数和英语的复习时间？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A03", "text": "一门必修没通过，后续补考是怎么安排的？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A04", "text": "补考还是没及格的话，下一步是不是要重新修这门课？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A05", "text": "学校发了学业预警，我接下来应该怎么调整？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A06", "text": "我想查一下这学期应该选哪些课以及学分要求。", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A07", "text": "培养方案里毕业前一共要修够多少学分？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A08", "text": "绩点是按什么规则算的？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A09", "text": "我准备暂停一个学期学习，学校的休学手续怎么走？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A10", "text": "休学期满准备回来上课，恢复学籍需要怎么处理？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A11", "text": "因为生病这周不能上课，学生请假应该怎么申请？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A12", "text": "请假结束后销假有什么要求？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A13", "text": "本科毕业需要满足哪些学业条件？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A14", "text": "如果没达到毕业要求只能结业吗？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "A15", "text": "学位授予一般要满足哪些课程和成绩要求？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "A16", "text": "我在纠结考研还是直接工作，想做一个两年的规划。", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A17", "text": "想争取推免，现在大二应该怎么准备？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A18", "text": "找暑期实习和秋招应该怎么安排时间线？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A19", "text": "毕业论文从选题到答辩我该怎么推进？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A20", "text": "课程作业引用别人内容到什么程度会涉及学术诚信问题？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "A21", "text": "学校图书馆的书到期了，续借和归还有什么要求？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A22", "text": "我想知道今年学费什么时候交、怎么计算。", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A23", "text": "课堂迟到、旷课这类情况对课程考核有什么规定？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "A24", "text": "本科生体质测试没达标会有什么影响？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A25", "text": "志愿服务的时长怎么认定到实践学时里？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A26", "text": "美育实践学时没修够会不会影响毕业？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A27", "text": "最近对学习很疲惫，主要是任务堆太多，帮我重新安排一下学习计划。", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A28", "text": "这学期总拖延，我想优化每天的学习方法和时间分配。", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "A29", "text": "选课系统里这门课显示容量满了，我还应该怎么安排课程？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "A30", "text": "我转专业后以前修过的课程和学分怎么处理？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "A31", "text": "本科生学习年限和学籍状态之间是什么关系？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "A32", "text": "考试缺考以后还能参加后续考核吗？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "A33", "text": "重修课程的成绩会怎样记载？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A34", "text": "我要准备毕业答辩，接下来一个月怎么安排论文修改？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A35", "text": "研究生考试复习和实习冲突，帮我做时间取舍。", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "A36", "text": "图书馆借阅权限和我的学生身份有关吗？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A37", "text": "学费如果晚交会有什么校内处理规则？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A38", "text": "体育测试的成绩是否属于毕业要求的一部分？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A39", "text": "社会实践学分应该怎样完成和认定？", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "A40", "text": "最近学习效率很低，但我不是情绪求助，主要想调整复习策略。", "labels": ["ACADEMIC"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "C01", "text": "本科生国家奖学金的评选条件有哪些？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C02", "text": "国家励志奖学金一般怎么评？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C03", "text": "我已经拿了国家奖学金，还能同时申请国家助学金吗？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C04", "text": "家庭经济困难学生认定需要满足什么要求？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C05", "text": "临时遇到家庭变故，学校有没有困难补助可以申请？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C06", "text": "生源地助学贷款在学校这边要办哪些手续？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C07", "text": "国家助学贷款毕业后怎么处理？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C08", "text": "综合素质测评结果会用于哪些评优？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C09", "text": "学校有哪些面向学业困难学生的帮扶资源？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "C10", "text": "我学习跟不上，想知道可以找辅导员或学业导师获得哪些支持。", "labels": ["CAMPUS"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "C11", "text": "宿舍住得不合适，想换一个寝室要怎么申请？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C12", "text": "新生第一次入住学生宿舍需要办什么手续？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C13", "text": "毕业离校前退宿要怎么处理？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C14", "text": "校园网账号开通后一直不能用，应该去哪里处理？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "C15", "text": "校园卡丢了，补办应该找哪个地方？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C16", "text": "校车在两个校区之间怎么乘坐，有什么规定？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C17", "text": "电动自行车进校园有什么管理要求？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C18", "text": "毕业后学生档案一般转到哪里？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C19", "text": "大学生医保参保流程是什么？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C20", "text": "住院之后学校医保怎么报销？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C21", "text": "收到纪律处分决定后，学生能不能申请复核？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C22", "text": "对处分结果不服，学生申诉的期限是多久？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C23", "text": "想成立学生社团需要走什么流程？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C24", "text": "宿舍里使用大功率电器有什么安全规定？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C25", "text": "宿舍水电使用有什么节约要求？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C26", "text": "学校对校园生活中的安全管理有哪些基本要求？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C27", "text": "休学之后国家助学金会暂停发放吗？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "C28", "text": "复学以后之前的助学金资格要怎么处理？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "C29", "text": "优秀毕业生评选通常看哪些条件？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "C30", "text": "重大疾病救助类资助可以怎样申请？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C31", "text": "应征入伍学生能享受哪些学费资助？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C32", "text": "基层就业的学费补偿或贷款代偿是什么？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C33", "text": "宿舍管理规定里对访客有什么要求？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C34", "text": "校园机动车通行需要办什么手续？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C35", "text": "学生组织举办活动要遵守哪些校内管理要求？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C36", "text": "我的档案需要从学院转出，应该联系哪个部门？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C37", "text": "门诊看病能不能走大学生医疗保险报销？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "C38", "text": "学校的奖学金评定和家庭困难认定是一回事吗？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "C39", "text": "我不是想做学习计划，我想问学校有没有学习支持中心。", "labels": ["CAMPUS"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "C40", "text": "校园网络服务账号忘记密码该去哪里重置？", "labels": ["CAMPUS"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M01", "text": "最近一到晚上就特别焦虑，心里总是静不下来。", "labels": ["MENTAL"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "M02", "text": "我突然会很慌，胸口发紧，遇到这种情况怎么让自己稳定一点？", "labels": ["MENTAL"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "M03", "text": "考试前害怕得厉害，一想到考试就紧张。", "labels": ["MENTAL"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M04", "text": "这段时间总是半夜睡不着，白天也没精神。", "labels": ["MENTAL"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "M05", "text": "压力大以后睡眠变得很差，有什么调整办法？", "labels": ["MENTAL"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "M06", "text": "最近情绪一直很低落，什么事情都不太想做。", "labels": ["MENTAL"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "M07", "text": "这几天特别难过和无助，很想找个人聊一聊。", "labels": ["MENTAL"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "M08", "text": "刚到大学以后一直适应不了，经常想家。", "labels": ["MENTAL"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "M09", "text": "换了校区以后生活节奏完全适应不过来。", "labels": ["MENTAL"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "M10", "text": "我和室友天天闹矛盾，心里很难受，不知道怎么沟通。", "labels": ["MENTAL"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M11", "text": "跟同学关系越来越僵，我每次交流都很紧张。", "labels": ["MENTAL"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "M12", "text": "家里的关系让我最近一直很压抑。", "labels": ["MENTAL"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "M13", "text": "失恋以后状态很差，总会反复想这件事。", "labels": ["MENTAL"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "M14", "text": "我想找学校的心理老师谈谈，应该怎么预约？", "labels": ["MENTAL"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M15", "text": "第一次做心理咨询前一般需要准备什么？", "labels": ["MENTAL"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M16", "text": "心理咨询的聊天内容会不会被其他人知道？", "labels": ["MENTAL"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M17", "text": "我比较担心心理咨询记录的隐私问题。", "labels": ["MENTAL"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M18", "text": "挂科以后我一直很低落，晚上也睡不好。", "labels": ["MENTAL"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M19", "text": "论文快截止了，我焦虑到连续几天失眠。", "labels": ["MENTAL"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M20", "text": "学习任务很多，我现在最困扰的是每天都心慌和睡不着。", "labels": ["MENTAL"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M21", "text": "刚入学没有朋友，感觉很孤单，很难融入同学。", "labels": ["MENTAL"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "M22", "text": "和父母沟通总是吵起来，我不知道怎么处理这种情绪。", "labels": ["MENTAL"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "M23", "text": "我最近容易突然恐慌，尤其在人多的时候。", "labels": ["MENTAL"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "M24", "text": "晚上脑子停不下来，总是睡不好。", "labels": ["MENTAL"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "M25", "text": "情绪很差的时候怎样让自己先缓下来？", "labels": ["MENTAL"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "M26", "text": "大学生活和我想象的不一样，我一直觉得不适应。", "labels": ["MENTAL"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "M27", "text": "室友说话让我很受伤，但我暂时不想换宿舍，只想学会怎么沟通。", "labels": ["MENTAL"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "M28", "text": "我不是问宿舍办理，我主要因为和室友相处很痛苦。", "labels": ["MENTAL"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "M29", "text": "我想了解学校心理咨询是否保密，以及咨询师会怎么处理个人信息。", "labels": ["MENTAL"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M30", "text": "最近总担心成绩，已经影响到吃饭和睡觉。", "labels": ["MENTAL"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "M31", "text": "考试周情绪绷得很紧，我想先调整一下心理状态。", "labels": ["MENTAL"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M32", "text": "毕业找工作让我持续焦虑，不知道怎么缓解。", "labels": ["MENTAL"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M33", "text": "实习被拒以后我很沮丧，开始怀疑自己。", "labels": ["MENTAL"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M34", "text": "我和朋友冷战以后一直难受，怎么把沟通重新建立起来？", "labels": ["MENTAL"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "M35", "text": "最近压力太大，一躺下就清醒到凌晨。", "labels": ["MENTAL"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "M36", "text": "我常常觉得无助，也不知道该和谁说。", "labels": ["MENTAL"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "M37", "text": "心理中心的咨询流程我有点紧张，第一次去应该怎么办？", "labels": ["MENTAL"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "M38", "text": "担心别人知道我去做心理咨询，这种顾虑怎么处理？", "labels": ["MENTAL"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "M39", "text": "新生军训后一直很想家，情绪不太稳定。", "labels": ["MENTAL"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "M40", "text": "这不是学习安排问题，我主要是因为成绩压力非常焦虑。", "labels": ["MENTAL"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "H01", "text": "你好，今天可以陪我随便聊两句吗？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H02", "text": "谢谢你的解释。", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H03", "text": "你能简单介绍一下自己能做什么吗？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H04", "text": "帮我把“项目已经完成”翻译成英文。", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H05", "text": "帮我把这段中文润色得更正式一些。", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H06", "text": "Python里列表和元组有什么区别？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H07", "text": "Java 的 HashMap 为什么查找通常是 O(1)？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H08", "text": "MySQL 联合索引为什么要遵循最左匹配？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H09", "text": "Redis 分布式锁应该怎么实现？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H10", "text": "操作系统里的虚拟内存是什么？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H11", "text": "HTTP 里的 404 和 500 有什么区别？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H12", "text": "这道二叉树算法题应该用递归还是迭代？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H13", "text": "KV cache 在大模型推理里是做什么的？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H14", "text": "帮我写一封普通的实习感谢邮件。", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H15", "text": "给我解释一下什么是消息队列。", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H16", "text": "Spring Boot 的 Bean 生命周期是什么？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H17", "text": "Docker 容器和虚拟机的区别是什么？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H18", "text": "Linux 怎么查看某个端口被哪个进程占用？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H19", "text": "Git rebase 和 merge 有什么区别？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H20", "text": "帮我把下面一段项目经历压缩成一句简历描述。", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H21", "text": "给我讲讲 RAG 的基本流程。", "labels": ["CHAT"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "H22", "text": "Agent 里的 ReAct 是什么意思？", "labels": ["CHAT"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "H23", "text": "什么是数据库事务的隔离级别？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H24", "text": "Java 中 ArrayDeque 怎么使用？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H25", "text": "LeetCode 两数之和怎么写？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H26", "text": "帮我起三个项目名字。", "labels": ["CHAT"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "H27", "text": "把这句话改得更礼貌一点。", "labels": ["CHAT"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "H28", "text": "解释一下 CAP 定理。", "labels": ["CHAT"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "H29", "text": "普通电脑为什么会出现内存泄漏？", "labels": ["CHAT"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "H30", "text": "接口压测的时候 QPS 和并发数是什么关系？", "labels": ["CHAT"], "slice": "single", "difficulty": "boundary", "note": ""}
+{"id": "H31", "text": "Python 程序运行时报 TypeError，怎么定位？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H32", "text": "Java 服务启动时报端口占用，怎么排查？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H33", "text": "SQL 查询很慢，一般从哪些方面优化？", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H34", "text": "帮我写一个正则表达式匹配手机号。", "labels": ["CHAT"], "slice": "single", "difficulty": "easy", "note": ""}
+{"id": "H35", "text": "机器学习里的过拟合是什么意思？", "labels": ["CHAT"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "H36", "text": "什么是余弦相似度？", "labels": ["CHAT"], "slice": "single", "difficulty": "medium", "note": ""}
+{"id": "H37", "text": "请给我一个三天的东京旅游行程。", "labels": ["CHAT"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "H38", "text": "怎么做一道番茄炒蛋？", "labels": ["CHAT"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "H39", "text": "给我推荐几本入门经济学的书。", "labels": ["CHAT"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "H40", "text": "明天给同事做分享，帮我列一个技术演讲提纲。", "labels": ["CHAT"], "slice": "single", "difficulty": "hard", "note": ""}
+{"id": "X01", "text": "我想办理休学，同时想确认休学后国家助学金会不会停发。", "labels": ["ACADEMIC", "CAMPUS"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X02", "text": "先告诉我复学需要什么手续，再说复学后助学金怎么恢复。", "labels": ["ACADEMIC", "CAMPUS"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X03", "text": "我挂科很多，想问重修安排，也想知道学校有哪些学业帮扶资源。", "labels": ["ACADEMIC", "CAMPUS"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X04", "text": "帮我规划下学期选课，同时查一下校园网账号怎么办。", "labels": ["ACADEMIC", "CAMPUS"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X05", "text": "我毕业条件还没弄清楚，另外毕业后的学生档案应该转去哪里？", "labels": ["ACADEMIC", "CAMPUS"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X06", "text": "想做求职实习规划，也想了解大学生医保报销流程。", "labels": ["ACADEMIC", "CAMPUS"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X07", "text": "帮我安排考研复习，再告诉我宿舍退宿什么时候办。", "labels": ["ACADEMIC", "CAMPUS"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X08", "text": "我想查补考规定，另外对之前的纪律处分想申请复核。", "labels": ["ACADEMIC", "CAMPUS"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X09", "text": "我需要确认体测毕业要求，也想问国家奖学金怎么评。", "labels": ["ACADEMIC", "CAMPUS"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X10", "text": "帮我看看论文答辩怎么准备，同时学生申诉期限是多久。", "labels": ["ACADEMIC", "CAMPUS"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X11", "text": "我想问学费缴纳规定，另外宿舍换寝需要哪些材料。", "labels": ["ACADEMIC", "CAMPUS"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X12", "text": "图书馆借书规则是什么？顺便告诉我校园卡丢了怎么补办。", "labels": ["ACADEMIC", "CAMPUS"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X13", "text": "考试快到了，帮我做复习计划；另外我焦虑得晚上睡不着，也想知道怎么调整。", "labels": ["ACADEMIC", "MENTAL"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X14", "text": "我论文进度落后，需要一个推进计划，同时最近因为这件事一直很低落。", "labels": ["ACADEMIC", "MENTAL"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X15", "text": "我想规划考研，但一想到考试就恐慌，两个问题都想处理。", "labels": ["ACADEMIC", "MENTAL"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X16", "text": "先帮我安排每天的学习时间，再给我一些缓解失眠的建议。", "labels": ["ACADEMIC", "MENTAL"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X17", "text": "实习求职怎么规划？另外最近被拒很多次，情绪很差。", "labels": ["ACADEMIC", "MENTAL"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X18", "text": "我准备复学，手续怎么走？同时我很担心回学校后的人际关系。", "labels": ["ACADEMIC", "MENTAL"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X19", "text": "这门课挂科后怎么重修？我因为这件事一直焦虑心慌。", "labels": ["ACADEMIC", "MENTAL"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X20", "text": "毕业论文怎么安排时间？最近压力大到每天凌晨都睡不着。", "labels": ["ACADEMIC", "MENTAL"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X21", "text": "帮我做一个期末复习表，同时我和室友关系很差，想学怎么沟通。", "labels": ["ACADEMIC", "MENTAL"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X22", "text": "我在考虑就业还是考研，同时持续焦虑，想分别聊聊规划和情绪。", "labels": ["ACADEMIC", "MENTAL"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X23", "text": "我和室友矛盾很严重，一方面想改善沟通，另一方面想申请调宿。", "labels": ["MENTAL", "CAMPUS"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X24", "text": "我最近很焦虑，另外想知道学校心理咨询中心怎么预约。", "labels": ["MENTAL"], "slice": "multi", "difficulty": "hard", "note": ""}
+{"id": "X25", "text": "最近家庭关系让我很难受，同时想问学校心理咨询的隐私规则。", "labels": ["MENTAL"], "slice": "multi", "difficulty": "hard", "note": ""}
+{"id": "X26", "text": "我睡眠很差，也想了解心理咨询预约流程。", "labels": ["MENTAL"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X27", "text": "宿舍里和室友天天吵架让我很痛苦，我还想了解换寝流程。", "labels": ["MENTAL", "CAMPUS"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X28", "text": "我情绪很低落，同时想问大学生医保怎么报销。", "labels": ["MENTAL", "CAMPUS"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X29", "text": "刚入学很不适应，也想知道新生宿舍入住怎么办。", "labels": ["MENTAL", "CAMPUS"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X30", "text": "我最近压力特别大，顺便想问助学贷款怎么办理。", "labels": ["MENTAL", "CAMPUS"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X31", "text": "和同学关系让我很难受，另外学生社团怎么申请成立？", "labels": ["MENTAL", "CAMPUS"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X32", "text": "分手后状态很差，同时校园网一直连不上怎么处理？", "labels": ["MENTAL", "CAMPUS"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X33", "text": "解释一下 Java HashMap，另外帮我制定高数复习计划。", "labels": ["CHAT", "ACADEMIC"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X34", "text": "帮我润色一段文字，然后告诉我本科毕业需要多少学分。", "labels": ["CHAT", "ACADEMIC"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X35", "text": "先讲讲 Redis 分布式锁，再帮我规划暑期实习。", "labels": ["CHAT", "ACADEMIC"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X36", "text": "给我解释 KV cache，另外补考没过后重修怎么办。", "labels": ["CHAT", "ACADEMIC"], "slice": "multi", "difficulty": "boundary", "note": ""}
+{"id": "X37", "text": "帮我翻译一句英文，再告诉我宿舍调换怎么申请。", "labels": ["CHAT", "CAMPUS"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X38", "text": "解释 MySQL 索引，顺便问一下国家助学金申请条件。", "labels": ["CHAT", "CAMPUS"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X39", "text": "帮我写一封邮件，另外校园卡补办去哪里。", "labels": ["CHAT", "CAMPUS"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X40", "text": "讲一下 HTTP 状态码，再说说学生处分如何申诉。", "labels": ["CHAT", "CAMPUS"], "slice": "multi", "difficulty": "easy", "note": ""}
+{"id": "X41", "text": "我最近焦虑失眠，准备休学，还想确认休学以后助学金会不会停发。", "labels": ["MENTAL", "ACADEMIC", "CAMPUS"], "slice": "multi", "difficulty": "hard", "note": ""}
+{"id": "X42", "text": "因为成绩低落得睡不着，我想了解重修，也想找学校的学业帮扶资源。", "labels": ["MENTAL", "ACADEMIC", "CAMPUS"], "slice": "multi", "difficulty": "hard", "note": ""}
+{"id": "X43", "text": "我和室友相处很痛苦，想申请换宿舍，同时担心这会影响每天的学习安排。", "labels": ["MENTAL", "CAMPUS", "ACADEMIC"], "slice": "multi", "difficulty": "hard", "note": ""}
+{"id": "X44", "text": "我焦虑到睡不好，想做考研计划，同时想预约学校心理咨询。", "labels": ["MENTAL", "ACADEMIC"], "slice": "multi", "difficulty": "hard", "note": ""}
+{"id": "X45", "text": "我准备毕业求职，最近情绪很低落，同时还要处理学生档案转递。", "labels": ["ACADEMIC", "MENTAL", "CAMPUS"], "slice": "multi", "difficulty": "hard", "note": ""}
+{"id": "X46", "text": "帮我解释 Python 报错，再帮我做复习计划，另外我最近焦虑失眠。", "labels": ["CHAT", "ACADEMIC", "MENTAL"], "slice": "multi", "difficulty": "hard", "note": ""}
+{"id": "X47", "text": "先解释数据库索引，再告诉我宿舍怎么调换，同时我和室友关系也让我很难受。", "labels": ["CHAT", "CAMPUS", "MENTAL"], "slice": "multi", "difficulty": "hard", "note": ""}
+{"id": "X48", "text": "帮我写一封邮件，再查国家奖学金条件，另外给我一个考研复习计划。", "labels": ["CHAT", "CAMPUS", "ACADEMIC"], "slice": "multi", "difficulty": "hard", "note": ""}

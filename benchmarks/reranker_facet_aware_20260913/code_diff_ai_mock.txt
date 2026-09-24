@@ -1,0 +1,26 @@
+--- /mnt/data/mindbridge_project_multiquery/app/services/ai.py	2026-09-12 16:33:58.684888777 +0000
++++ app/services/ai.py	2026-09-12 17:05:24.938029351 +0000
+@@ -979,8 +979,21 @@
+             payload = json.loads(user_content)
+         except (TypeError, json.JSONDecodeError):
+             payload = {}
+-        if schema_name == "rag_rerank_v3":
+-            return json.dumps({"ranked": [item["evidenceId"] for item in payload.get("candidates", [])]}, ensure_ascii=False)
++        if schema_name == "rag_rerank_v4":
++            candidates = [item for item in payload.get("candidates", []) if item.get("evidenceId")]
++            facet_ids = [item.get("facetId") for item in payload.get("evidenceFacets", []) if item.get("facetId")]
++            return json.dumps({
++                "ranked": [item["evidenceId"] for item in candidates],
++                "assessments": [
++                    {
++                        "evidenceId": item["evidenceId"],
++                        "relevanceLevel": "HIGH",
++                        "matchedFacetIds": facet_ids[:1] if facet_ids else [],
++                        "directSupport": True,
++                    }
++                    for item in candidates
++                ],
++            }, ensure_ascii=False)
+         if schema_name == "rag_rerank_v1":
+             return json.dumps({"ranked": [
+                 {"evidenceId": item["evidenceId"], "relevance": 0.8, "coverage": 0.8, "reasonCode": "MOCK_RELEVANT"}

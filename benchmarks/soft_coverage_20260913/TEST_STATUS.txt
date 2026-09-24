@@ -1,0 +1,12 @@
+Core regression suite:
+55 passed, 15 subtests passed in 26.12s
+
+Compilation:
+python -m compileall -q app tests -> COMPILE_OK
+
+Additional agent/specialist suite:
+32 passed, 6 failed.
+The same 6 Specialist status-mapping failures reproduce on the unmodified V5 package, so they are pre-existing baseline failures and are not introduced by the V6 Soft Coverage patch.
+
+Benchmark note:
+The long benchmark runner hit the execution time cap after writing metrics/per_query/evidence_slice/coverage outputs. Bootstrap CI was then recomputed separately with a vectorized 5000-resample paired bootstrap and saved as bootstrap_ci.csv / paired_delta_bootstrap.csv.

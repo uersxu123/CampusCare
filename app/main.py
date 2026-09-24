@@ -1,0 +1,77 @@
+import logging
+from pathlib import Path
+
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+
+from app.api.routes import router
+from app.core.bootstrap import seed_data
+from app.core.config import get_settings
+from app.core.database import SessionLocal
+from app.services.tool_queue import get_tool_queue_worker
+from app.services.chat_turns import ChatTurnService
+from app.services.knowledge_ingestion.admin import get_knowledge_ingestion_worker
+from app.services.chat_tool_runtime import get_chat_tool_runtime
+from app.services.mcp_runtime import shutdown_mcp_runtime
+from app.services.routing_v5 import warmup_fast_routing
+from app.services.memory_jobs import get_memory_worker
+
+logger = logging.getLogger(__name__)
+
+
+def create_app() -> FastAPI:
+    app = FastAPI(title="MindBridge Python", version="0.1.0")
+
+    @app.middleware("http")
+    async def no_cache_frontend_assets(request, call_next):
+        response = await call_next(request)
+        path = request.url.path
+        if path == "/" or path.endswith((".html", ".js", ".css")):
+            response.headers["Cache-Control"] = "no-store"
+        return response
+
+    @app.on_event("startup")
+    def startup() -> None:
+        db = SessionLocal()
+        try:
+            seed_data(db)
+            ChatTurnService(db, get_settings()).mark_stale_interrupted()
+        finally:
+            db.close()
+        worker = get_tool_queue_worker(get_settings())
+        worker.start()
+        app.state.tool_queue_worker = worker
+        ingestion_worker = get_knowledge_ingestion_worker(get_settings())
+        ingestion_worker.start()
+        app.state.knowledge_ingestion_worker = ingestion_worker
+        memory_worker = get_memory_worker(get_settings())
+        memory_worker.start()
+        app.state.memory_worker = memory_worker
+        settings = get_settings()
+        if settings.route_fast_enabled and settings.route_fast_warmup_enabled:
+            warmed = warmup_fast_routing(settings)
+            if not warmed:
+                logger.warning("Fast routing embedding warmup failed; requests will fail open to Planner")
+        if settings.chat_tools_enabled:
+            app.state.chat_tool_runtime = get_chat_tool_runtime(settings)
+
+    @app.on_event("shutdown")
+    def shutdown() -> None:
+        worker = getattr(app.state, "tool_queue_worker", None)
+        if worker is not None:
+            worker.stop()
+        ingestion_worker = getattr(app.state, "knowledge_ingestion_worker", None)
+        if ingestion_worker is not None:
+            ingestion_worker.stop()
+        memory_worker = getattr(app.state, "memory_worker", None)
+        if memory_worker is not None:
+            memory_worker.stop()
+        shutdown_mcp_runtime()
+
+    app.include_router(router)
+    static_dir = Path(__file__).resolve().parent / "static"
+    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
+    return app
+
+
+app = create_app()

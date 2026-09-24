@@ -1,0 +1,4 @@
+corpus: handbook_prechunked_v2
+# 当前知识库直接使用交付的父子分块，旧语料已停用。
+corpus_path: app/knowledge/handbook_v2
+documents: []

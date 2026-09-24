@@ -1,0 +1,259 @@
+version: 3
+
+sites:
+  NANWANGSHAN:
+    aliases: [南望山, 南望山校区]
+  FUTURE_CITY:
+    aliases: [未来城, 未来城校区]
+  ALL:
+    aliases: [全校, 各校区, 所有校区]
+
+facet_terms:
+  ELIGIBILITY:
+    query_terms: [条件, 资格, 哪些人可以, 哪些学生, 哪些课程, 什么情况, 能否, 可以申请, 是否可以]
+    evidence_patterns: [申请条件, 补考条件, 适用对象, 应当符合, 可以申请, 可申请, 可按, 申请人]
+  MATERIALS:
+    query_terms: [材料, 资料, 证明, 准备什么, 要带什么, 提交什么]
+    evidence_patterns: [申请表, 申诉书, 申诉申请书, 决定书的副本, 书面委托代理书, 申请材料, 提交材料, 提供证明, 材料包括, 签字盖章, 附件]
+  STEPS:
+    query_terms: [流程, 怎么, 怎样, 怎么办, 如何办理, 办理步骤, 怎么申请, 如何申请]
+    evidence_patterns: [填写, 提交, 递交, 审核, 审批, 签字盖章, 领取, 申请流程, 办理流程, 安排, 评估, 拆分]
+  CHANNEL:
+    query_terms: [入口, 在哪里办, 去哪里办, 去哪里, 线上, 线上办理, 服务平台]
+    evidence_patterns: [服务中心, 支持中心, 心理中心, 教务部门, 辅导员, 信息门户, 线上办理, 办理入口, 服务平台, 办公室]
+  DEADLINE:
+    query_terms: [截止, 截止时间, 截止日期, 最晚时间, 申请时间, 什么时候申请, 什么时候交, 申诉期限, 流程、期限, 多久内完成, 有效期, 集中办理]
+    evidence_patterns: [截止, 申请时间, 有效期, 申请日期, 集中办理, 每年五月]
+  PROCESSING_TIME:
+    query_terms: [几个工作日, 多少个工作日, 多久办完, 办理多久, 审批多久, 处理时长, 办结时限, 办理时限]
+    evidence_patterns: [个工作日, 工作日内办结, 办理时长, 处理时长, 办结时限]
+  CONTACT:
+    query_terms: [联系方式, 电话, 联系谁, 联系, 咨询哪里]
+    evidence_patterns: [联系电话, 咨询电话, 联系人, 联系方式, 联系导师, 联系辅导员, 辅导员, 导师, 咨询]
+  COST:
+    query_terms: [多少钱, 费用, 收费, 缴费]
+    evidence_patterns: [费用, 收费标准, 缴费, 元]
+  SCOPE:
+    query_terms: [适用范围, 哪个校区, 哪些学生, 范围]
+    evidence_patterns: [适用于, 适用范围, 校区, 本科生, 学生]
+  POLICY_BASIS:
+    query_terms: [依据, 规定, 政策, 哪一条, 文件]
+    evidence_patterns: [根据, 依据, 条例, 办法, 规定, 第]
+
+concepts:
+  STUDY_PLANNING:
+    canonical: 学业规划
+    domain: ACADEMIC
+    aliases: [学习计划, 复习计划, 复习, 时间管理]
+    preferred_tags: [学习计划, 时间管理, 复习]
+  ACADEMIC_WARNING:
+    canonical: 学业预警
+    domain: ACADEMIC
+    aliases: [挂科, 学业困难, 学业警示]
+    preferred_tags: [挂科, 学业预警]
+  MAKEUP_EXAM:
+    canonical: 补考
+    domain: ACADEMIC
+    aliases: [补考考试, 补考安排]
+    preferred_tags: [补考, 考核]
+  COURSE_RETAKE:
+    canonical: 重修
+    domain: ACADEMIC
+    aliases: [课程重修, 重新修读]
+    preferred_tags: [重修, 课程修读]
+  COURSE_ENROLLMENT:
+    canonical: 课程修读
+    domain: ACADEMIC
+    aliases: [选课, 课程考核, 课程学习, 考试, 学分, 绩点]
+    preferred_tags: [课程修读, 考核]
+  STUDENT_STATUS:
+    canonical: 学籍管理
+    domain: ACADEMIC
+    aliases: [学籍, 学籍异动]
+    preferred_tags: [学籍]
+  STUDY_SUSPENSION:
+    canonical: 休学
+    domain: ACADEMIC
+    aliases: [办理休学, 休学申请, 暂停学业]
+    preferred_tags: [休学, 学籍]
+  LEAVE_REQUEST:
+    canonical: 请假
+    domain: ACADEMIC
+    aliases: [学生请假, 请假申请]
+    preferred_tags: [请假]
+  GRADUATION:
+    canonical: 毕业
+    domain: ACADEMIC
+    aliases: [毕业条件, 结业, 学位]
+    preferred_tags: [毕业, 学位]
+  FURTHER_STUDY:
+    canonical: 升学
+    domain: ACADEMIC
+    aliases: [考研, 保研, 推免]
+    preferred_tags: [考研, 保研]
+  EMPLOYMENT_INTERNSHIP:
+    canonical: 就业实习
+    domain: ACADEMIC
+    aliases: [就业, 实习, 求职]
+    preferred_tags: [就业, 实习]
+  THESIS_RESEARCH:
+    canonical: 论文科研
+    domain: ACADEMIC
+    aliases: [论文, 答辩, 科研, 学术诚信]
+    preferred_tags: [论文, 科研, 学术诚信]
+  ACADEMIC_SUPPORT:
+    canonical: 学业支持
+    domain: CAMPUS_SERVICE
+    aliases: [学业帮扶, 教务支持, 导师帮助, 辅导员帮助, 学习支持中心, 学业导师]
+    preferred_tags: [academic_support, 教务, 导师, 辅导员]
+  STUDENT_APPEAL:
+    canonical: 学生申诉
+    domain: CAMPUS_SERVICE
+    aliases: [处分申诉, 申诉处分, 处分复核, 学生复核]
+    preferred_tags: [处分, 申诉, 纪律处分]
+  DISCIPLINE:
+    canonical: 纪律处分
+    domain: CAMPUS_SERVICE
+    aliases: [处分, 学生处分, 违纪处理]
+    preferred_tags: [纪律处分, 申诉]
+  DORM_CHANGE:
+    canonical: 宿舍调整
+    domain: CAMPUS_SERVICE
+    aliases: [调宿, 换宿舍, 换寝, 调寝, 宿舍调换]
+    preferred_tags: [宿舍, 调宿, 住宿]
+    required_scope_fields: [site]
+  DORM_CHECKIN:
+    canonical: 宿舍入住
+    domain: CAMPUS_SERVICE
+    aliases: [入住办理, 新生入住, 住宿登记]
+    preferred_tags: [宿舍, 入住, 住宿]
+  DORM_CHECKOUT:
+    canonical: 退宿
+    domain: CAMPUS_SERVICE
+    aliases: [退寝, 退宿办理, 搬离宿舍]
+    preferred_tags: [宿舍, 退宿, 住宿]
+  CAMPUS_NETWORK:
+    canonical: 校园网
+    domain: CAMPUS_SERVICE
+    aliases: [校园网络, 网络服务, 上网账号]
+    preferred_tags: [网络, 校园服务]
+  CAMPUS_TRANSPORT:
+    canonical: 校园交通
+    domain: CAMPUS_SERVICE
+    aliases: [校车, 校园通勤, 交通, 电动自行车, 机动车, 校园车辆]
+    preferred_tags: [交通, 校园服务]
+  STUDENT_ARCHIVES:
+    canonical: 学生档案
+    domain: CAMPUS_SERVICE
+    aliases: [人事档案, 学生人事档案, 档案管理]
+    preferred_tags: [档案, 校园服务]
+  CAMPUS_SAFETY:
+    canonical: 校园安全管理
+    domain: CAMPUS_SERVICE
+    aliases: [学生安全, 在校安全, 安全管理]
+    preferred_tags: [安全管理]
+  DORM_MANAGEMENT:
+    canonical: 宿舍住宿管理
+    domain: CAMPUS_SERVICE
+    aliases: [宿舍住宿, 宿舍住宿规定, 住宿管理, 宿舍管理规定]
+    preferred_tags: [宿舍, 住宿]
+  WATER_ELECTRICITY:
+    canonical: 节水节电
+    domain: CAMPUS_SERVICE
+    aliases: [节约用水, 节约用电, 水电规范]
+    preferred_tags: [校园服务]
+  MEDICAL_INSURANCE:
+    canonical: 大学生医保
+    domain: CAMPUS_SERVICE
+    aliases: [医保, 医疗保险, 医保报销, 就医报销]
+    preferred_tags: [医保, 校园服务]
+  SCHOLARSHIP:
+    canonical: 奖学金
+    domain: CAMPUS_SERVICE
+    aliases: [奖学金评定, 奖励评选]
+    preferred_tags: [奖学金]
+  STUDENT_GRANT:
+    canonical: 助学金
+    domain: CAMPUS_SERVICE
+    aliases: [助学金申请, 国家助学金]
+    preferred_tags: [助学金, 困难认定]
+  HARDSHIP_ASSESSMENT:
+    canonical: 家庭经济困难认定
+    domain: CAMPUS_SERVICE
+    aliases: [困难认定, 贫困认定, 家庭困难认定]
+    preferred_tags: [困难认定, 助学金]
+  STUDENT_LOAN:
+    canonical: 助学贷款
+    domain: CAMPUS_SERVICE
+    aliases: [贷款, 生源地贷款, 国家助学贷款]
+    preferred_tags: [贷款, 助学金]
+  STUDENT_ORGANIZATION:
+    canonical: 学生组织
+    domain: CAMPUS_SERVICE
+    aliases: [社团, 学生社团, 学生组织活动]
+    preferred_tags: [社团]
+  LIBRARY_SERVICE:
+    canonical: 图书馆服务
+    domain: ACADEMIC
+    aliases: [图书馆, 借书, 还书]
+    preferred_tags: [图书馆]
+  STUDENT_TUITION:
+    canonical: 学费收缴
+    domain: ACADEMIC
+    aliases: [学费, 缴纳学费, 学费管理]
+    preferred_tags: [学费]
+  CLASSROOM_LEARNING:
+    canonical: 课堂学习规范
+    domain: ACADEMIC
+    aliases: [课堂规范, 课堂要求, 课堂学习]
+    preferred_tags: [课程修读]
+  PHYSICAL_HEALTH_STANDARD:
+    canonical: 体质健康标准
+    domain: ACADEMIC
+    aliases: [体测, 学生体质健康, 体质健康]
+    preferred_tags: [体质健康]
+  VOLUNTEER_PRACTICE:
+    canonical: 志愿服务实践
+    domain: ACADEMIC
+    aliases: [志愿服务, 美育实践, 志愿实践]
+    preferred_tags: [实践]
+  COUNSELING_APPOINTMENT:
+    canonical: 心理咨询预约
+    domain: MENTAL_HEALTH
+    aliases: [心理咨询, 咨询预约, 心理中心预约]
+    preferred_tags: [心理咨询, 校园心理]
+  ANXIETY_SUPPORT:
+    canonical: 焦虑支持
+    domain: MENTAL_HEALTH
+    aliases: [焦虑, 惊恐, 恐慌, 压力应对]
+    preferred_tags: [焦虑, 压力]
+  SLEEP_SUPPORT:
+    canonical: 睡眠支持
+    domain: MENTAL_HEALTH
+    aliases: [失眠, 睡不着, 睡眠问题]
+    preferred_tags: [睡眠, 失眠]
+  LOW_MOOD_SUPPORT:
+    canonical: 低落支持
+    domain: MENTAL_HEALTH
+    aliases: [抑郁, 低落, 难过, 崩溃, 痛苦, 无助]
+    preferred_tags: [低落, 抑郁, 情绪支持]
+  CAMPUS_ADJUSTMENT:
+    canonical: 入学适应
+    domain: MENTAL_HEALTH
+    aliases: [大学适应, 入学不适应, 新生适应]
+    preferred_tags: [适应, 过渡]
+  RELATIONSHIP_SUPPORT:
+    canonical: 人际关系支持
+    domain: MENTAL_HEALTH
+    aliases: [室友关系, 人际关系, 家庭关系, 沟通冲突]
+    preferred_tags: [关系, 沟通]
+  PRIVACY_BOUNDARY:
+    canonical: 隐私边界
+    domain: MENTAL_HEALTH
+    aliases: [隐私, 保密, 信息边界]
+    preferred_tags: [隐私, 伦理]
+  ACADEMIC_BURNOUT:
+    canonical: 学业倦怠
+    domain: ACADEMIC
+    aliases: [倦怠, 学习倦怠, 学习耗竭, 学业压力耗竭]
+    preferred_tags: [学业倦怠, 压力]

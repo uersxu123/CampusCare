@@ -1,0 +1,1191 @@
+--- /mnt/data/mindbridge_project_multiquery/app/rag_eval/runner.py	2026-09-12 15:30:04.420335676 +0000
++++ app/rag_eval/runner.py	2026-09-12 17:05:24.938229083 +0000
+@@ -1,589 +1,599 @@
+-from __future__ import annotations
+-
+-import argparse
+-import json
+-import math
+-import time
+-from collections import defaultdict
+-from datetime import UTC, datetime
+-from pathlib import Path
+-from typing import Any
+-
+-from app.core.bootstrap import seed_data
+-from app.core.config import Settings, get_settings
+-from app.core.database import SessionLocal
+-from app.models.entities import KnowledgeChunk, KnowledgeDocument
+-from app.services.ai import StructuredCompletion
+-from app.services.knowledge import KnowledgeService
+-from app.services.knowledge_query import build_query_spec
+-from app.services.model_completion import ModelCompletionMetadata, ModelFinishReason, ModelUsage
+-from app.services.rag_pipeline import RagPipeline, _evidence_id
+-
+-
+-REQUIRED_CASE_FIELDS = {
+-    "id",
+-    "query",
+-    "expectedDocumentKeys",
+-    "expectedSections",
+-    "requiredFacets",
+-    "forbiddenDocumentKeys",
+-    "expectedGrade",
+-    "expectedScope",
+-    "requiredFacts",
+-    "forbiddenClaims",
+-}
+-VALID_GRADES = {"SUFFICIENT", "PARTIAL", "NONE", "CLARIFY"}
+-TOP_K = 5
+-RECALL_K = 10
+-
+-
+-def evaluate(
+-    modes: tuple[str, ...] = ("bm25", "hybrid", "vector-fault"),
+-    *,
+-    seed: bool = True,
+-) -> dict:
+-    settings = get_settings()
+-    cases = load_dataset(Path(settings.rag_eval_dataset))
+-    db = SessionLocal()
+-    try:
+-        if seed:
+-            seed_data(db)
+-        reports = {mode: evaluate_mode(db, settings, cases, mode) for mode in modes}
+-        report = {
+-            "schemaVersion": 3,
+-            "createdAt": datetime.now(UTC).isoformat(),
+-            "dataset": settings.rag_eval_dataset,
+-            "totalCases": len(cases),
+-            "topK": TOP_K,
+-            "gradeJudge": "fixed-golden-set",
+-            "ingestionBaseline": corpus_chunk_metrics(db),
+-            "modes": reports,
+-            "passed": all(item["passed"] for item in reports.values()),
+-        }
+-        output = _resolve_path(settings, settings.rag_eval_output)
+-        output.parent.mkdir(parents=True, exist_ok=True)
+-        output.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
+-        report["reportPath"] = str(output)
+-        return report
+-    finally:
+-        db.close()
+-
+-
+-def load_dataset(path: Path) -> list[dict]:
+-    payload = json.loads(path.read_text(encoding="utf-8"))
+-    if not isinstance(payload, list) or not 80 <= len(payload) <= 200:
+-        raise ValueError("RAG golden set 必须包含 80 到 200 个 case")
+-    seen = set()
+-    for index, case in enumerate(payload):
+-        if not isinstance(case, dict):
+-            raise ValueError(f"case #{index + 1} 必须是对象")
+-        missing = REQUIRED_CASE_FIELDS - set(case)
+-        if missing:
+-            raise ValueError(f"case {case.get('id', index)} 缺少字段: {sorted(missing)}")
+-        case_id = str(case["id"])
+-        if not case_id or case_id in seen:
+-            raise ValueError(f"case id 为空或重复: {case_id}")
+-        seen.add(case_id)
+-        if case["expectedGrade"] not in VALID_GRADES:
+-            raise ValueError(f"case {case_id} expectedGrade 非法")
+-        for field in (
+-            "expectedDocumentKeys",
+-            "expectedSections",
+-            "requiredFacets",
+-            "forbiddenDocumentKeys",
+-            "requiredFacts",
+-            "forbiddenClaims",
+-        ):
+-            if not isinstance(case[field], list):
+-                raise ValueError(f"case {case_id} 的 {field} 必须是数组")
+-    return payload
+-
+-
+-def evaluate_mode(db, settings: Settings, cases: list[dict], mode: str) -> dict:
+-    if mode not in {"bm25", "hybrid", "vector-fault"}:
+-        raise ValueError(f"不支持的评测模式: {mode}")
+-    mode_settings = settings.model_copy(
+-        update={
+-            "knowledge_vector_enabled": mode != "bm25",
+-            "knowledge_vector_required": False,
+-        }
+-    )
+-    service = KnowledgeService(db, mode_settings)
+-    if mode == "vector-fault":
+-        service.vector_store = None
+-        service.vector_error = "INJECTED_VECTOR_FAILURE"
+-    status = service.status()
+-    hybrid_ready = bool(status.get("vectorAvailable"))
+-    results = []
+-    for case in cases:
+-        try:
+-            results.append(evaluate_case(service, case))
+-        except Exception as exc:
+-            results.append(_failed_case(case, exc))
+-    metrics = aggregate_metrics(results)
+-    thresholds = {
+-        "recallAt5": 0.95 if mode == "hybrid" else 0.90,
+-        "recallAt10": 0.95 if mode == "hybrid" else 0.90,
+-        "mrr": 0.85,
+-        "ndcgAt5": 0.85,
+-        "forbiddenUsableEvidenceRate": 0.0,
+-        "provenanceCompleteness": 1.0,
+-        "filterCompliance": 1.0,
+-        "negativeSufficientErrors": 0,
+-        "searchP95Seconds": 4.0,
+-        "requiredFactCoverage": 1.0,
+-        "forbiddenClaimsInPrompt": 0,
+-        "sectionCoverage": 0.95,
+-    }
+-    gates = {
+-        "recallAt5": metrics["recallAt5"] >= thresholds["recallAt5"],
+-        "recallAt10": metrics["recallAt10"] >= thresholds["recallAt10"],
+-        "mrr": metrics["mrr"] >= thresholds["mrr"],
+-        "ndcgAt5": metrics["ndcgAt5"] >= thresholds["ndcgAt5"],
+-        "forbiddenUsableEvidenceRate": metrics["forbiddenUsableEvidenceRate"] == 0.0,
+-        "provenanceCompleteness": metrics["provenanceCompleteness"] == 1.0,
+-        "filterCompliance": metrics["filterCompliance"] == 1.0,
+-        "negativeSufficientErrors": metrics["negativeSufficientErrors"] == 0,
+-        "searchP95Seconds": metrics["searchP95Seconds"] <= thresholds["searchP95Seconds"],
+-        "requiredFactCoverage": metrics["requiredFactCoverage"] == 1.0,
+-        "forbiddenClaimsInPrompt": metrics["forbiddenClaimsInPrompt"] == 0,
+-        "sectionCoverage": metrics["sectionCoverage"] >= thresholds["sectionCoverage"],
+-    }
+-    if mode == "hybrid":
+-        gates["activeHybridAvailable"] = hybrid_ready
+-    if mode == "vector-fault":
+-        gates["explicitBm25Degradation"] = status.get("retrievalMode") == "degraded-bm25-only"
+-    return {
+-        "mode": mode,
+-        "status": status,
+-        "metrics": metrics,
+-        "thresholds": thresholds,
+-        "gates": gates,
+-        "passed": all(gates.values()),
+-        "domains": domain_metrics(results),
+-        "results": results,
+-    }
+-
+-
+-def evaluate_case(service: KnowledgeService, case: dict) -> dict:
+-    query = str(case["query"])
+-    spec = build_query_spec(query)
+-    started = time.perf_counter()
+-    candidate_result = service.search_candidates(
+-        query=query,
+-        per_list_k=int(getattr(service.settings, "rag_per_list_candidate_k", 40)),
+-        site=spec.site,
+-    )
+-    candidates = list(candidate_result.candidates)
+-    evaluation_client = FixedEvaluationStructuredClient(case, spec, candidates)
+-    rag_result = RagPipeline(
+-        client=evaluation_client, knowledge=service, settings=service.settings,
+-    ).search(
+-        query=query,
+-        top_k=TOP_K,
+-        site=spec.site,
+-    )
+-    search_seconds = time.perf_counter() - started
+-    expected = {str(item) for item in case["expectedDocumentKeys"]}
+-    forbidden = {str(item) for item in case["forbiddenDocumentKeys"]}
+-    distinct_at_10 = _distinct_documents(candidates, RECALL_K)
+-    keys = [item.canonical_key or item.source_key for item in distinct_at_10]
+-    top5_keys = keys[:TOP_K]
+-    relevant_ranks = [index for index, key in enumerate(top5_keys, start=1) if key in expected]
+-    returned_items = list(rag_result.get("items") or [])
+-    assessment = rag_result.get("assessment") or {}
+-    referenced_ids = {
+-        str(evidence_id)
+-        for claim in assessment.get("supportedClaims", [])
+-        for evidence_id in claim.get("evidenceIds", [])
+-    } | {
+-        str(evidence_id)
+-        for conflict in assessment.get("conflicts", [])
+-        for evidence_id in conflict.get("evidenceIds", [])
+-    }
+-    usable = [item for item in returned_items if str(item.get("evidenceId")) in referenced_ids]
+-    candidates_by_id = {_evidence_id(item): item for item in candidates}
+-    usable_rows = [candidates_by_id[item.get("evidenceId")] for item in usable if item.get("evidenceId") in candidates_by_id]
+-    usable_keys = {str(item.canonical_key or item.source_key or "") for item in usable_rows}
+-    usable_scopes = {str(item.site or "ALL") for item in usable_rows}
+-    prompt_text = "\n".join(_prompt_evidence_text(item) for item in usable)
+-    top10_key_set = set(keys)
+-    top5_key_set = set(top5_keys)
+-    retrieval_text_at_10 = "\n".join(
+-        f"{item.title}\n{item.section_title or ''}\n{item.content}"
+-        for item in candidates
+-        if (item.canonical_key or item.source_key) in top10_key_set
+-    )
+-    retrieval_text_at_5 = "\n".join(
+-        f"{item.title}\n{item.section_title or ''}\n{item.content}"
+-        for item in candidates
+-        if (item.canonical_key or item.source_key) in top5_key_set
+-    )
+-    required_facts = [str(item) for item in case["requiredFacts"]]
+-    forbidden_claims = [str(item) for item in case["forbiddenClaims"]]
+-    provenance_rows = [item for item in usable_rows if item.chunk_id is not None]
+-    provenance_complete = all(
+-        item.provenance.child_chunk_ids and item.provenance.content_hashes and item.canonical_key
+-        for item in provenance_rows
+-    )
+-    filter_compliant = all(
+-        item.status == "ACTIVE"
+-        and item.verified_at is not None
+-        and (item.expires_at is None or item.expires_at > datetime.now(UTC).replace(tzinfo=None))
+-        and (not spec.site or item.site in {"ALL", spec.site})
+-        for item in candidates
+-    )
+-    cited_chunk_ids = [int(item.chunk_id) for item in candidates if item.chunk_id is not None]
+-    stored_pages = {
+-        int(item.id): item.page_number
+-        for item in service.db.query(KnowledgeChunk).filter(KnowledgeChunk.id.in_(cited_chunk_ids)).all()
+-    }
+-    page_citations = [item for item in candidates if item.chunk_id is not None and item.page_number is not None]
+-    page_citation_matches = sum(
+-        stored_pages.get(int(item.chunk_id)) == item.page_number
+-        for item in page_citations
+-    )
+-    expected_scope = str(case.get("expectedScope") or "")
+-    expected_facets = {str(item) for item in case.get("requiredFacets", [])}
+-    actual_facets = {item.value for item in spec.required_facets}
+-    scope_correct = (
+-        not spec.site
+-        or not expected_scope
+-        or not usable
+-        or expected_scope in usable_scopes
+-        or (expected_scope != "ALL" and usable_scopes == {"ALL"})
+-    )
+-    return {
+-        "id": case["id"],
+-        "query": query,
+-        "domain": spec.domain,
+-        "expectedGrade": case["expectedGrade"],
+-        "actualGrade": rag_result.get("status", "ERROR"),
+-        "gradeCorrect": rag_result.get("status") == _expected_rag_status(case["expectedGrade"]),
+-        "expectedDocumentKeys": sorted(expected),
+-        "candidateDocumentKeys": top5_keys,
+-        "candidateDocumentKeysAt10": keys,
+-        "usableDocumentKeys": sorted(usable_keys),
+-        "recallAt5": len(set(top5_keys).intersection(expected)) / len(expected) if expected else 1.0,
+-        "recallAt10": len(set(keys).intersection(expected)) / len(expected) if expected else 1.0,
+-        "reciprocalRank": 1.0 / relevant_ranks[0] if relevant_ranks else (1.0 if not expected else 0.0),
+-        "ndcgAt5": _ndcg(top5_keys, expected),
+-        "forbiddenUsable": sorted(usable_keys.intersection(forbidden)),
+-        "requiredFactEvidenceScope": "top5-and-top10-retrieval-candidates",
+-        "requiredFacts": required_facts,
+-        "requiredFactsCoveredAt5": [fact for fact in required_facts if fact in retrieval_text_at_5],
+-        "requiredFactsCoveredAt10": [fact for fact in required_facts if fact in retrieval_text_at_10],
+-        "requiredFactsCovered": [fact for fact in required_facts if fact in prompt_text],
+-        "requiredFactsMissing": [fact for fact in required_facts if fact not in prompt_text],
+-        "forbiddenClaimsInPrompt": [claim for claim in forbidden_claims if claim in prompt_text],
+-        "expectedSectionsCovered": _covered_sections(candidates, case["expectedSections"]),
+-        "expectedSections": list(case["expectedSections"]),
+-        "facetPlanCorrect": actual_facets == expected_facets,
+-        "provenanceComplete": provenance_complete,
+-        "citationPageChecks": len(page_citations),
+-        "citationPageMatches": page_citation_matches,
+-        "filterCompliant": filter_compliant,
+-        "scopeCorrect": scope_correct,
+-        "searchSeconds": search_seconds,
+-        "retrievalDiagnostics": dict(rag_result.get("diagnostics") or service.last_search_diagnostics),
+-        "questionCoverage": list((rag_result.get("assessment") or {}).get("gaps", [])),
+-    }
+-
+-
+-class FixedEvaluationStructuredClient:
+-    """Deterministic offline semantic stub; it never contacts a model or the network."""
+-
+-    def __init__(self, case: dict, spec: Any, candidates: list[Any]):
+-        self.case = case
+-        self.spec = spec
+-        expected = {str(item) for item in case.get("expectedDocumentKeys", [])}
+-        forbidden = {str(item) for item in case.get("forbiddenDocumentKeys", [])}
+-        self.rerank_priority = {
+-            _evidence_id(item): (
+-                0 if str(item.canonical_key or item.source_key or "") in expected else
+-                2 if str(item.canonical_key or item.source_key or "") in forbidden else 1
+-            )
+-            for item in candidates
+-        }
+-
+-    def complete_structured(self, messages, *, response_model, schema_name, options):
+-        data = json.loads(messages[-1].content)
+-        if schema_name == "rag_rerank_v3":
+-            ordered = sorted(
+-                data.get("candidates", []),
+-                key=lambda item: (self.rerank_priority.get(item["evidenceId"], 1), item["evidenceId"]),
+-            )
+-            payload = {
+-                "ranked": [
+-                    item["evidenceId"]
+-                    for item in ordered
+-                ]
+-            }
+-        elif schema_name == "rag_grade_v1":
+-            ids = [item["evidenceId"] for item in data.get("evidence", [])]
+-            expected = _expected_rag_status(self.case["expectedGrade"])
+-            has_claim = bool(ids) and expected in {"SUFFICIENT", "PARTIAL"}
+-            payload = {
+-                "verdict": expected,
+-                "supportedClaims": [{"claim": "golden set 固定语义判断", "evidenceIds": ids[:1]}] if has_claim else [],
+-                "gaps": [] if expected == "SUFFICIENT" else [{
+-                    "gapId": "gap-1", "description": "golden set 标注的证据缺口",
+-                    "kind": "NO_DIRECT_EVIDENCE", "required": True,
+-                    "resolution": "NOT_RECOVERABLE", "anchorTerms": [],
+-                }],
+-                "conflicts": [],
+-                "reasonCode": "DIRECT_EVIDENCE_COMPLETE" if expected == "SUFFICIENT" else (
+-                    "REQUIRED_FACT_MISSING" if has_claim else "NO_USABLE_EVIDENCE"
+-                ),
+-            }
+-        elif schema_name == "rag_rewrite_v1":
+-            payload = {"query": f"{self.case['query']} 官方说明"}
+-        else:
+-            raise ValueError(f"未知评测 schema: {schema_name}")
+-        value = response_model.model_validate(payload)
+-        metadata = ModelCompletionMetadata(
+-            provider="fixed-eval",
+-            model="fixed-eval-v1",
+-            finish_reason=ModelFinishReason.STOP,
+-            semantic_finish_seen=True,
+-            transport_terminal_seen=True,
+-            terminal_signal="fixed",
+-            provider_finish_reason="stop",
+-            configured_output_limit=options.max_tokens,
+-            usage=ModelUsage(),
+-        )
+-        return StructuredCompletion(value=value, metadata=metadata, schema_name=schema_name, repair_count=0)
+-
+-
+-def _expected_rag_status(value: str) -> str:
+-    return {"NONE": "INSUFFICIENT", "CLARIFY": "INSUFFICIENT"}.get(str(value), str(value))
+-
+-
+-def aggregate_metrics(results: list[dict]) -> dict:
+-    retrieval = [item for item in results if item.get("expectedDocumentKeys")]
+-    usable_count = sum(len(item.get("usableDocumentKeys", [])) for item in results)
+-    forbidden_count = sum(len(item.get("forbiddenUsable", [])) for item in results)
+-    provenance = [item for item in results if item.get("usableDocumentKeys")]
+-    negatives = [item for item in results if item.get("expectedGrade") == "NONE"]
+-    citation_page_checks = sum(int(item.get("citationPageChecks", 0)) for item in results)
+-    citation_page_matches = sum(int(item.get("citationPageMatches", 0)) for item in results)
+-    return {
+-        "recallAt5": _mean(item["recallAt5"] for item in retrieval),
+-        "recallAt10": _mean(item["recallAt10"] for item in retrieval),
+-        "mrr": _mean(item["reciprocalRank"] for item in retrieval),
+-        "ndcgAt5": _mean(item["ndcgAt5"] for item in retrieval),
+-        "forbiddenUsableEvidenceRate": forbidden_count / max(1, usable_count),
+-        "gradeMacroF1": _not_applicable("FixedEvaluationStructuredClient 读取 golden label，仅用于编排合同"),
+-        "gradeAccuracy": _not_applicable("FixedEvaluationStructuredClient 读取 golden label，仅用于编排合同"),
+-        "negativeSufficientErrors": sum(item.get("actualGrade") == "SUFFICIENT" for item in negatives),
+-        "provenanceCompleteness": _mean(1.0 if item.get("provenanceComplete") else 0.0 for item in provenance),
+-        "citationPageAccuracy": (
+-            citation_page_matches / citation_page_checks if citation_page_checks else None
+-        ),
+-        "citationPageChecks": citation_page_checks,
+-        "filterCompliance": _mean(
+-            1.0 if item.get("filterCompliant") and item.get("scopeCorrect", True) else 0.0
+-            for item in results
+-        ),
+-        "retrievedFactCoverageAt5": _fact_coverage(results, "requiredFactsCoveredAt5"),
+-        "retrievedFactCoverageAt10": _fact_coverage(results, "requiredFactsCoveredAt10"),
+-        "usableEvidenceFactCoverage": _fact_coverage(results, "requiredFactsCovered"),
+-        "requiredFactCoverage": _fact_coverage(results, "requiredFactsCoveredAt10"),
+-        "forbiddenClaimsInPrompt": sum(len(item.get("forbiddenClaimsInPrompt", [])) for item in results),
+-        "sectionCoverage": _section_coverage(results),
+-        "facetPlanAccuracy": _not_applicable("FixedEvaluationStructuredClient 读取 golden label，仅用于编排合同"),
+-        "searchP95Seconds": _percentile([float(item.get("searchSeconds", 0.0)) for item in results], 0.95),
+-    }
+-
+-
+-def domain_metrics(results: list[dict]) -> dict:
+-    grouped = defaultdict(list)
+-    for item in results:
+-        grouped[str(item.get("domain") or "UNKNOWN")].append(item)
+-    return {domain: aggregate_metrics(rows) for domain, rows in sorted(grouped.items())}
+-
+-
+-def _grade_macro_f1(results: list[dict]) -> float:
+-    scores = []
+-    for label in sorted(VALID_GRADES):
+-        true_positive = sum(
+-            item.get("expectedGrade") == label and item.get("actualGrade") == label for item in results
+-        )
+-        false_positive = sum(
+-            item.get("expectedGrade") != label and item.get("actualGrade") == label for item in results
+-        )
+-        false_negative = sum(
+-            item.get("expectedGrade") == label and item.get("actualGrade") != label for item in results
+-        )
+-        precision = true_positive / max(1, true_positive + false_positive)
+-        recall = true_positive / max(1, true_positive + false_negative)
+-        scores.append(2 * precision * recall / max(1e-12, precision + recall))
+-    return _mean(scores)
+-
+-
+-def _distinct_documents(candidates, limit: int = RECALL_K) -> list:
+-    seen = set()
+-    rows = []
+-    for item in candidates:
+-        key = item.canonical_key or item.source_key
+-        if key in seen:
+-            continue
+-        seen.add(key)
+-        rows.append(item)
+-    return rows[:limit]
+-
+-
+-def _ndcg(keys: list[str], expected: set[str]) -> float:
+-    if not expected:
+-        return 1.0
+-    gains = [1.0 if key in expected else 0.0 for key in keys[:TOP_K]]
+-    dcg = sum(gain / math.log2(index + 2.0) for index, gain in enumerate(gains))
+-    ideal_count = min(len(expected), TOP_K)
+-    ideal = sum(1.0 / math.log2(index + 2.0) for index in range(ideal_count))
+-    return dcg / ideal if ideal else 0.0
+-
+-
+-def _covered_sections(candidates, expected_sections: list[str]) -> list[str]:
+-    values = []
+-    for section in expected_sections:
+-        if any(section in str(item.section_title or "") for item in candidates):
+-            values.append(section)
+-    return values
+-
+-
+-def _prompt_evidence_text(item: dict) -> str:
+-    return " ".join(
+-        str(item.get(field) or "")
+-        for field in (
+-            "canonical_key",
+-            "title",
+-            "source_url",
+-            "section_title",
+-            "site",
+-            "content",
+-        )
+-    )
+-
+-
+-def _fact_coverage(results: list[dict], field: str = "requiredFactsCovered") -> float:
+-    expected = sum(len(item.get("requiredFacts", [])) for item in results)
+-    covered = sum(len(item.get(field, [])) for item in results)
+-    return covered / max(1, expected)
+-
+-
+-def _not_applicable(reason: str) -> dict:
+-    return {"status": "notApplicable", "reason": reason}
+-
+-
+-def _section_coverage(results: list[dict]) -> float:
+-    expected = sum(len(item.get("expectedSections", [])) for item in results)
+-    covered = sum(len(item.get("expectedSectionsCovered", [])) for item in results)
+-    return covered / max(1, expected)
+-
+-
+-def _failed_case(case: dict, exc: Exception) -> dict:
+-    return {
+-        "id": case.get("id"),
+-        "query": case.get("query"),
+-        "domain": "ERROR",
+-        "expectedGrade": case.get("expectedGrade"),
+-        "actualGrade": "ERROR",
+-        "gradeCorrect": False,
+-        "expectedDocumentKeys": case.get("expectedDocumentKeys", []),
+-        "candidateDocumentKeys": [],
+-        "candidateDocumentKeysAt10": [],
+-        "usableDocumentKeys": [],
+-        "recallAt5": 0.0,
+-        "recallAt10": 0.0,
+-        "reciprocalRank": 0.0,
+-        "ndcgAt5": 0.0,
+-        "forbiddenUsable": [],
+-        "provenanceComplete": False,
+-        "citationPageChecks": 0,
+-        "citationPageMatches": 0,
+-        "filterCompliant": False,
+-        "searchSeconds": 0.0,
+-        "error": f"{type(exc).__name__}: {exc}",
+-    }
+-
+-
+-def _mean(values) -> float:
+-    rows = list(values)
+-    return sum(rows) / len(rows) if rows else 1.0
+-
+-
+-def _percentile(values: list[float], percentile: float) -> float:
+-    if not values:
+-        return 0.0
+-    rows = sorted(values)
+-    index = min(len(rows) - 1, max(0, math.ceil(len(rows) * percentile) - 1))
+-    return rows[index]
+-
+-
+-def corpus_chunk_metrics(db) -> dict:
+-    lengths = [
+-        len(row.content or "")
+-        for row in db.query(KnowledgeChunk)
+-        .join(KnowledgeDocument)
+-        .filter(KnowledgeDocument.status == "ACTIVE")
+-        .order_by(KnowledgeChunk.id.asc())
+-        .all()
+-    ]
+-    if not lengths:
+-        distribution = {"min": 0, "p50": 0, "p95": 0, "max": 0, "mean": 0.0}
+-    else:
+-        distribution = {
+-            "min": min(lengths),
+-            "p50": int(_percentile(lengths, 0.50)),
+-            "p95": int(_percentile(lengths, 0.95)),
+-            "max": max(lengths),
+-            "mean": round(sum(lengths) / len(lengths), 3),
+-        }
+-    return {
+-        "profile": _active_chunk_profile(db),
+-        "unit": "python_characters",
+-        "activeChunkCount": len(lengths),
+-        "lengthCharacters": distribution,
+-    }
+-
+-
+-def _active_chunk_profile(db) -> str:
+-    profiles = sorted({
+-        str(value)
+-        for (value,) in db.query(KnowledgeChunk.chunking_profile)
+-        .join(KnowledgeDocument)
+-        .filter(KnowledgeDocument.status == "ACTIVE")
+-        .distinct()
+-        .all()
+-        if value
+-    })
+-    return profiles[0] if len(profiles) == 1 else "+".join(profiles) or "unknown"
+-
+-
+-def _resolve_path(settings: Settings, value: str) -> Path:
+-    path = Path(value)
+-    return path if path.is_absolute() else settings.project_root / path
+-
+-
+-def main() -> int:
+-    parser = argparse.ArgumentParser(description="运行 MindBridge 知识可靠性评测")
+-    parser.add_argument("--mode", choices=("all", "bm25", "hybrid", "vector-fault"), default="all")
+-    parser.add_argument("--no-gate", action="store_true", help="只生成报告，不用指标设置退出码")
+-    parser.add_argument("--skip-seed", action="store_true", help="评测现有数据库快照，不执行启动兼容导入")
+-    args = parser.parse_args()
+-    modes = ("bm25", "hybrid", "vector-fault") if args.mode == "all" else (args.mode,)
+-    report = evaluate(modes, seed=not args.skip_seed)
+-    print(f"RAG report: {report['reportPath']}")
+-    for mode, item in report["modes"].items():
+-        metrics = item["metrics"]
+-        print(
+-            f"[{mode}] passed={item['passed']} recall@5={metrics['recallAt5']:.3f} "
+-            f"recall@10={metrics['recallAt10']:.3f} "
+-            f"mrr={metrics['mrr']:.3f} ndcg@5={metrics['ndcgAt5']:.3f} "
+-            f"gradeF1={metrics['gradeMacroF1']['status']}"
+-        )
+-    return 0 if args.no_gate or report["passed"] else 1
+-
+-
+-if __name__ == "__main__":
+-    raise SystemExit(main())
++from __future__ import annotations
++
++import argparse
++import json
++import math
++import time
++from collections import defaultdict
++from datetime import UTC, datetime
++from pathlib import Path
++from typing import Any
++
++from app.core.bootstrap import seed_data
++from app.core.config import Settings, get_settings
++from app.core.database import SessionLocal
++from app.models.entities import KnowledgeChunk, KnowledgeDocument
++from app.services.ai import StructuredCompletion
++from app.services.knowledge import KnowledgeService
++from app.services.knowledge_query import build_query_spec
++from app.services.model_completion import ModelCompletionMetadata, ModelFinishReason, ModelUsage
++from app.services.rag_pipeline import RagPipeline, _evidence_id
++
++
++REQUIRED_CASE_FIELDS = {
++    "id",
++    "query",
++    "expectedDocumentKeys",
++    "expectedSections",
++    "requiredFacets",
++    "forbiddenDocumentKeys",
++    "expectedGrade",
++    "expectedScope",
++    "requiredFacts",
++    "forbiddenClaims",
++}
++VALID_GRADES = {"SUFFICIENT", "PARTIAL", "NONE", "CLARIFY"}
++TOP_K = 5
++RECALL_K = 10
++
++
++def evaluate(
++    modes: tuple[str, ...] = ("bm25", "hybrid", "vector-fault"),
++    *,
++    seed: bool = True,
++) -> dict:
++    settings = get_settings()
++    cases = load_dataset(Path(settings.rag_eval_dataset))
++    db = SessionLocal()
++    try:
++        if seed:
++            seed_data(db)
++        reports = {mode: evaluate_mode(db, settings, cases, mode) for mode in modes}
++        report = {
++            "schemaVersion": 3,
++            "createdAt": datetime.now(UTC).isoformat(),
++            "dataset": settings.rag_eval_dataset,
++            "totalCases": len(cases),
++            "topK": TOP_K,
++            "gradeJudge": "fixed-golden-set",
++            "ingestionBaseline": corpus_chunk_metrics(db),
++            "modes": reports,
++            "passed": all(item["passed"] for item in reports.values()),
++        }
++        output = _resolve_path(settings, settings.rag_eval_output)
++        output.parent.mkdir(parents=True, exist_ok=True)
++        output.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
++        report["reportPath"] = str(output)
++        return report
++    finally:
++        db.close()
++
++
++def load_dataset(path: Path) -> list[dict]:
++    payload = json.loads(path.read_text(encoding="utf-8"))
++    if not isinstance(payload, list) or not 80 <= len(payload) <= 200:
++        raise ValueError("RAG golden set 必须包含 80 到 200 个 case")
++    seen = set()
++    for index, case in enumerate(payload):
++        if not isinstance(case, dict):
++            raise ValueError(f"case #{index + 1} 必须是对象")
++        missing = REQUIRED_CASE_FIELDS - set(case)
++        if missing:
++            raise ValueError(f"case {case.get('id', index)} 缺少字段: {sorted(missing)}")
++        case_id = str(case["id"])
++        if not case_id or case_id in seen:
++            raise ValueError(f"case id 为空或重复: {case_id}")
++        seen.add(case_id)
++        if case["expectedGrade"] not in VALID_GRADES:
++            raise ValueError(f"case {case_id} expectedGrade 非法")
++        for field in (
++            "expectedDocumentKeys",
++            "expectedSections",
++            "requiredFacets",
++            "forbiddenDocumentKeys",
++            "requiredFacts",
++            "forbiddenClaims",
++        ):
++            if not isinstance(case[field], list):
++                raise ValueError(f"case {case_id} 的 {field} 必须是数组")
++    return payload
++
++
++def evaluate_mode(db, settings: Settings, cases: list[dict], mode: str) -> dict:
++    if mode not in {"bm25", "hybrid", "vector-fault"}:
++        raise ValueError(f"不支持的评测模式: {mode}")
++    mode_settings = settings.model_copy(
++        update={
++            "knowledge_vector_enabled": mode != "bm25",
++            "knowledge_vector_required": False,
++        }
++    )
++    service = KnowledgeService(db, mode_settings)
++    if mode == "vector-fault":
++        service.vector_store = None
++        service.vector_error = "INJECTED_VECTOR_FAILURE"
++    status = service.status()
++    hybrid_ready = bool(status.get("vectorAvailable"))
++    results = []
++    for case in cases:
++        try:
++            results.append(evaluate_case(service, case))
++        except Exception as exc:
++            results.append(_failed_case(case, exc))
++    metrics = aggregate_metrics(results)
++    thresholds = {
++        "recallAt5": 0.95 if mode == "hybrid" else 0.90,
++        "recallAt10": 0.95 if mode == "hybrid" else 0.90,
++        "mrr": 0.85,
++        "ndcgAt5": 0.85,
++        "forbiddenUsableEvidenceRate": 0.0,
++        "provenanceCompleteness": 1.0,
++        "filterCompliance": 1.0,
++        "negativeSufficientErrors": 0,
++        "searchP95Seconds": 4.0,
++        "requiredFactCoverage": 1.0,
++        "forbiddenClaimsInPrompt": 0,
++        "sectionCoverage": 0.95,
++    }
++    gates = {
++        "recallAt5": metrics["recallAt5"] >= thresholds["recallAt5"],
++        "recallAt10": metrics["recallAt10"] >= thresholds["recallAt10"],
++        "mrr": metrics["mrr"] >= thresholds["mrr"],
++        "ndcgAt5": metrics["ndcgAt5"] >= thresholds["ndcgAt5"],
++        "forbiddenUsableEvidenceRate": metrics["forbiddenUsableEvidenceRate"] == 0.0,
++        "provenanceCompleteness": metrics["provenanceCompleteness"] == 1.0,
++        "filterCompliance": metrics["filterCompliance"] == 1.0,
++        "negativeSufficientErrors": metrics["negativeSufficientErrors"] == 0,
++        "searchP95Seconds": metrics["searchP95Seconds"] <= thresholds["searchP95Seconds"],
++        "requiredFactCoverage": metrics["requiredFactCoverage"] == 1.0,
++        "forbiddenClaimsInPrompt": metrics["forbiddenClaimsInPrompt"] == 0,
++        "sectionCoverage": metrics["sectionCoverage"] >= thresholds["sectionCoverage"],
++    }
++    if mode == "hybrid":
++        gates["activeHybridAvailable"] = hybrid_ready
++    if mode == "vector-fault":
++        gates["explicitBm25Degradation"] = status.get("retrievalMode") == "degraded-bm25-only"
++    return {
++        "mode": mode,
++        "status": status,
++        "metrics": metrics,
++        "thresholds": thresholds,
++        "gates": gates,
++        "passed": all(gates.values()),
++        "domains": domain_metrics(results),
++        "results": results,
++    }
++
++
++def evaluate_case(service: KnowledgeService, case: dict) -> dict:
++    query = str(case["query"])
++    spec = build_query_spec(query)
++    started = time.perf_counter()
++    candidate_result = service.search_candidates(
++        query=query,
++        per_list_k=int(getattr(service.settings, "rag_per_list_candidate_k", 40)),
++        site=spec.site,
++    )
++    candidates = list(candidate_result.candidates)
++    evaluation_client = FixedEvaluationStructuredClient(case, spec, candidates)
++    rag_result = RagPipeline(
++        client=evaluation_client, knowledge=service, settings=service.settings,
++    ).search(
++        query=query,
++        top_k=TOP_K,
++        site=spec.site,
++    )
++    search_seconds = time.perf_counter() - started
++    expected = {str(item) for item in case["expectedDocumentKeys"]}
++    forbidden = {str(item) for item in case["forbiddenDocumentKeys"]}
++    distinct_at_10 = _distinct_documents(candidates, RECALL_K)
++    keys = [item.canonical_key or item.source_key for item in distinct_at_10]
++    top5_keys = keys[:TOP_K]
++    relevant_ranks = [index for index, key in enumerate(top5_keys, start=1) if key in expected]
++    returned_items = list(rag_result.get("items") or [])
++    assessment = rag_result.get("assessment") or {}
++    referenced_ids = {
++        str(evidence_id)
++        for claim in assessment.get("supportedClaims", [])
++        for evidence_id in claim.get("evidenceIds", [])
++    } | {
++        str(evidence_id)
++        for conflict in assessment.get("conflicts", [])
++        for evidence_id in conflict.get("evidenceIds", [])
++    }
++    usable = [item for item in returned_items if str(item.get("evidenceId")) in referenced_ids]
++    candidates_by_id = {_evidence_id(item): item for item in candidates}
++    usable_rows = [candidates_by_id[item.get("evidenceId")] for item in usable if item.get("evidenceId") in candidates_by_id]
++    usable_keys = {str(item.canonical_key or item.source_key or "") for item in usable_rows}
++    usable_scopes = {str(item.site or "ALL") for item in usable_rows}
++    prompt_text = "\n".join(_prompt_evidence_text(item) for item in usable)
++    top10_key_set = set(keys)
++    top5_key_set = set(top5_keys)
++    retrieval_text_at_10 = "\n".join(
++        f"{item.title}\n{item.section_title or ''}\n{item.content}"
++        for item in candidates
++        if (item.canonical_key or item.source_key) in top10_key_set
++    )
++    retrieval_text_at_5 = "\n".join(
++        f"{item.title}\n{item.section_title or ''}\n{item.content}"
++        for item in candidates
++        if (item.canonical_key or item.source_key) in top5_key_set
++    )
++    required_facts = [str(item) for item in case["requiredFacts"]]
++    forbidden_claims = [str(item) for item in case["forbiddenClaims"]]
++    provenance_rows = [item for item in usable_rows if item.chunk_id is not None]
++    provenance_complete = all(
++        item.provenance.child_chunk_ids and item.provenance.content_hashes and item.canonical_key
++        for item in provenance_rows
++    )
++    filter_compliant = all(
++        item.status == "ACTIVE"
++        and item.verified_at is not None
++        and (item.expires_at is None or item.expires_at > datetime.now(UTC).replace(tzinfo=None))
++        and (not spec.site or item.site in {"ALL", spec.site})
++        for item in candidates
++    )
++    cited_chunk_ids = [int(item.chunk_id) for item in candidates if item.chunk_id is not None]
++    stored_pages = {
++        int(item.id): item.page_number
++        for item in service.db.query(KnowledgeChunk).filter(KnowledgeChunk.id.in_(cited_chunk_ids)).all()
++    }
++    page_citations = [item for item in candidates if item.chunk_id is not None and item.page_number is not None]
++    page_citation_matches = sum(
++        stored_pages.get(int(item.chunk_id)) == item.page_number
++        for item in page_citations
++    )
++    expected_scope = str(case.get("expectedScope") or "")
++    expected_facets = {str(item) for item in case.get("requiredFacets", [])}
++    actual_facets = {item.value for item in spec.required_facets}
++    scope_correct = (
++        not spec.site
++        or not expected_scope
++        or not usable
++        or expected_scope in usable_scopes
++        or (expected_scope != "ALL" and usable_scopes == {"ALL"})
++    )
++    return {
++        "id": case["id"],
++        "query": query,
++        "domain": spec.domain,
++        "expectedGrade": case["expectedGrade"],
++        "actualGrade": rag_result.get("status", "ERROR"),
++        "gradeCorrect": rag_result.get("status") == _expected_rag_status(case["expectedGrade"]),
++        "expectedDocumentKeys": sorted(expected),
++        "candidateDocumentKeys": top5_keys,
++        "candidateDocumentKeysAt10": keys,
++        "usableDocumentKeys": sorted(usable_keys),
++        "recallAt5": len(set(top5_keys).intersection(expected)) / len(expected) if expected else 1.0,
++        "recallAt10": len(set(keys).intersection(expected)) / len(expected) if expected else 1.0,
++        "reciprocalRank": 1.0 / relevant_ranks[0] if relevant_ranks else (1.0 if not expected else 0.0),
++        "ndcgAt5": _ndcg(top5_keys, expected),
++        "forbiddenUsable": sorted(usable_keys.intersection(forbidden)),
++        "requiredFactEvidenceScope": "top5-and-top10-retrieval-candidates",
++        "requiredFacts": required_facts,
++        "requiredFactsCoveredAt5": [fact for fact in required_facts if fact in retrieval_text_at_5],
++        "requiredFactsCoveredAt10": [fact for fact in required_facts if fact in retrieval_text_at_10],
++        "requiredFactsCovered": [fact for fact in required_facts if fact in prompt_text],
++        "requiredFactsMissing": [fact for fact in required_facts if fact not in prompt_text],
++        "forbiddenClaimsInPrompt": [claim for claim in forbidden_claims if claim in prompt_text],
++        "expectedSectionsCovered": _covered_sections(candidates, case["expectedSections"]),
++        "expectedSections": list(case["expectedSections"]),
++        "facetPlanCorrect": actual_facets == expected_facets,
++        "provenanceComplete": provenance_complete,
++        "citationPageChecks": len(page_citations),
++        "citationPageMatches": page_citation_matches,
++        "filterCompliant": filter_compliant,
++        "scopeCorrect": scope_correct,
++        "searchSeconds": search_seconds,
++        "retrievalDiagnostics": dict(rag_result.get("diagnostics") or service.last_search_diagnostics),
++        "questionCoverage": list((rag_result.get("assessment") or {}).get("gaps", [])),
++    }
++
++
++class FixedEvaluationStructuredClient:
++    """Deterministic offline semantic stub; it never contacts a model or the network."""
++
++    def __init__(self, case: dict, spec: Any, candidates: list[Any]):
++        self.case = case
++        self.spec = spec
++        expected = {str(item) for item in case.get("expectedDocumentKeys", [])}
++        forbidden = {str(item) for item in case.get("forbiddenDocumentKeys", [])}
++        self.rerank_priority = {
++            _evidence_id(item): (
++                0 if str(item.canonical_key or item.source_key or "") in expected else
++                2 if str(item.canonical_key or item.source_key or "") in forbidden else 1
++            )
++            for item in candidates
++        }
++
++    def complete_structured(self, messages, *, response_model, schema_name, options):
++        data = json.loads(messages[-1].content)
++        if schema_name == "rag_rerank_v4":
++            ordered = sorted(
++                data.get("candidates", []),
++                key=lambda item: (self.rerank_priority.get(item["evidenceId"], 1), item["evidenceId"]),
++            )
++            facet_ids = [item.get("facetId") for item in data.get("evidenceFacets", []) if item.get("facetId")]
++            payload = {
++                "ranked": [
++                    item["evidenceId"]
++                    for item in ordered
++                ],
++                "assessments": [
++                    {
++                        "evidenceId": item["evidenceId"],
++                        "relevanceLevel": "HIGH" if self.rerank_priority.get(item["evidenceId"], 1) == 0 else "MEDIUM",
++                        "matchedFacetIds": facet_ids[:1] if facet_ids else [],
++                        "directSupport": self.rerank_priority.get(item["evidenceId"], 1) != 2,
++                    }
++                    for item in ordered
++                ],
++            }
++        elif schema_name == "rag_grade_v1":
++            ids = [item["evidenceId"] for item in data.get("evidence", [])]
++            expected = _expected_rag_status(self.case["expectedGrade"])
++            has_claim = bool(ids) and expected in {"SUFFICIENT", "PARTIAL"}
++            payload = {
++                "verdict": expected,
++                "supportedClaims": [{"claim": "golden set 固定语义判断", "evidenceIds": ids[:1]}] if has_claim else [],
++                "gaps": [] if expected == "SUFFICIENT" else [{
++                    "gapId": "gap-1", "description": "golden set 标注的证据缺口",
++                    "kind": "NO_DIRECT_EVIDENCE", "required": True,
++                    "resolution": "NOT_RECOVERABLE", "anchorTerms": [],
++                }],
++                "conflicts": [],
++                "reasonCode": "DIRECT_EVIDENCE_COMPLETE" if expected == "SUFFICIENT" else (
++                    "REQUIRED_FACT_MISSING" if has_claim else "NO_USABLE_EVIDENCE"
++                ),
++            }
++        elif schema_name == "rag_rewrite_v1":
++            payload = {"query": f"{self.case['query']} 官方说明"}
++        else:
++            raise ValueError(f"未知评测 schema: {schema_name}")
++        value = response_model.model_validate(payload)
++        metadata = ModelCompletionMetadata(
++            provider="fixed-eval",
++            model="fixed-eval-v1",
++            finish_reason=ModelFinishReason.STOP,
++            semantic_finish_seen=True,
++            transport_terminal_seen=True,
++            terminal_signal="fixed",
++            provider_finish_reason="stop",
++            configured_output_limit=options.max_tokens,
++            usage=ModelUsage(),
++        )
++        return StructuredCompletion(value=value, metadata=metadata, schema_name=schema_name, repair_count=0)
++
++
++def _expected_rag_status(value: str) -> str:
++    return {"NONE": "INSUFFICIENT", "CLARIFY": "INSUFFICIENT"}.get(str(value), str(value))
++
++
++def aggregate_metrics(results: list[dict]) -> dict:
++    retrieval = [item for item in results if item.get("expectedDocumentKeys")]
++    usable_count = sum(len(item.get("usableDocumentKeys", [])) for item in results)
++    forbidden_count = sum(len(item.get("forbiddenUsable", [])) for item in results)
++    provenance = [item for item in results if item.get("usableDocumentKeys")]
++    negatives = [item for item in results if item.get("expectedGrade") == "NONE"]
++    citation_page_checks = sum(int(item.get("citationPageChecks", 0)) for item in results)
++    citation_page_matches = sum(int(item.get("citationPageMatches", 0)) for item in results)
++    return {
++        "recallAt5": _mean(item["recallAt5"] for item in retrieval),
++        "recallAt10": _mean(item["recallAt10"] for item in retrieval),
++        "mrr": _mean(item["reciprocalRank"] for item in retrieval),
++        "ndcgAt5": _mean(item["ndcgAt5"] for item in retrieval),
++        "forbiddenUsableEvidenceRate": forbidden_count / max(1, usable_count),
++        "gradeMacroF1": _not_applicable("FixedEvaluationStructuredClient 读取 golden label，仅用于编排合同"),
++        "gradeAccuracy": _not_applicable("FixedEvaluationStructuredClient 读取 golden label，仅用于编排合同"),
++        "negativeSufficientErrors": sum(item.get("actualGrade") == "SUFFICIENT" for item in negatives),
++        "provenanceCompleteness": _mean(1.0 if item.get("provenanceComplete") else 0.0 for item in provenance),
++        "citationPageAccuracy": (
++            citation_page_matches / citation_page_checks if citation_page_checks else None
++        ),
++        "citationPageChecks": citation_page_checks,
++        "filterCompliance": _mean(
++            1.0 if item.get("filterCompliant") and item.get("scopeCorrect", True) else 0.0
++            for item in results
++        ),
++        "retrievedFactCoverageAt5": _fact_coverage(results, "requiredFactsCoveredAt5"),
++        "retrievedFactCoverageAt10": _fact_coverage(results, "requiredFactsCoveredAt10"),
++        "usableEvidenceFactCoverage": _fact_coverage(results, "requiredFactsCovered"),
++        "requiredFactCoverage": _fact_coverage(results, "requiredFactsCoveredAt10"),
++        "forbiddenClaimsInPrompt": sum(len(item.get("forbiddenClaimsInPrompt", [])) for item in results),
++        "sectionCoverage": _section_coverage(results),
++        "facetPlanAccuracy": _not_applicable("FixedEvaluationStructuredClient 读取 golden label，仅用于编排合同"),
++        "searchP95Seconds": _percentile([float(item.get("searchSeconds", 0.0)) for item in results], 0.95),
++    }
++
++
++def domain_metrics(results: list[dict]) -> dict:
++    grouped = defaultdict(list)
++    for item in results:
++        grouped[str(item.get("domain") or "UNKNOWN")].append(item)
++    return {domain: aggregate_metrics(rows) for domain, rows in sorted(grouped.items())}
++
++
++def _grade_macro_f1(results: list[dict]) -> float:
++    scores = []
++    for label in sorted(VALID_GRADES):
++        true_positive = sum(
++            item.get("expectedGrade") == label and item.get("actualGrade") == label for item in results
++        )
++        false_positive = sum(
++            item.get("expectedGrade") != label and item.get("actualGrade") == label for item in results
++        )
++        false_negative = sum(
++            item.get("expectedGrade") == label and item.get("actualGrade") != label for item in results
++        )
++        precision = true_positive / max(1, true_positive + false_positive)
++        recall = true_positive / max(1, true_positive + false_negative)
++        scores.append(2 * precision * recall / max(1e-12, precision + recall))
++    return _mean(scores)
++
++
++def _distinct_documents(candidates, limit: int = RECALL_K) -> list:
++    seen = set()
++    rows = []
++    for item in candidates:
++        key = item.canonical_key or item.source_key
++        if key in seen:
++            continue
++        seen.add(key)
++        rows.append(item)
++    return rows[:limit]
++
++
++def _ndcg(keys: list[str], expected: set[str]) -> float:
++    if not expected:
++        return 1.0
++    gains = [1.0 if key in expected else 0.0 for key in keys[:TOP_K]]
++    dcg = sum(gain / math.log2(index + 2.0) for index, gain in enumerate(gains))
++    ideal_count = min(len(expected), TOP_K)
++    ideal = sum(1.0 / math.log2(index + 2.0) for index in range(ideal_count))
++    return dcg / ideal if ideal else 0.0
++
++
++def _covered_sections(candidates, expected_sections: list[str]) -> list[str]:
++    values = []
++    for section in expected_sections:
++        if any(section in str(item.section_title or "") for item in candidates):
++            values.append(section)
++    return values
++
++
++def _prompt_evidence_text(item: dict) -> str:
++    return " ".join(
++        str(item.get(field) or "")
++        for field in (
++            "canonical_key",
++            "title",
++            "source_url",
++            "section_title",
++            "site",
++            "content",
++        )
++    )
++
++
++def _fact_coverage(results: list[dict], field: str = "requiredFactsCovered") -> float:
++    expected = sum(len(item.get("requiredFacts", [])) for item in results)
++    covered = sum(len(item.get(field, [])) for item in results)
++    return covered / max(1, expected)
++
++
++def _not_applicable(reason: str) -> dict:
++    return {"status": "notApplicable", "reason": reason}
++
++
++def _section_coverage(results: list[dict]) -> float:
++    expected = sum(len(item.get("expectedSections", [])) for item in results)
++    covered = sum(len(item.get("expectedSectionsCovered", [])) for item in results)
++    return covered / max(1, expected)
++
++
++def _failed_case(case: dict, exc: Exception) -> dict:
++    return {
++        "id": case.get("id"),
++        "query": case.get("query"),
++        "domain": "ERROR",
++        "expectedGrade": case.get("expectedGrade"),
++        "actualGrade": "ERROR",
++        "gradeCorrect": False,
++        "expectedDocumentKeys": case.get("expectedDocumentKeys", []),
++        "candidateDocumentKeys": [],
++        "candidateDocumentKeysAt10": [],
++        "usableDocumentKeys": [],
++        "recallAt5": 0.0,
++        "recallAt10": 0.0,
++        "reciprocalRank": 0.0,
++        "ndcgAt5": 0.0,
++        "forbiddenUsable": [],
++        "provenanceComplete": False,
++        "citationPageChecks": 0,
++        "citationPageMatches": 0,
++        "filterCompliant": False,
++        "searchSeconds": 0.0,
++        "error": f"{type(exc).__name__}: {exc}",
++    }
++
++
++def _mean(values) -> float:
++    rows = list(values)
++    return sum(rows) / len(rows) if rows else 1.0
++
++
++def _percentile(values: list[float], percentile: float) -> float:
++    if not values:
++        return 0.0
++    rows = sorted(values)
++    index = min(len(rows) - 1, max(0, math.ceil(len(rows) * percentile) - 1))
++    return rows[index]
++
++
++def corpus_chunk_metrics(db) -> dict:
++    lengths = [
++        len(row.content or "")
++        for row in db.query(KnowledgeChunk)
++        .join(KnowledgeDocument)
++        .filter(KnowledgeDocument.status == "ACTIVE")
++        .order_by(KnowledgeChunk.id.asc())
++        .all()
++    ]
++    if not lengths:
++        distribution = {"min": 0, "p50": 0, "p95": 0, "max": 0, "mean": 0.0}
++    else:
++        distribution = {
++            "min": min(lengths),
++            "p50": int(_percentile(lengths, 0.50)),
++            "p95": int(_percentile(lengths, 0.95)),
++            "max": max(lengths),
++            "mean": round(sum(lengths) / len(lengths), 3),
++        }
++    return {
++        "profile": _active_chunk_profile(db),
++        "unit": "python_characters",
++        "activeChunkCount": len(lengths),
++        "lengthCharacters": distribution,
++    }
++
++
++def _active_chunk_profile(db) -> str:
++    profiles = sorted({
++        str(value)
++        for (value,) in db.query(KnowledgeChunk.chunking_profile)
++        .join(KnowledgeDocument)
++        .filter(KnowledgeDocument.status == "ACTIVE")
++        .distinct()
++        .all()
++        if value
++    })
++    return profiles[0] if len(profiles) == 1 else "+".join(profiles) or "unknown"
++
++
++def _resolve_path(settings: Settings, value: str) -> Path:
++    path = Path(value)
++    return path if path.is_absolute() else settings.project_root / path
++
++
++def main() -> int:
++    parser = argparse.ArgumentParser(description="运行 MindBridge 知识可靠性评测")
++    parser.add_argument("--mode", choices=("all", "bm25", "hybrid", "vector-fault"), default="all")
++    parser.add_argument("--no-gate", action="store_true", help="只生成报告，不用指标设置退出码")
++    parser.add_argument("--skip-seed", action="store_true", help="评测现有数据库快照，不执行启动兼容导入")
++    args = parser.parse_args()
++    modes = ("bm25", "hybrid", "vector-fault") if args.mode == "all" else (args.mode,)
++    report = evaluate(modes, seed=not args.skip_seed)
++    print(f"RAG report: {report['reportPath']}")
++    for mode, item in report["modes"].items():
++        metrics = item["metrics"]
++        print(
++            f"[{mode}] passed={item['passed']} recall@5={metrics['recallAt5']:.3f} "
++            f"recall@10={metrics['recallAt10']:.3f} "
++            f"mrr={metrics['mrr']:.3f} ndcg@5={metrics['ndcgAt5']:.3f} "
++            f"gradeF1={metrics['gradeMacroF1']['status']}"
++        )
++    return 0 if args.no_gate or report["passed"] else 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
