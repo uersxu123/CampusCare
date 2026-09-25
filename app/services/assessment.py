@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 
 from app.core.enums import EmotionLabel, RiskLevel
@@ -66,8 +67,15 @@ def heuristic(text: str) -> PsychologyAssessment:
         return PsychologyAssessment(EmotionLabel.HIGH_RISK, 4.0, RiskLevel.HIGH, 0.98, "检测到当前本人明确高风险表达")
     if signal.indirect_current_danger:
         return PsychologyAssessment(EmotionLabel.HIGH_RISK, 4.0, RiskLevel.HIGH, 0.9, "检测到当前本人间接危险表达")
-    if has_mental_signal(text):
-        if any(word in text.lower() for word in ["抑郁", "低落", "崩溃", "难过", "depress", "hopeless"]):
+    # 只去除描述软件故障的短语，保留同一句中用户自己的情绪与危险表达。
+    mental_text = re.sub(
+        r"(?:程序|软件|应用|进程|服务|系统|浏览器|游戏|app)\s*(?:已经|突然|又|总是|一直)?\s*崩溃",
+        "",
+        text,
+        flags=re.IGNORECASE,
+    )
+    if has_mental_signal(mental_text):
+        if any(word in mental_text.lower() for word in ["抑郁", "低落", "崩溃", "难过", "depress", "hopeless"]):
             return PsychologyAssessment(EmotionLabel.DEPRESSED, 3.1, RiskLevel.MEDIUM, 0.75, "检测到低落或抑郁相关表达")
         return PsychologyAssessment(EmotionLabel.ANXIETY, 2.2, RiskLevel.LOW, 0.72, "检测到焦虑或压力相关表达")
     return PsychologyAssessment(EmotionLabel.NORMAL, 0.0, RiskLevel.LOW, 0.66, "未检测到明显风险信号")

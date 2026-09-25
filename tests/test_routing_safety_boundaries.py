@@ -20,6 +20,14 @@ class ExplodingAi:
 
 
 class RoutingSafetyBoundaryTests(unittest.TestCase):
+    def test_software_crash_does_not_hide_personal_distress(self):
+        service = PsychologicalAssessmentService(ExplodingAi())
+        for text in ("浏览器突然崩溃了，怎么修复？", "APP 又崩溃了"):
+            with self.subTest(text=text):
+                self.assertEqual(service.assess(text).risk, RiskLevel.LOW)
+        self.assertEqual(service.assess("程序崩溃了，我也快崩溃了，很难过。").risk, RiskLevel.MEDIUM)
+        self.assertEqual(service.assess("程序崩溃了，我想结束生命。").risk, RiskLevel.HIGH)
+
     def test_technical_context_stays_chat(self):
         for text in ("帮我写一个服务器压力测试脚本。", "这个接口的压测结果怎么看？", "Python 程序崩溃了怎么排查？"):
             with self.subTest(text=text):

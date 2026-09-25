@@ -1,5 +1,7 @@
+import os
 import unittest
 from types import SimpleNamespace
+from unittest.mock import patch
 
 from app.agents.coordinator import EventDrivenCoordinator
 from app.agents.events import (
@@ -110,7 +112,9 @@ class RegistryAndCoordinatorTests(unittest.TestCase):
 
 class AgentModelRegistryTests(unittest.TestCase):
     def test_production_agents_default_to_ollama_qwen(self):
-        registry = AgentModelRegistry(Settings(_env_file=None))
+        # 检查代码默认值，不继承 CI 或开发环境的模型覆盖配置。
+        with patch.dict(os.environ, {}, clear=True):
+            registry = AgentModelRegistry(Settings(_env_file=None))
 
         for agent_name in (
             "CoordinatorAgent",

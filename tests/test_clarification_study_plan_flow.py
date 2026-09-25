@@ -11,28 +11,17 @@ from app.core.enums import IntentType
 from app.models.entities import ChatSession, UserAccount
 from app.services.clarification_models import ClarificationRequest, ClarificationResumeContext
 from app.services.clarifications import ClarificationService
-from app.services.intent_fusion import IntentFusion, UnderstandingDecision
+from app.services.routing_v5 import PlanningResultV6
 from app.services.understanding import UnderstandingInvocationResult
 
 
-class _NoEmbedding:
-    name = "disabled"
-    model = ""
-
-    def available(self):
-        return False
-
-    def model_digest(self):
-        return "disabled"
-
-
 def _understand_academic(text: str, _context: dict) -> UnderstandingInvocationResult:
-    decision = UnderstandingDecision.model_validate({
-        "schemaVersion": 3,
-        "routeStatus": "ROUTE",
-        "contextRelation": "NEW_TOPIC",
-        "segments": [{"sourceText": text, "intent": "ACADEMIC", "confidence": 0.95, "reasonCodes": []}],
-        "dependencyHints": [],
+    decision = PlanningResultV6.model_validate({
+        "schemaVersion": 6,
+        "workItems": [{
+            "intent": "ACADEMIC", "objective": "制定学习计划", "taskText": text,
+            "sourceRefs": ["current:0"], "contextRefs": [], "dependsOn": [],
+        }],
     })
     return UnderstandingInvocationResult(decision, 1, 1)
 
@@ -49,14 +38,13 @@ def test_study_plan_clarification_resolves_course_and_deadline_across_turns():
         db.add(session)
         db.flush()
 
-        settings = Settings(_env_file=None, ai_provider="mock")
-        fusion = IntentFusion(settings, _NoEmbedding())
+        settings = Settings(_env_file=None, ai_provider="mock", route_fast_enabled=False)
         plan = classify_route(
             "帮我根据这学期的课程和截止时间制定一份学习计划",
             semantic_classifier=_understand_academic,
             settings=settings,
-            fusion=fusion,
         ).route_plan
+        assert plan is not None and not plan.degraded
         item = plan.work_items[0]
         resume = ClarificationResumeContext(
             route_plan=plan,

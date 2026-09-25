@@ -390,6 +390,7 @@ def test_prototype_vectors_are_shared_across_router_instances():
 def test_fast_embedding_backend_uses_short_timeout_budget():
     settings = Settings(
         _env_file=None,
+        knowledge_vector_enabled=True,
         knowledge_embedding_provider="ollama",
         knowledge_embedding_model="bge-m3:latest",
         embedding_timeout_seconds=30.0,

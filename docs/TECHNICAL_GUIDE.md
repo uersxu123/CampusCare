@@ -515,6 +515,7 @@ target/rag-eval-report.json
 当前 `tests/` 里的测试主体使用 Python 标准库 `unittest` 组织，并由 pytest 执行完整回归：
 
 ```bash
+python -m pip install -r requirements-dev.txt
 python -m pytest -q
 ```
 
