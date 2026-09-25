@@ -6,6 +6,7 @@ import sys
 import time
 from pathlib import Path
 
+import pytest
 from app.services.execution_control import ExecutionBudget
 from app.services.process_supervisor import ProcessSupervisor
 
@@ -123,6 +124,7 @@ def test_late_success_cannot_overwrite_timeout() -> None:
     assert result.value is None
 
 
+@pytest.mark.skipif(os.name != "nt", reason="Windows Job Object 的后代进程回收由 Windows CI 验证")
 def test_windows_job_reclaims_descendant_process(tmp_path) -> None:
     pid_file = tmp_path / "descendant.pid"
     result = ProcessSupervisor(

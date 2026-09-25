@@ -5,21 +5,30 @@ import json
 import re
 from pathlib import Path
 
+import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-VALIDATION = ROOT / "target/verification/blocking-bugfix/20260917T221428+0800"
+BASELINE = Path(__file__).parent / "fixtures/protected-dataset-hashes.json"
+LOCAL_RUN_LOCK = ROOT / "target/evaluation/smoke-current-v2/.single-smoke-v2-started.json"
 
 
 def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest().upper()
 
 
-def test_protected_dataset_and_single_run_lock_hashes_are_unchanged() -> None:
-    baseline = json.loads((VALIDATION / "baseline-hashes.json").read_text(encoding="utf-8"))
-    protected = [item for item in baseline["files"] if item.get("protected")]
+def test_protected_dataset_hashes_are_unchanged() -> None:
+    baseline = json.loads(BASELINE.read_text(encoding="utf-8"))
+    protected = [item for item in baseline["files"] if item["path"].startswith("app/")]
     assert protected
     for item in protected:
         assert _sha256(ROOT / item["path"]) == item["sha256"]
+
+
+@pytest.mark.skipif(not LOCAL_RUN_LOCK.exists(), reason="历史单次评测锁仅存在于原评测机器，不属于仓库运行依赖")
+def test_historical_single_run_lock_hash_is_unchanged() -> None:
+    baseline = json.loads(BASELINE.read_text(encoding="utf-8"))
+    expected = next(item for item in baseline["files"] if item["path"] == LOCAL_RUN_LOCK.relative_to(ROOT).as_posix())
+    assert _sha256(LOCAL_RUN_LOCK) == expected["sha256"]
 
 
 def test_changed_source_is_utf8_without_bom_and_has_no_accidental_unicode_escapes() -> None:

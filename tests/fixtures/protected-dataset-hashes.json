@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "validationId": "20260917T221428+0800",
+  "files": [
+    {
+      "path": "app/evaluation/datasets/e2e-smoke-current-v2/business.jsonl",
+      "length": 39482,
+      "sha256": "5F7E0DAA8349822C2E5C4C352D3F0EE68EB3945A656BC13BF96CBAD222DA3DE2",
+      "protected": true
+    },
+    {
+      "path": "app/evaluation/datasets/e2e-smoke-current-v2/safety.jsonl",
+      "length": 3079,
+      "sha256": "B2C77CBCFC8239A9D7FB9529C5CA922ABEC789590886E964A10101E89394809D",
+      "protected": true
+    },
+    {
+      "path": "app/evaluation/datasets/e2e-smoke-current-v2/corpus-audit.json",
+      "length": 1375,
+      "sha256": "D4F1E006CA67214C67FD440D18EC526B227E732BB2541FDBD096BD91F0EB963E",
+      "protected": true
+    },
+    {
+      "path": "target/evaluation/smoke-current-v2/.single-smoke-v2-started.json",
+      "length": 636,
+      "sha256": "DBE282786BE38F53DBBFF33420375601F04C6F9275A8653029217821D6D0E17F",
+      "protected": true
+    }
+  ]
+}

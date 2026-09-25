@@ -1,0 +1,4 @@
+# Frozen evaluation fixtures are checked by their original byte hashes.
+app/evaluation/datasets/e2e-smoke-current-v2/business.jsonl -text
+app/evaluation/datasets/e2e-smoke-current-v2/safety.jsonl -text
+app/evaluation/datasets/e2e-smoke-current-v2/corpus-audit.json -text

@@ -29,3 +29,15 @@ jobs:
         run: |
           mkdir -p target
           python -m pytest -q
+
+  windows-process-supervisor:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test runner
+        run: python -m pip install pytest==8.3.5 pytest-asyncio==0.24.0
+      - name: Test Windows process cleanup
+        run: python -m pytest -q tests/test_turn_execution_supervisor.py
